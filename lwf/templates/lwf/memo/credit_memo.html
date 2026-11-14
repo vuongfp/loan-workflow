@@ -1,0 +1,114 @@
+{% load humanize %}<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Credit memo {{ ticket.title }}</title>
+<style>
+    @font-face { font-family: MemoSans; src: url("{{ font_regular }}"); }
+    @font-face { font-family: MemoSans; src: url("{{ font_bold }}"); font-weight: bold; }
+    @page { size: a4 portrait; margin: 1.6cm 1.4cm 1.6cm 1.4cm;
+            @frame footer { -pdf-frame-content: footer; bottom: 0.6cm; margin-left: 1.4cm; margin-right: 1.4cm; height: 0.6cm; } }
+    body { font-family: MemoSans; font-size: 9pt; color: #1f2937; }
+    h1, h2, th { font-family: MemoSans; font-weight: bold; }
+    h1 { font-size: 15pt; margin: 0 0 2pt 0; }
+    h2 { font-size: 11pt; margin: 12pt 0 4pt 0; padding-bottom: 2pt; border-bottom: 1px solid #9ca3af; }
+    table { width: 100%; }
+    th, td { padding: 3pt 4pt; vertical-align: top; text-align: left; }
+    th { background-color: #f3f4f6; font-weight: bold; }
+    td.num, th.num { text-align: right; }
+    .grid td.label { width: 32%; color: #4b5563; }
+    .muted { color: #6b7280; }
+    .box { border: 1px solid #d1d5db; padding: 4pt; }
+</style>
+</head>
+<body>
+<h1>Credit memo &middot; {{ ticket.title }}</h1>
+<p class="muted">{{ lender.name|default:"Loan workflow" }} &middot; {{ ticket.get_status_display }} &middot; printed {{ printed|date:"d/m/Y H:i" }}</p>
+
+<h2>Loan request</h2>
+<table class="grid">
+    <tr><td class="label">Product</td><td>{{ product }} / {{ subproduct }}</td></tr>
+    <tr><td class="label">Amount requested</td><td>{{ loan.loanamount|intcomma }} VND</td></tr>
+    <tr><td class="label">Tenor</td><td>{{ loan.loan_tenor }} months</td></tr>
+    <tr><td class="label">Pricing scheme</td><td>{{ loan.loan_pricing_scheme|default:"-" }}</td></tr>
+    <tr><td class="label">Loan to value</td><td>{{ loan.loan_moa|default:"-" }}%</td></tr>
+    <tr><td class="label">Monthly installment (highest / average)</td>
+        <td>{{ loan.highest_installment|intcomma }} / {{ loan.average_installment|intcomma }} VND</td></tr>
+    <tr><td class="label">Purpose</td><td>{{ loan.get_purpose_display|default:"-" }} {{ loan.purpose_details|default:"" }}</td></tr>
+    {% if loan.deviation1 or loan.deviation2 %}
+        <tr><td class="label">Deviations</td><td>{{ loan.get_deviation1_display|default:"" }} {{ loan.deviation1_details|default:"" }}<br>{{ loan.get_deviation2_display|default:"" }} {{ loan.deviation2_details|default:"" }}</td></tr>
+    {% endif %}
+</table>
+
+<h2>Applicants</h2>
+<table>
+    <tr><th>Name</th><th>ID</th><th>Role</th><th>Date of birth</th>
+        <th class="num">Income / month</th><th class="num">Existing payments</th></tr>
+    {% for applicant in applicants %}
+        <tr><td>{{ applicant.name_vn }}</td><td>{{ applicant.cid }}</td><td>{{ applicant.get_typeofapplicant_display }}</td>
+            <td>{{ applicant.dob|date:"d/m/Y"|default:"-" }}</td>
+            <td class="num">{{ applicant.total|intcomma }}</td><td class="num">{{ applicant.highest_installment|intcomma }}</td></tr>
+    {% empty %}
+        <tr><td colspan="6" class="muted">No applicants.</td></tr>
+    {% endfor %}
+</table>
+
+<h2>Collateral</h2>
+{% for collateral in collaterals %}
+    <table class="grid">
+        <tr><td class="label">Type</td><td>{{ collateral.get_colla_type_display|default:"-" }} {{ collateral.get_mortgage_type_display|default:"" }}</td></tr>
+        {% if collateral.fulladdress_vn %}<tr><td class="label">Address</td><td>{{ collateral.fulladdress_vn }}</td></tr>{% endif %}
+        {% if collateral.project_name %}<tr><td class="label">Project</td><td>{{ collateral.project_name }}</td></tr>{% endif %}
+        {% if collateral.car_brand %}<tr><td class="label">Car</td><td>{{ collateral.car_brand }} {{ collateral.car_model|default:"" }} {{ collateral.car_year|stringformat:"s"|default:"" }}</td></tr>{% endif %}
+        <tr><td class="label">Value (SPA or estimate)</td><td>{{ collateral.spa_or_estimated|default:collateral.car_spa_value|intcomma|default:"-" }}</td></tr>
+    </table>
+{% empty %}
+    <p class="muted">No collateral recorded.</p>
+{% endfor %}
+
+<h2>Credit assessment</h2>
+{% if detail %}
+<table class="grid">
+    <tr><td class="label">Total monthly income</td><td>{{ detail.monthly_income|intcomma }} VND
+        <span class="muted">(salary {{ detail.net_income|intcomma }}, business {{ detail.biz_income|intcomma }}, household {{ detail.hhold_income|intcomma }}, rental {{ detail.rental_income|intcomma }})</span></td></tr>
+    <tr><td class="label">Existing debt payments (highest)</td><td>{{ detail.exist_highest_installment|intcomma }} VND</td></tr>
+    <tr><td class="label">Living cost</td><td>{{ detail.expenditure|intcomma }} VND</td></tr>
+    <tr><td class="label">DSR highest / average</td><td>{{ detail.dsr_high }}% / {{ detail.dsr_avg }}%</td></tr>
+    <tr><td class="label">Net surplus after payments</td><td>{{ detail.nst|intcomma }} VND</td></tr>
+    <tr><td class="label">Segment</td><td>{{ detail.segmentation|default:"-" }}</td></tr>
+    <tr><td class="label">CRR score</td><td>{% if detail.crr_score %}{{ detail.crr_score }} ({{ detail.crr_band }}){% else %}not scored{% endif %}</td></tr>
+    <tr><td class="label">Credit policy</td><td>{% for breach in policy_breaches %}{{ breach.rule }}: {{ breach.actual }} (limit {{ breach.limit }}) &rarr; {{ breach.deviation_label }}<br>{% empty %}Within policy{% endfor %}</td></tr>
+</table>
+{% endif %}
+
+<h2>Credit decision</h2>
+<table class="grid">
+    <tr><td class="label">Approved amount</td><td>{{ decision.approved_amount|intcomma|default:"-" }} VND</td></tr>
+    <tr><td class="label">Valuation (desktop / report)</td><td>{{ decision.desktop_valuation|intcomma|default:"-" }} / {{ decision.report_valuation|intcomma|default:"-" }}</td></tr>
+    <tr><td class="label">CED recommendation</td><td><div class="box">{{ decision.recommendation|default:"-"|linebreaksbr }}</div></td></tr>
+    <tr><td class="label">Approver 1</td><td><div class="box">{{ decision.approver1_comment|default:"-"|linebreaksbr }}</div></td></tr>
+    <tr><td class="label">Approver 2</td><td><div class="box">{{ decision.approver2_comment|default:"-"|linebreaksbr }}</div></td></tr>
+</table>
+
+{% if conditions %}
+<h2>Conditions</h2>
+<table>
+    <tr><th>Type</th><th>Condition</th></tr>
+    {% for condition in conditions %}
+        <tr><td>{{ condition.get_condition_type_display|default:condition.condition_type }}</td><td>{{ condition.condition_detail|linebreaksbr }}</td></tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<h2>History</h2>
+<table>
+    <tr><th>Date</th><th>By</th><th>Step</th><th>Comment</th></tr>
+    {% for entry in history %}
+        <tr><td>{{ entry.date|date:"d/m/Y H:i" }}</td><td>{{ entry.user.get_full_name|default:entry.user|default:"-" }}</td>
+            <td>{{ entry.title }}</td><td>{{ entry.comment|truncatechars:160 }}</td></tr>
+    {% endfor %}
+</table>
+
+<div id="footer" class="muted">{{ ticket.title }} &middot; page <pdf:pagenumber> / <pdf:pagecount></div>
+</body>
+</html>

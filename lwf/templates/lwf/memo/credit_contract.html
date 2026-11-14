@@ -1,0 +1,46 @@
+{% load humanize %}<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Hợp đồng tín dụng {{ doc.contract_number }}</title>
+<style>
+    @font-face { font-family: MemoSans; src: url("{{ font_regular }}"); }
+    @font-face { font-family: MemoSans; src: url("{{ font_bold }}"); font-weight: bold; }
+    @page { size: a4 portrait; margin: 2cm 2cm 2cm 2cm; }
+    body { font-family: MemoSans; font-size: 10.5pt; color: #111827; }
+    h1 { font-family: MemoSans; font-weight: bold; font-size: 15pt; text-align: center; margin: 0; }
+    .center { text-align: center; }
+    .party { margin: 10pt 0 0 0; }
+    .party td { padding: 2pt 4pt; vertical-align: top; }
+    .party td.label { width: 30%; }
+    .name { font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>HỢP ĐỒNG TÍN DỤNG</h1>
+<p class="center">Số: {{ doc.contract_number|default:"……" }}</p>
+
+<p>Hợp Đồng Tín Dụng này (“Hợp Đồng”) được lập ngày {{ doc.sign_date|date:"d/m/Y"|default:"……" }} bởi và giữa:</p>
+
+<table class="party">
+    <tr><td colspan="2" class="name">{% if borrower.gender == 1 %}Ông{% else %}Bà{% endif %} {{ borrower.name_vn }}</td></tr>
+    <tr><td class="label">Ngày sinh</td><td>: {{ borrower.dob|date:"d/m/Y"|default:"" }}</td></tr>
+    <tr><td class="label">CMND / CCCD / Hộ chiếu số</td><td>: {{ borrower.cid }}</td></tr>
+    <tr><td class="label">Ngày cấp, nơi cấp</td><td>: {{ borrower.cra_id_date|date:"d/m/Y"|default:"" }} {{ borrower.cra_id_place|default:"" }}</td></tr>
+    <tr><td class="label">Địa chỉ thường trú</td><td>: {{ borrower.cra_permanent_address|default:borrower.permanent_address_vn|default:"" }}</td></tr>
+    <tr><td class="label">Địa chỉ tạm trú</td><td>: {{ borrower.cra_temporary_address|default:borrower.temporary_address_vn|default:"" }}</td></tr>
+</table>
+<p>(Sau đây gọi là “Bên Vay”)</p>
+
+<table class="party">
+    <tr><td colspan="2" class="name">{{ lender.name|default:"……" }}</td></tr>
+    <tr><td class="label">Địa chỉ</td><td>: {{ lender.address }}</td></tr>
+    <tr><td class="label">Mã số doanh nghiệp</td><td>: {{ lender.registration }}</td></tr>
+    <tr><td class="label">Đại diện bởi</td><td>: {{ doc.signer|default:"" }}</td></tr>
+    <tr><td class="label">Chức vụ</td><td>: {{ doc.position|default:"" }}</td></tr>
+    <tr><td class="label">Theo giấy ủy quyền số</td><td>:</td></tr>
+</table>
+<p>(Sau đây gọi là “Ngân Hàng”)</p>
+<p>(“Ngân Hàng” và “Bên Vay” sau đây được gọi chung là “Các Bên”)</p>
+</body>
+</html>

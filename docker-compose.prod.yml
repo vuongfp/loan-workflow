@@ -1,0 +1,41 @@
+# Production-like run: the image as built (gunicorn, collected static files),
+# no source mount, data and uploads in named volumes. Put an HTTPS reverse proxy
+# (nginx, a load balancer) in front of port 8000 and set DJANGO_HTTPS=true.
+#
+#   docker compose -f docker-compose.prod.yml up -d --build
+#   docker compose -f docker-compose.prod.yml run --rm web python manage.py migrate
+services:
+  db:
+    image: postgres:17
+    env_file: .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      retries: 10
+
+  web:
+    build: .
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db
+      DJANGO_DEBUG: "false"
+      DJANGO_MEDIA_ROOT: /app/media
+    volumes:
+      - media:/app/media
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      interval: 30s
+      retries: 3
+
+volumes:
+  pgdata:
+  media:

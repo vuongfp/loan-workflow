@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: lws
+          POSTGRES_USER: lws
+          POSTGRES_PASSWORD: ci-only-password
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U lws" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DJANGO_SECRET_KEY: ci-only-secret-key-not-used-anywhere-else-0123456789abcdefghijklmnop
+      DJANGO_ALLOWED_HOSTS: localhost
+      POSTGRES_DB: lws
+      POSTGRES_USER: lws
+      POSTGRES_PASSWORD: ci-only-password
+      POSTGRES_HOST: 127.0.0.1
+      DJANGO_EMAIL_BACKEND: django.core.mail.backends.locmem.EmailBackend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: System packages (PDF font, gettext)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-dejavu-core gettext
+      - run: pip install -r requirements.txt
+      - name: Checks
+        run: |
+          python manage.py check
+          python manage.py makemigrations --check --dry-run
+          python manage.py compilemessages --ignore '.venv/*'
+      - name: Tests
+        run: python manage.py test lwf
+      - name: Production settings
+        env:
+          DJANGO_DEBUG: 'false'
+          DJANGO_HTTPS: 'true'
+          DJANGO_ALLOWED_HOSTS: loan.example.test
+        run: python manage.py check --deploy --fail-level WARNING
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the image
+        run: docker build -t loan-workflow:ci .

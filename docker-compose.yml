@@ -1,0 +1,38 @@
+# Development: code mounted from this folder, runserver with reload.
+services:
+  db:
+    # Django 6.1 needs PostgreSQL 15+. The lws157 dump comes from PostgreSQL 12
+    # and restores into this version with pg_restore.
+    image: postgres:17
+    env_file: .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker:/docker:ro
+      - ./dumps:/dumps:ro
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      retries: 10
+
+  web:
+    build: .
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db
+      # The bind mount below hides the static files collected in the image.
+      DJANGO_STATIC_MANIFEST: "false"
+    # Development server with code reload; the image's default command is gunicorn
+    # (see docker-compose.prod.yml).
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:

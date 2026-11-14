@@ -1,0 +1,70 @@
+{% extends "admin/base_site.html" %}
+{% load i18n unfold %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div class="flex flex-col gap-6 max-w-4xl">
+    <a href="{{ change_url }}" class="text-sm text-primary-600 underline">&larr; {{ original.title }}</a>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:1rem">
+        <div class="border border-base-200 rounded-default p-4 dark:border-base-800">
+            <p class="text-sm">{% translate "CRR score" %}</p>
+            <p class="text-2xl font-semibold text-font-important-light dark:text-font-important-dark">
+                {% if detail.crr_score %}{{ detail.crr_score }}{% else %}-{% endif %}
+            </p>
+        </div>
+        <div class="border border-base-200 rounded-default p-4 dark:border-base-800">
+            <p class="text-sm">{% translate "Band" %}</p>
+            <p class="text-2xl font-semibold text-font-important-light dark:text-font-important-dark">
+                {% if detail.crr_band %}{{ detail.crr_band }}{% else %}-{% endif %}
+            </p>
+        </div>
+        <div class="border border-base-200 rounded-default p-4 dark:border-base-800">
+            <p class="text-sm">{% translate "Segment" %} / DSR</p>
+            <p class="font-semibold">{{ detail.segmentation|default:"-" }} / {{ detail.dsr_high }}%</p>
+        </div>
+    </div>
+
+    <form method="post" class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+        {% csrf_token %}
+        <div class="border-b border-base-200 px-4 py-3 dark:border-base-800">
+            <h2 class="font-semibold text-font-important-light dark:text-font-important-dark">{% translate "Credit bureau and account inputs" %}</h2>
+            <p class="text-sm">
+                {% if can_score %}{% translate "The other inputs come from the applicants, loan and collateral." %}
+                {% else %}{% translate "Only the CED officer can score at this status." %}{% endif %}
+            </p>
+            <p class="text-sm">{% translate "Score matrix" %}: <strong>{{ version|default:"-" }}</strong>{% if version.effective_from %} ({% translate "effective from" %} {{ version.effective_from|date:"d/m/Y" }}){% endif %}</p>
+        </div>
+        <div class="p-4" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1rem">
+            {% for field in form %}
+                <label class="flex flex-col gap-1 text-sm font-medium">
+                    {{ field.label }}
+                    {{ field }}
+                    {% for error in field.errors %}<span class="text-red-600">{{ error }}</span>{% endfor %}
+                </label>
+            {% endfor %}
+        </div>
+        {% if can_score %}
+            <div class="border-t border-base-200 px-4 py-3 dark:border-base-800">
+                {% component "unfold/components/button.html" with submit=1 %}{% translate "Calculate score" %}{% endcomponent %}
+            </div>
+        {% endif %}
+    </form>
+
+    {% if points %}
+        <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+            <h2 class="border-b border-base-200 px-4 py-3 font-semibold dark:border-base-800">{% translate "Points by criterion" %}</h2>
+            <div style="overflow-x:auto">
+            <table class="w-full text-sm">
+                {% for name, value in points %}
+                    <tr class="border-b border-base-200 dark:border-base-800">
+                        <td class="px-4 py-2">{{ name }}</td>
+                        <td class="px-4 py-2 text-right font-medium">{{ value }}</td>
+                    </tr>
+                {% endfor %}
+            </table></div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

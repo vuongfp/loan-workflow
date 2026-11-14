@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Hướng dẫn sử dụng – Loan Workflow</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  :root {
+    --ink: #1f2430; --muted: #5b6272; --line: #e3e5ea; --soft: #f5f6f8;
+    --brand: #7e22ce; --brand-soft: #f3e8ff; --amber: #b45309; --amber-soft: #fef3c7;
+    --red: #b91c1c; --red-soft: #fee2e2; --green: #15803d; --green-soft: #dcfce7; --blue: #1d4ed8; --blue-soft: #dbeafe;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Inter", Arial, sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.55; margin: 0; }
+  h1, h2, h3 { line-height: 1.25; color: var(--ink); }
+  h2 { font-size: 17pt; margin: 0 0 4mm; padding-bottom: 2mm; border-bottom: 2px solid var(--brand); counter-increment: chapter; counter-reset: section; }
+  h2::before { content: counter(chapter) ". "; color: var(--brand); }
+  h3 { font-size: 12.5pt; margin: 6mm 0 2mm; counter-increment: section; }
+  h3::before { content: counter(chapter) "." counter(section) " "; color: var(--brand); }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1mm; }
+  b, strong { font-weight: 600; }
+  .chapter { page-break-before: always; counter-reset: figure-in-chapter; }
+  body { counter-reset: chapter figure; }
+  figure { margin: 3mm 0 5mm; page-break-inside: avoid; counter-increment: figure; }
+  figure img { width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; }
+  figure.tall img { max-height: 225mm; width: auto; max-width: 100%; margin: 0 auto; }
+  figure.half img { width: 70%; margin: 0 auto; }
+  figcaption { font-size: 9pt; color: var(--muted); margin-top: 1.5mm; text-align: center; }
+  figcaption::before { content: "Hình " counter(figure) ". "; font-weight: 600; color: var(--ink); }
+  .ui { display: inline-block; padding: 0 1.6mm; border: 1px solid var(--line); border-radius: 4px; background: var(--soft); font-size: 9.5pt; white-space: nowrap; }
+  .note, .tip, .warn { border-radius: 6px; padding: 3mm 4mm; margin: 3mm 0 4mm; page-break-inside: avoid; }
+  .note { background: var(--blue-soft); border-left: 4px solid var(--blue); }
+  .tip { background: var(--green-soft); border-left: 4px solid var(--green); }
+  .warn { background: var(--amber-soft); border-left: 4px solid var(--amber); }
+  .note b:first-child, .tip b:first-child, .warn b:first-child { display: block; margin-bottom: 1mm; }
+  table { border-collapse: collapse; width: 100%; margin: 2mm 0 4mm; font-size: 9.5pt; page-break-inside: auto; }
+  th, td { border: 1px solid var(--line); padding: 1.6mm 2.4mm; text-align: left; vertical-align: top; }
+  th { background: var(--soft); font-weight: 600; }
+  tr { page-break-inside: avoid; }
+  .steps { counter-reset: step; list-style: none; padding-left: 0; }
+  .steps > li { counter-increment: step; position: relative; padding-left: 9mm; margin-bottom: 2mm; }
+  .steps > li::before { content: counter(step); position: absolute; left: 0; top: 0.3mm; width: 6mm; height: 6mm; border-radius: 50%;
+                        background: var(--brand); color: #fff; font-size: 8.5pt; font-weight: 600; text-align: center; line-height: 6mm; }
+  .chip { display: inline-block; border-radius: 4px; padding: 0 1.8mm; font-size: 8.5pt; font-weight: 600; text-transform: uppercase; }
+  .c-info { background: var(--blue-soft); color: var(--blue); } .c-primary { background: var(--brand-soft); color: var(--brand); }
+  .c-warn { background: var(--amber-soft); color: var(--amber); } .c-ok { background: var(--green-soft); color: var(--green); }
+  .c-stop { background: var(--red-soft); color: var(--red); }
+
+  /* cover */
+  .cover { height: 255mm; display: flex; flex-direction: column; justify-content: space-between; padding: 10mm 4mm 0; }
+  .cover .logo { width: 16mm; height: 16mm; border-radius: 4mm; background: var(--brand); color: #fff; font-size: 9mm; display: flex; align-items: center; justify-content: center; }
+  .cover h1 { font-size: 30pt; margin: 14mm 0 3mm; letter-spacing: -0.5px; }
+  .cover .sub { font-size: 14pt; color: var(--muted); margin: 0; }
+  .cover .meta { border-top: 1px solid var(--line); padding-top: 5mm; color: var(--muted); font-size: 10pt; }
+  .cover .hero { margin-top: 12mm; }
+  .cover .hero img { width: 100%; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 6px 24px rgba(31,36,48,0.12); }
+
+  /* table of contents */
+  .toc { list-style: none; padding: 0; counter-reset: toc; }
+  .toc > li { counter-increment: toc; display: flex; gap: 3mm; padding: 2mm 0; border-bottom: 1px dotted var(--line); font-size: 11pt; }
+  .toc > li::before { content: counter(toc) "."; color: var(--brand); font-weight: 600; width: 7mm; }
+  .toc a { color: var(--ink); text-decoration: none; flex: 1; }
+  .toc .who { color: var(--muted); font-size: 9.5pt; }
+
+  /* workflow diagram */
+  .flow { display: grid; grid-template-columns: 34mm 1fr; gap: 0; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin: 3mm 0 4mm; font-size: 9pt; }
+  .flow .lane { padding: 2.2mm 3mm; border-bottom: 1px solid var(--line); background: var(--soft); font-weight: 600; }
+  .flow .cells { padding: 2.2mm 3mm; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 1.5mm; align-items: center; }
+  .flow .lane:nth-last-child(2), .flow .cells:last-child { border-bottom: 0; }
+  .flow .box { border-radius: 4px; padding: 0.6mm 2mm; border: 1px solid; }
+  .flow .fwd { border-color: #d8b4fe; background: var(--brand-soft); }
+  .flow .back { border-color: #fcd34d; background: var(--amber-soft); }
+  .flow .end { border-color: #fca5a5; background: var(--red-soft); }
+  .flow .done { border-color: #86efac; background: var(--green-soft); }
+  .flow .arrow { color: var(--muted); }
+  .legend { font-size: 8.5pt; color: var(--muted); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ cover -->
+<section class="cover">
+  <div>
+    <div class="logo">&#127974;</div>
+    <h1>Hướng dẫn sử dụng<br>Loan Workflow</h1>
+    <p class="sub">Hệ thống xử lý hồ sơ vay: từ lúc Sale nhập hồ sơ đến khi giải ngân</p>
+    <div class="hero"><img src="img/06_overview.jpg" alt=""></div>
+  </div>
+  <div class="meta">
+    Phiên bản demo · Tháng 11/2026<br>
+    Tất cả tên khách hàng, số giấy tờ, công ty và số tiền trong tài liệu là dữ liệu giả lập, không phải dữ liệu thật.
+  </div>
+</section>
+
+<!-- ============================================================ toc -->
+<section class="chapter" style="counter-increment: none">
+  <h1 style="font-size:20pt;margin:0 0 6mm">Mục lục</h1>
+  <ol class="toc">
+    <li><a href="#intro">Giới thiệu và quy trình tổng quát</a> <span class="who">Mọi người</span></li>
+    <li><a href="#start">Đăng nhập và màn hình chính</a> <span class="who">Mọi người</span></li>
+    <li><a href="#list">Tìm và mở hồ sơ</a> <span class="who">Mọi người</span></li>
+    <li><a href="#sale">Sale: tạo và hoàn thiện hồ sơ</a> <span class="who">SaleTeam</span></li>
+    <li><a href="#workflow">Chuyển hồ sơ sang bước tiếp theo</a> <span class="who">Mọi vai trò xử lý</span></li>
+    <li><a href="#review">Sale Leader, Sale Support và duyệt ngoại lệ</a> <span class="who">SaleManager, SaleSupport, SaleDirector, HeadPFS</span></li>
+    <li><a href="#ced">CED: thẩm định và chấm điểm CRR</a> <span class="who">CEDOfficer</span></li>
+    <li><a href="#approve">Phê duyệt hai cấp</a> <span class="who">Approver</span></li>
+    <li><a href="#cra">CRA: hợp đồng và giải ngân</a> <span class="who">CRAOfficer</span></li>
+    <li><a href="#history">Lịch sử xử lý và Credit memo</a> <span class="who">Mọi người</span></li>
+    <li><a href="#teamadmin">Trưởng nhóm: khối lượng việc và giao lại hồ sơ</a> <span class="who">CEDAdmin, CRAAdmin</span></li>
+    <li><a href="#admin">Quản trị hệ thống</a> <span class="who">Quản trị viên</span></li>
+    <li><a href="#appendix">Phụ lục: trạng thái, quyền sửa, câu hỏi thường gặp</a> <span class="who">Tra cứu</span></li>
+  </ol>
+  <div class="note">
+    <b>Cách đọc tài liệu</b>
+    Chương 1–3 và 5 dành cho tất cả người dùng. Sau đó bạn chỉ cần đọc chương ứng với vai trò của mình.
+    Tên nút và tab trên màn hình được viết như <span class="ui">Change status</span>.
+  </div>
+</section>
+
+<!-- ============================================================ 1 intro -->
+<section class="chapter" id="intro">
+  <h2>Giới thiệu và quy trình tổng quát</h2>
+  <p>Loan Workflow quản lý hồ sơ vay cá nhân (vay mua nhà, mua nhà dự án, vay thế chấp, vay mua xe) qua các bước:
+     Sale nhập hồ sơ, các cấp Sale kiểm tra, CED thẩm định và chấm điểm, hai cấp phê duyệt, rồi CRA lập hợp đồng và giải ngân.</p>
+  <p>Ở mỗi thời điểm, một hồ sơ có <b>một trạng thái</b> và <b>một người đang xử lý</b>. Chỉ người đang xử lý mới chuyển được hồ sơ sang bước sau.
+     Hệ thống ghi lại mọi lần chuyển bước: ai chuyển, lúc nào, kèm ý kiến gì.</p>
+
+  <h3>Quy trình tổng quát</h3>
+  <div class="flow">
+    <div class="lane">Sale</div>
+    <div class="cells"><span class="box fwd">Open: nhập hồ sơ</span><span class="arrow">→</span><span class="box fwd">Gửi Sale Leader</span></div>
+    <div class="lane">Sale Leader</div>
+    <div class="cells"><span class="box fwd">Endorse</span><span class="arrow">→</span><span class="box fwd">Chuyển Sale Support</span><span class="box back">Yêu cầu Sale sửa</span><span class="box end">Từ chối</span></div>
+    <div class="lane">Sale Support</div>
+    <div class="cells"><span class="box fwd">Kiểm tra</span><span class="arrow">→</span><span class="box fwd">Chuyển CED</span><span class="box fwd">Trình ngoại lệ</span><span class="box back">Yêu cầu Sale bổ sung</span></div>
+    <div class="lane">Ngoại lệ</div>
+    <div class="cells"><span class="box fwd">Head of Sale</span><span class="arrow">→</span><span class="box fwd">Head of PFS</span><span class="arrow">→</span><span class="box fwd">CED</span></div>
+    <div class="lane">CED</div>
+    <div class="cells"><span class="box fwd">Thẩm định, chấm điểm CRR</span><span class="arrow">→</span><span class="box fwd">Đề xuất Approver 1</span><span class="box back">Yêu cầu Sale bổ sung</span><span class="box end">Từ chối</span></div>
+    <div class="lane">Approver</div>
+    <div class="cells"><span class="box fwd">Phê duyệt cấp 1</span><span class="arrow">→</span><span class="box fwd">Phê duyệt cấp 2</span><span class="box back">Yêu cầu CED cập nhật</span></div>
+    <div class="lane">Sale</div>
+    <div class="cells"><span class="box fwd">Post approval</span><span class="arrow">→</span><span class="box fwd">Yêu cầu CRA lập hồ sơ</span></div>
+    <div class="lane">CRA</div>
+    <div class="cells"><span class="box fwd">Lập hợp đồng</span><span class="arrow">→</span><span class="box fwd">Sale xác nhận giải ngân</span><span class="arrow">→</span><span class="box fwd">CRA giải ngân</span><span class="arrow">→</span><span class="box done">Complete</span></div>
+  </div>
+  <p class="legend"><span class="chip c-primary">Tím</span> chuyển tiếp · <span class="chip c-warn">Vàng</span> trả lại để bổ sung · <span class="chip c-stop">Đỏ</span> từ chối / hủy · <span class="chip c-ok">Xanh</span> hoàn tất.
+     Danh sách đầy đủ trạng thái có trong <a href="#appendix">Phụ lục</a>.</p>
+
+  <h3>Vai trò</h3>
+  <table>
+    <tr><th style="width:30%">Vai trò (nhóm)</th><th>Việc chính</th></tr>
+    <tr><td>Sale (SaleTeam)</td><td>Tạo hồ sơ, nhập người vay, thu nhập, CIC, tài sản đảm bảo, tài liệu; bổ sung khi bị trả lại; xác nhận giải ngân.</td></tr>
+    <tr><td>Sale Leader (SaleManager)</td><td>Xem và đồng ý (endorse) hồ sơ của nhóm.</td></tr>
+    <tr><td>Sale Support (SaleSupport)</td><td>Kiểm tra tính đầy đủ, chuyển CED hoặc trình duyệt ngoại lệ.</td></tr>
+    <tr><td>Head of Sale, Head of PFS</td><td>Duyệt hồ sơ ngoại lệ trước khi sang CED.</td></tr>
+    <tr><td>CED (CEDOfficer)</td><td>Thẩm định, chấm điểm CRR, ghi quyết định tín dụng và điều kiện phê duyệt.</td></tr>
+    <tr><td>Approver</td><td>Phê duyệt cấp 1 và cấp 2 (hai người khác nhau).</td></tr>
+    <tr><td>CRA (CRAOfficer)</td><td>Nhập dữ liệu hợp đồng, in hợp đồng, giải ngân.</td></tr>
+    <tr><td>Trưởng nhóm (CEDAdmin, CRAAdmin)</td><td>Theo dõi khối lượng việc, giao lại hồ sơ trong nhóm.</td></tr>
+    <tr><td>Quản trị viên</td><td>Người dùng, danh mục sản phẩm, quy trình, bảng điểm, tham số tín dụng.</td></tr>
+  </table>
+</section>
+
+<!-- ============================================================ 2 start -->
+<section class="chapter" id="start">
+  <h2>Đăng nhập và màn hình chính</h2>
+  <h3>Đăng nhập</h3>
+  <p>Mở địa chỉ hệ thống trên trình duyệt (bản demo chạy tại <span class="ui">http://localhost:8000</span>), nhập tên đăng nhập và mật khẩu rồi bấm <span class="ui">Log in</span>.</p>
+  <figure class="half"><img src="img/01_login.jpg" alt=""><figcaption>Màn hình đăng nhập</figcaption></figure>
+  <div class="note"><b>Tài khoản demo</b>
+    Bản demo có sẵn một tài khoản cho mỗi vai trò: <span class="ui">sale1</span>, <span class="ui">sale2</span>, <span class="ui">salelead</span>, <span class="ui">salesupport</span>,
+    <span class="ui">saledirector</span>, <span class="ui">headpfs</span>, <span class="ui">ced1</span>, <span class="ui">ced2</span>, <span class="ui">cedadmin</span>,
+    <span class="ui">approver1</span>, <span class="ui">approver2</span>, <span class="ui">cra1</span>, <span class="ui">craadmin</span>.
+    Tất cả dùng chung mật khẩu ghi trong biến <span class="ui">DEMO_USER_PASSWORD</span> của file <span class="ui">.env</span>.</div>
+
+  <h3>Trang chủ (Dashboard)</h3>
+  <p>Sau khi đăng nhập, bạn thấy trang chủ của riêng mình:</p>
+  <ul>
+    <li><b>Bốn chỉ số</b> ở trên cùng: hồ sơ đang chờ bạn, hồ sơ của bạn đã quá hạn, hồ sơ đang mở bạn được xem, hồ sơ hoàn tất trong 30 ngày.</li>
+    <li><b>My work queue</b>: các hồ sơ đang chờ bạn xử lý, sắp theo hạn. Hạn đã qua hiện màu đỏ. Bấm số hồ sơ để mở.</li>
+    <li><b>Open applications by status</b>: số hồ sơ đang mở ở từng bước.</li>
+  </ul>
+  <figure><img src="img/02_dashboard_sale.jpg" alt=""><figcaption>Trang chủ của Sale</figcaption></figure>
+  <p>Thanh bên trái có <span class="ui">Dashboard</span>, <span class="ui">Loan applications</span> (danh sách hồ sơ) và <span class="ui">Applicants</span> (danh sách người vay).
+     Ô tìm kiếm phía trên (phím tắt <span class="ui">Ctrl K</span>) mở nhanh một mục. Bấm tên của bạn ở góc dưới để đổi mật khẩu, chọn giao diện sáng/tối hoặc đăng xuất.</p>
+  <div class="tip"><b>Hạn xử lý</b>
+    Mỗi lần hồ sơ được chuyển bước, người nhận có <b>3 ngày</b> để xử lý (tham số của bản demo). Hồ sơ quá hạn hiện màu đỏ ở trang chủ và trong danh sách.</div>
+</section>
+
+<!-- ============================================================ 3 list -->
+<section class="chapter" id="list">
+  <h2>Tìm và mở hồ sơ</h2>
+  <p>Chọn <span class="ui">Loan applications</span> ở thanh bên. Bạn chỉ thấy những hồ sơ mình được phép xem: hồ sơ mình tạo, đang xử lý hoặc đã tham gia xử lý, và hồ sơ của nhóm nếu bạn là trưởng nhóm.</p>
+  <figure><img src="img/03_list.jpg" alt=""><figcaption>Danh sách hồ sơ</figcaption></figure>
+  <ul>
+    <li><b>Tìm kiếm</b>: gõ số hồ sơ, tên hoặc số CCCD/CMND của người vay vào ô tìm kiếm rồi nhấn Enter.</li>
+    <li><b>Cột</b>: số hồ sơ, người vay chính, sản phẩm, số tiền vay, trạng thái (màu theo nhóm bước), người đang xử lý (<i>With</i>), hạn (<i>Due</i>) và lần sửa cuối.</li>
+    <li><b>Sắp xếp</b>: bấm tiêu đề cột.</li>
+    <li><b>Lọc</b>: bấm <span class="ui">Filters</span> để lọc theo trạng thái, loại phê duyệt, người xử lý hoặc khoảng ngày tạo, rồi bấm <span class="ui">Apply Filters</span>.</li>
+  </ul>
+  <figure><img src="img/04_list_filters.jpg" alt=""><figcaption>Bộ lọc danh sách hồ sơ</figcaption></figure>
+  <p>Số hồ sơ có hai dạng: <b>APmmyy…</b> khi còn nháp ở bộ phận Sale, và <b>DS.&lt;sản phẩm&gt;.&lt;năm&gt;.&lt;số thứ tự&gt;</b> (ví dụ DS.SS.26.0004) được cấp tự động khi hồ sơ đến CED.</p>
+</section>
+
+<!-- ============================================================ 4 sale -->
+<section class="chapter" id="sale">
+  <h2>Sale: tạo và hoàn thiện hồ sơ</h2>
+  <h3>Tạo hồ sơ mới</h3>
+  <ol class="steps">
+    <li>Trong <span class="ui">Loan applications</span>, bấm nút <span class="ui">+</span> ở góc trên bên phải.</li>
+    <li>Bấm <span class="ui">Create application</span> để xác nhận. Hệ thống tạo hồ sơ nháp do bạn đứng tên và đang xử lý, kèm một đề nghị vay và một tài sản đảm bảo trống.</li>
+  </ol>
+  <figure><img src="img/05_new_application.jpg" alt=""><figcaption>Xác nhận tạo hồ sơ</figcaption></figure>
+
+  <h3>Trang hồ sơ</h3>
+  <p>Trang hồ sơ có các tab theo từng phần: <span class="ui">General</span>, <span class="ui">Loan request</span>, <span class="ui">Applicants</span>, <span class="ui">Collaterals</span>,
+     <span class="ui">Credit decision (CED)</span>, <span class="ui">Conditions</span>, <span class="ui">Documents</span>, <span class="ui">Loan contract (CRA)</span>,
+     <span class="ui">Contract documents</span>, và trong menu <span class="ui">···</span> là <span class="ui">Sale parties</span> và <span class="ui">Workflow history</span>.
+     Các nút trên cùng: <span class="ui">Change status</span> (chuyển bước), <span class="ui">CRR scoring</span>, <span class="ui">Credit memo (PDF)</span>.</p>
+  <p>Tab <span class="ui">General › Overview</span> cho biết nhanh trạng thái, người đang xử lý, hạn, người vay chính và khoản vay.</p>
+  <figure><img src="img/06_overview.jpg" alt=""><figcaption>Tổng quan hồ sơ</figcaption></figure>
+  <div class="warn"><b>Ai được sửa phần nào?</b>
+    Mỗi phần chỉ sửa được bởi đúng vai trò, ở đúng bước. Sale sửa phần của Sale khi hồ sơ đang ở bước của Sale (Open, hoặc khi bị trả lại).
+    Ngoài các bước đó, ô nhập hiện dạng chỉ đọc. Chi tiết xem bảng trong <a href="#appendix">Phụ lục</a>.</div>
+
+  <h3>Đề nghị vay (Loan request)</h3>
+  <p>Chọn sản phẩm và sản phẩm con, nhập số tiền, kỳ hạn (tháng), chương trình vay, gói lãi suất, mục đích, tỷ lệ cho vay (MOA %) và ngoại lệ nếu có.
+     Bấm <span class="ui">Save and continue editing</span> để lưu. Khoản trả hằng tháng (cao nhất, thấp nhất, trung bình) được tính tự động sau khi lưu.</p>
+  <figure class="tall"><img src="img/07_loan_request.jpg" alt=""><figcaption>Đề nghị vay; khoản trả hằng tháng được tính tự động</figcaption></figure>
+  <div class="tip"><b>Mẹo</b>
+    Khi đổi sản phẩm, loại tài sản đảm bảo được cập nhật theo sản phẩm (xe, nhà có sổ, nhà dự án).</div>
+
+  <h3>Người vay (Applicants)</h3>
+  <p>Tab <span class="ui">Applicants</span> liệt kê người vay chính và người đồng vay, cùng tổng thu nhập tháng của từng người.
+     Có thể thêm dòng mới để nhập người đồng vay. Bấm vào tên để mở trang chi tiết người vay.</p>
+  <figure><img src="img/08_applicants_tab.jpg" alt=""><figcaption>Danh sách người vay của hồ sơ</figcaption></figure>
+  <p>Trang người vay có thông tin cá nhân, địa chỉ, tình trạng cư trú và quan hệ với ngân hàng. Tên và địa chỉ không dấu (dùng trên chứng từ) được tạo tự động từ bản có dấu.</p>
+  <figure class="tall"><img src="img/09_applicant.jpg" alt=""><figcaption>Thông tin người vay</figcaption></figure>
+
+  <h3>Thu nhập và CIC</h3>
+  <p>Các tab trên trang người vay dùng để nhập từng nguồn thu nhập và từng khoản nợ CIC:</p>
+  <table>
+    <tr><th style="width:32%">Tab</th><th>Nhập gì</th><th style="width:30%">Hệ thống tính</th></tr>
+    <tr><td>Salaries</td><td>Nơi làm việc, hợp đồng, lương cố định và biến đổi theo từng tháng, số tháng tính</td><td>Lương bình quân tháng</td></tr>
+    <tr><td>Businesses</td><td>Doanh nghiệp/hộ kinh doanh, doanh thu VAT, báo cáo tài chính 3 năm, biên lợi nhuận</td><td>Thu nhập ròng tháng</td></tr>
+    <tr><td>Household businesses</td><td>Doanh thu 6 tháng, biên lợi nhuận</td><td>Thu nhập ròng tháng</td></tr>
+    <tr><td>Rental incomes</td><td>Giá cho thuê, tỷ lệ</td><td>Thu nhập ròng tháng</td></tr>
+    <tr><td>Secured loans / Unsecured loans / Overdrafts / Credit cards (CIC)</td><td>Các khoản vay và thẻ hiện có theo CIC</td><td>Khoản trả hằng tháng</td></tr>
+  </table>
+  <figure class="tall"><img src="img/10_applicant_salary.jpg" alt=""><figcaption>Nhập lương theo tháng</figcaption></figure>
+  <figure><img src="img/11_applicant_cic.jpg" alt=""><figcaption>Khoản vay có tài sản đảm bảo theo CIC</figcaption></figure>
+  <p>Sau mỗi lần lưu, tab <span class="ui">Income summary (calculated)</span> cập nhật tổng thu nhập và tổng khoản trả nợ hiện có của người vay.</p>
+  <figure><img src="img/12_income_summary.jpg" alt=""><figcaption>Tổng hợp thu nhập của người vay</figcaption></figure>
+
+  <h3>Tài sản đảm bảo (Collaterals)</h3>
+  <p>Nhập loại tài sản, giá trị theo hợp đồng mua bán hoặc ước tính, rồi mở nhóm <span class="ui">Property</span> (nhà, đất, căn hộ dự án) hoặc <span class="ui">Car</span> (xe) để nhập chi tiết.
+     Một hồ sơ có thể có nhiều tài sản. Dữ liệu pháp lý dùng cho hợp đồng do CRA nhập sau, trên trang riêng của từng tài sản (mục 9.2).</p>
+  <figure class="tall"><img src="img/13_collaterals.jpg" alt=""><figcaption>Tài sản đảm bảo</figcaption></figure>
+
+  <h3>Tài liệu (Documents)</h3>
+  <p>Thêm dòng, chọn loại tài liệu, chọn file rồi lưu. File chỉ mở được bởi người có quyền xem hồ sơ.</p>
+  <figure><img src="img/14_documents.jpg" alt=""><figcaption>Tài liệu đính kèm</figcaption></figure>
+
+  <h3>Khả năng trả nợ (Credit assessment)</h3>
+  <p>Tab <span class="ui">General › Credit assessment</span> cho biết tổng thu nhập, khoản trả nợ hiện có, chi phí sinh hoạt, DSR, thu nhập còn lại (NST),
+     phân khúc khách hàng và điểm CRR. Tất cả được tính tự động mỗi khi hồ sơ được lưu.</p>
+  <figure><img src="img/15_credit_assessment.jpg" alt=""><figcaption>Khả năng trả nợ, tính tự động</figcaption></figure>
+  <div class="note"><b>Cách tính chính</b>
+    DSR = (khoản trả của khoản vay này + khoản trả nợ hiện có) / tổng thu nhập. NST = thu nhập − khoản trả nợ − chi phí sinh hoạt.
+    Chi phí sinh hoạt mặc định được tính theo số người vay; quản trị viên chỉnh mức này trong <span class="ui">Credit settings</span>.</div>
+</section>
+
+<!-- ============================================================ 5 workflow -->
+<section class="chapter" id="workflow">
+  <h2>Chuyển hồ sơ sang bước tiếp theo</h2>
+  <p>Khi đã xử lý xong phần của mình, bấm <span class="ui">Change status</span> trên trang hồ sơ. Trang này hiện:</p>
+  <ul>
+    <li><b>Tóm tắt hồ sơ</b> ở trên cùng: người vay, khoản vay, thu nhập, DSR, điểm CRR và hạn, để bạn quyết định mà không cần quay lại trang hồ sơ.</li>
+    <li><b>Các bước bạn được làm</b> ở trạng thái hiện tại, mỗi bước một thẻ, viền trái có màu:
+      <span class="chip c-primary">Move on</span> chuyển tiếp (mở sẵn),
+      <span class="chip c-warn">Send back</span> trả lại để bổ sung,
+      <span class="chip c-stop">End</span> từ chối hoặc hủy. Hai loại sau được thu gọn để tránh bấm nhầm; bấm vào tiêu đề để mở.</li>
+  </ul>
+  <figure class="tall"><img src="img/16_status_sale.jpg" alt=""><figcaption>Sale gửi hồ sơ cho Sale Leader</figcaption></figure>
+  <ol class="steps">
+    <li>Mở thẻ của bước cần làm.</li>
+    <li>Chọn người nhận ở ô <span class="ui">Hand over to</span>. Hệ thống gợi ý sẵn người phù hợp; với CED và CRA, gợi ý là người đang ít hồ sơ nhất trong nhóm (chia đều việc).</li>
+    <li>Nhập ý kiến. Với bước trả lại hoặc từ chối, ý kiến là bắt buộc và người nhận sẽ đọc được trong lịch sử.</li>
+    <li>Với bước từ chối của CED/Approver, chọn lý do từ chối. Khi CED trả lại cho Sale, có thể chọn mục QC.</li>
+    <li>Bấm nút của bước. Hồ sơ chuyển trạng thái, người nhận được giao việc và nhận email thông báo (nếu có địa chỉ email).</li>
+  </ol>
+  <div class="note"><b>Không thấy bước nào?</b>
+    Bạn chỉ thấy bước khi chính bạn đang xử lý hồ sơ và nhóm của bạn được làm bước đó ở trạng thái hiện tại. Nếu hồ sơ đang ở người khác, trang sẽ báo không có bước nào.</div>
+</section>
+
+<!-- ============================================================ 6 review -->
+<section class="chapter" id="review">
+  <h2>Sale Leader, Sale Support và duyệt ngoại lệ</h2>
+  <p>Hồ sơ được giao cho bạn xuất hiện trong <b>My work queue</b> ở trang chủ.</p>
+  <figure><img src="img/17_dashboard_salelead.jpg" alt=""><figcaption>Trang chủ của Sale Leader</figcaption></figure>
+  <ul>
+    <li><b>Sale Leader</b>: mở hồ sơ, kiểm tra, rồi <span class="ui">Endorse to Sale Support</span>; hoặc <span class="ui">Request Update</span> trả lại Sale; hoặc <span class="ui">Reject</span>.</li>
+    <li><b>Sale Support</b>: kiểm tra tính đầy đủ, rồi <span class="ui">Submit to CED</span>. Hồ sơ có ngoại lệ thì <span class="ui">Submit to Head of Sale</span>.
+        Có thể <span class="ui">Request Sale Update</span> để Sale bổ sung; khi đó hồ sơ quay lại Sale Support sau khi Sale cập nhật.</li>
+    <li><b>Head of Sale → Head of PFS</b>: duyệt ngoại lệ; Head of PFS bấm <span class="ui">Approve</span> để chuyển hồ sơ sang CED.</li>
+  </ul>
+  <figure class="tall"><img src="img/18_status_salelead.jpg" alt=""><figcaption>Các bước của Sale Leader</figcaption></figure>
+</section>
+
+<!-- ============================================================ 7 ced -->
+<section class="chapter" id="ced">
+  <h2>CED: thẩm định và chấm điểm CRR</h2>
+  <p>Khi hồ sơ đến CED, hệ thống cấp số hồ sơ DS.… và giao cho một CED officer (gợi ý theo khối lượng việc).</p>
+  <figure><img src="img/19_dashboard_ced.jpg" alt=""><figcaption>Trang chủ của CED</figcaption></figure>
+
+  <h3>Quyết định tín dụng</h3>
+  <p>Trong tab <span class="ui">Credit decision (CED)</span>, nhập số tiền phê duyệt, giá trị định giá, mã lỗi, đề xuất của CED và file báo cáo định giá.
+     Ý kiến của Approver 1 và 2 cũng nằm ở đây.</p>
+  <figure class="tall"><img src="img/20_ced_decision.jpg" alt=""><figcaption>Quyết định tín dụng</figcaption></figure>
+
+  <h3>Chấm điểm CRR</h3>
+  <ol class="steps">
+    <li>Bấm <span class="ui">CRR scoring</span> trên trang hồ sơ.</li>
+    <li>Nhập các thông tin CIC và tài khoản: thời gian quan hệ tài khoản, nhóm nợ, có báo cáo CIC hay không, số tổ chức tín dụng, số lần quá hạn 12 và 60 tháng.</li>
+    <li>Bấm <span class="ui">Calculate score</span>. Các thông tin còn lại (tuổi, hôn nhân, học vấn, thu nhập, DSR, khoản vay, LTV…) được lấy từ hồ sơ.</li>
+  </ol>
+  <figure><img src="img/21_scoring_input.jpg" alt=""><figcaption>Nhập thông tin chấm điểm</figcaption></figure>
+  <p>Kết quả gồm tổng điểm, hạng (band) và điểm của từng tiêu chí. Người khác xem được kết quả nhưng không sửa được.</p>
+  <figure class="tall"><img src="img/22_scoring_result.jpg" alt=""><figcaption>Kết quả chấm điểm CRR và điểm từng tiêu chí</figcaption></figure>
+
+  <h3>Điều kiện phê duyệt</h3>
+  <p>Tab <span class="ui">Conditions</span>: thêm các điều kiện trước/sau giải ngân. Có hai cột đánh dấu CED và CRA đã theo dõi điều kiện.</p>
+  <figure><img src="img/23_conditions.jpg" alt=""><figcaption>Điều kiện phê duyệt</figcaption></figure>
+
+  <h3>Chuyển bước</h3>
+  <p>Bấm <span class="ui">Change status</span>: <span class="ui">Recommend to Approver 1</span> để trình duyệt,
+     <span class="ui">Request Sale Update</span> để Sale bổ sung, hoặc <span class="ui">Reject</span> kèm lý do.</p>
+  <figure class="tall"><img src="img/24_status_ced.jpg" alt=""><figcaption>Các bước của CED; bước trả lại và từ chối được mở ra để minh họa</figcaption></figure>
+</section>
+
+<!-- ============================================================ 8 approve -->
+<section class="chapter" id="approve">
+  <h2>Phê duyệt hai cấp</h2>
+  <p>Approver mở hồ sơ từ trang chủ, xem tab <span class="ui">General › Credit assessment</span>, <span class="ui">CRR scoring</span> và <span class="ui">Credit memo (PDF)</span>,
+     ghi ý kiến trong tab <span class="ui">Credit decision (CED)</span>, rồi bấm <span class="ui">Change status</span>.</p>
+  <figure class="tall"><img src="img/25_status_approver1.jpg" alt=""><figcaption>Approver 1: duyệt, trả CED cập nhật hoặc từ chối</figcaption></figure>
+  <div class="warn"><b>Nguyên tắc bốn mắt</b>
+    Người duyệt cấp 2 phải khác người duyệt cấp 1. Hệ thống không cho người đã duyệt cấp 1 duyệt tiếp cấp 2, và không đưa người đó vào danh sách người nhận.</div>
+  <figure class="tall"><img src="img/26_status_approver2.jpg" alt=""><figcaption>Approver 2: phê duyệt chuyển hồ sơ về Sale (Post approval)</figcaption></figure>
+  <p>Sau phê duyệt cấp 2, hồ sơ về Sale ở trạng thái <b>Post Approval</b>. Sale bấm <span class="ui">Request Docs Preparation</span> để chuyển CRA,
+     hoặc <span class="ui">Valuation Review Request</span> nếu cần CED xem lại định giá.</p>
+</section>
+
+<!-- ============================================================ 9 cra -->
+<section class="chapter" id="cra">
+  <h2>CRA: hợp đồng và giải ngân</h2>
+  <h3>Điều khoản hợp đồng tín dụng</h3>
+  <p>Tab <span class="ui">Loan contract (CRA)</span>: số tiền, hạn mức (bằng số và bằng chữ), số tiền giải ngân, lãi suất, biên độ, phí trả trước hạn, kỳ hạn, phương thức giải ngân, mục đích và các điều kiện khác.</p>
+  <figure class="tall"><img src="img/27_loan_contract.jpg" alt=""><figcaption>Điều khoản hợp đồng tín dụng</figcaption></figure>
+
+  <h3>Dữ liệu pháp lý của tài sản</h3>
+  <p>Trong tab <span class="ui">Collaterals</span>, bấm biểu tượng mở của tài sản để sang trang riêng của tài sản đó. Phần trên là dữ liệu Sale đã nhập (chỉ đọc);
+     phần <b>Contract data (CRA)</b> bên dưới để CRA nhập: thửa đất, tờ bản đồ, giấy chứng nhận, định giá, hợp đồng mua bán, công chứng chuyển nhượng; với xe là số khung, số máy, đại lý.</p>
+  <figure class="tall"><img src="img/28_collateral_contract.jpg" alt=""><figcaption>Dữ liệu pháp lý của tài sản cho hợp đồng thế chấp</figcaption></figure>
+
+  <h3>Chứng từ hợp đồng</h3>
+  <p>Tab <span class="ui">Contract documents</span>: thêm từng chứng từ (hợp đồng tín dụng FA, hợp đồng thế chấp MA, hợp đồng ba bên TA, biên bản định giá), số hợp đồng, ngày ký, người ký.
+     Sau khi lưu, cột <b>Print</b> mở bản PDF phần các bên của hợp đồng, đã điền thông tin người vay và ngân hàng.</p>
+  <figure><img src="img/29_contract_docs.jpg" alt=""><figcaption>Chứng từ hợp đồng và liên kết in</figcaption></figure>
+  <p>Các bước tiếp theo: CRA <span class="ui">Preparation Complete</span> → Sale <span class="ui">Confirm Disbursement</span>
+     (hoặc yêu cầu CED kiểm tra điều kiện trước giải ngân) → CRA <span class="ui">Confirm Disbursement Complete</span>. Hồ sơ chuyển sang <span class="chip c-ok">Complete</span>.</p>
+</section>
+
+<!-- ============================================================ 10 history -->
+<section class="chapter" id="history">
+  <h2>Lịch sử xử lý và Credit memo</h2>
+  <h3>Lịch sử xử lý</h3>
+  <p>Menu <span class="ui">···</span> › <span class="ui">Workflow history</span> trên trang hồ sơ liệt kê mọi bước đã qua, mới nhất ở trên: thời điểm, người thực hiện, tên bước, trạng thái mới và ý kiến.</p>
+  <figure><img src="img/30_history.jpg" alt=""><figcaption>Lịch sử xử lý của một hồ sơ đã hoàn tất</figcaption></figure>
+  <div class="note"><b>Phân biệt hai loại lịch sử</b>
+    Nút <span class="ui">History</span> ở thanh trên cùng là nhật ký chỉnh sửa dữ liệu của trang quản trị, không phải lịch sử xử lý hồ sơ.</div>
+
+  <h3>Credit memo (PDF)</h3>
+  <p>Bấm <span class="ui">Credit memo (PDF)</span> để mở tờ trình tín dụng: đề nghị vay, người vay, tài sản, khả năng trả nợ, điểm CRR, quyết định tín dụng,
+     ý kiến phê duyệt, điều kiện và lịch sử xử lý. Có thể in hoặc lưu file từ trình duyệt.</p>
+  <figure class="tall"><img src="img/36_credit_memo.jpg" alt=""><figcaption>Trang đầu của Credit memo</figcaption></figure>
+</section>
+
+<!-- ============================================================ 11 team admin -->
+<section class="chapter" id="teamadmin">
+  <h2>Trưởng nhóm: khối lượng việc và giao lại hồ sơ</h2>
+  <p>Trưởng nhóm CED và CRA xem được tất cả hồ sơ của nhóm. Trang chủ có thêm bảng <b>Team workload</b>: số hồ sơ đang mở của từng người và người đó có đang nhận việc mới hay không.</p>
+  <figure class="tall"><img src="img/31_dashboard_teamadmin.jpg" alt=""><figcaption>Trang chủ của trưởng nhóm CED</figcaption></figure>
+  <ul>
+    <li><b>Tạm dừng nhận việc</b>: mỗi officer có nút <span class="ui">Pause</span> / <span class="ui">Resume</span> ở trang chủ (ví dụ khi nghỉ phép). Người đang tạm dừng không được gợi ý khi chia việc.</li>
+    <li><b>Giao lại hồ sơ</b>: trên trang <span class="ui">Change status</span>, mở thẻ <b>Re-assign (team admin)</b>, chọn người mới, ghi chú và bấm <span class="ui">Re-assign</span>. Trạng thái hồ sơ không đổi.</li>
+  </ul>
+  <figure class="tall"><img src="img/32_reassign.jpg" alt=""><figcaption>Giao lại hồ sơ cho người khác trong nhóm</figcaption></figure>
+</section>
+
+<!-- ============================================================ 12 admin -->
+<section class="chapter" id="admin">
+  <h2>Quản trị hệ thống</h2>
+  <p>Quản trị viên có thêm các nhóm <b>Reference data</b>, <b>Workflow and scoring</b> và <b>Users</b> ở thanh bên:</p>
+  <table>
+    <tr><th style="width:30%">Mục</th><th>Dùng để</th></tr>
+    <tr><td>Products, Pricing schemes</td><td>Sản phẩm, sản phẩm con và gói lãi suất (có phí trả trước hạn). Nhập/xuất Excel.</td></tr>
+    <tr><td>Panel projects, Panel car dealers</td><td>Dự án và đại lý xe liên kết, hạn mức.</td></tr>
+    <tr><td>Workflow actions</td><td>Các bước của quy trình: từ trạng thái nào, nhóm nào được làm, sang trạng thái nào, giao cho nhóm nào.</td></tr>
+    <tr><td>Score matrix</td><td>Bảng điểm CRR theo từng tiêu chí và khoảng giá trị.</td></tr>
+    <tr><td>Credit settings</td><td>Chi phí sinh hoạt mặc định, ngưỡng phân khúc lương, độ rộng mỗi band điểm.</td></tr>
+    <tr><td>Officers</td><td>Officer CED/CRA tham gia chia việc tự động.</td></tr>
+    <tr><td>Users, Groups (roles)</td><td>Người dùng và nhóm (vai trò). Quyền trong hệ thống đi theo nhóm.</td></tr>
+  </table>
+  <figure><img src="img/33_admin_actions.jpg" alt=""><figcaption>Cấu hình các bước quy trình</figcaption></figure>
+  <figure><img src="img/34_admin_scorematrix.jpg" alt=""><figcaption>Bảng điểm CRR</figcaption></figure>
+  <h3>Thêm người dùng</h3>
+  <ol class="steps">
+    <li>Mở <span class="ui">Users</span>, bấm <span class="ui">+</span>, nhập tên đăng nhập và mật khẩu ban đầu.</li>
+    <li>Nhập họ tên, đánh dấu <b>Staff status</b> (được vào hệ thống) và chọn nhóm theo vai trò (ví dụ SaleTeam, CEDOfficer).</li>
+    <li>Với CED/CRA officer, thêm một dòng trong <span class="ui">Officers</span> để người đó được chia việc tự động.</li>
+  </ol>
+  <figure><img src="img/35_admin_users.jpg" alt=""><figcaption>Danh sách người dùng</figcaption></figure>
+  <div class="warn"><b>Thay đổi quy trình</b>
+    Sửa bảng Workflow actions làm thay đổi ngay các bước người dùng thấy. Nên thử trên môi trường thử nghiệm trước.</div>
+</section>
+
+<!-- ============================================================ 13 appendix -->
+<section class="chapter" id="appendix">
+  <h2>Phụ lục: trạng thái, quyền sửa, câu hỏi thường gặp</h2>
+  <h3>Trạng thái hồ sơ</h3>
+  <table>
+    <tr><th style="width:9%">Mã</th><th style="width:34%">Trạng thái</th><th>Người xử lý</th><th style="width:22%">Được sửa</th></tr>
+    <tr><td>11</td><td><span class="chip c-info">Open</span></td><td>Sale</td><td>Phần Sale</td></tr>
+    <tr><td>12</td><td><span class="chip c-info">Sale Leader Endorse</span></td><td>Sale Leader</td><td>–</td></tr>
+    <tr><td>13</td><td><span class="chip c-info">Sale Support Review</span></td><td>Sale Support</td><td>–</td></tr>
+    <tr><td>19</td><td><span class="chip c-warn">Sale Support Request Update</span></td><td>Sale</td><td>Phần Sale</td></tr>
+    <tr><td>14</td><td><span class="chip c-info">Head of Sale Approve Exception</span></td><td>Head of Sale</td><td>–</td></tr>
+    <tr><td>16</td><td><span class="chip c-info">Head of PFS Approve Exception</span></td><td>Head of PFS</td><td>–</td></tr>
+    <tr><td>21</td><td><span class="chip c-primary">CED Verify Application</span></td><td>CED</td><td>Phần CED</td></tr>
+    <tr><td>29</td><td><span class="chip c-warn">CED Request Update</span></td><td>Sale</td><td>Phần Sale</td></tr>
+    <tr><td>22</td><td><span class="chip c-primary">First Approval</span></td><td>Approver 1</td><td>–</td></tr>
+    <tr><td>24</td><td><span class="chip c-warn">First Approver Request Update</span></td><td>CED</td><td>Phần CED</td></tr>
+    <tr><td>23</td><td><span class="chip c-primary">Second Approval</span></td><td>Approver 2 (khác Approver 1)</td><td>–</td></tr>
+    <tr><td>25</td><td><span class="chip c-warn">Second Approver Request Update</span></td><td>CED</td><td>Phần CED</td></tr>
+    <tr><td>26</td><td><span class="chip c-primary">Concurrence</span></td><td>Credit Manager (hồ sơ MCC/ngoại lệ)</td><td>–</td></tr>
+    <tr><td>27</td><td><span class="chip c-primary">Post Approval</span></td><td>Sale</td><td>–</td></tr>
+    <tr><td>28</td><td><span class="chip c-primary">Request Valuation</span></td><td>CED</td><td>–</td></tr>
+    <tr><td>31</td><td><span class="chip c-ok">CRA Prepare Document</span></td><td>CRA</td><td>Phần CRA</td></tr>
+    <tr><td>39</td><td><span class="chip c-warn">CRA Request Update</span></td><td>Sale</td><td>Phần Sale</td></tr>
+    <tr><td>32</td><td><span class="chip c-ok">Sale Confirm Disbursement</span></td><td>Sale</td><td>–</td></tr>
+    <tr><td>33</td><td><span class="chip c-ok">CED Check Approval Condition</span></td><td>CED</td><td>–</td></tr>
+    <tr><td>35</td><td><span class="chip c-warn">CED Request Update Pre Disbursement</span></td><td>Sale</td><td>Phần Sale</td></tr>
+    <tr><td>34</td><td><span class="chip c-ok">CRA Disbursement</span></td><td>CRA</td><td>Phần CRA</td></tr>
+    <tr><td>51</td><td><span class="chip c-ok">Complete</span></td><td>–</td><td>–</td></tr>
+    <tr><td>10</td><td><span class="chip c-stop">Reject</span></td><td>Sale (có thể mở lại)</td><td>–</td></tr>
+    <tr><td>50</td><td><span class="chip c-stop">Closed</span></td><td>–</td><td>–</td></tr>
+  </table>
+
+  <h3>Phần dữ liệu theo vai trò</h3>
+  <table>
+    <tr><th style="width:18%">Phần</th><th>Gồm</th><th style="width:30%">Ai sửa</th></tr>
+    <tr><td>Sale</td><td>Đề nghị vay, người vay, thu nhập, CIC, tài sản đảm bảo, tài liệu</td><td>Sale tạo hồ sơ, khi hồ sơ ở bước của Sale</td></tr>
+    <tr><td>CED</td><td>Quyết định tín dụng, điều kiện, chấm điểm, loại phê duyệt</td><td>CED đang xử lý hoặc trưởng nhóm CED, ở bước 21/24/25</td></tr>
+    <tr><td>CRA</td><td>Hợp đồng tín dụng, dữ liệu pháp lý tài sản, chứng từ, bên bán</td><td>CRA đang xử lý hoặc trưởng nhóm CRA, ở bước 31/34</td></tr>
+  </table>
+
+  <h3>Câu hỏi thường gặp</h3>
+  <p><b>Tôi không sửa được hồ sơ?</b> Hồ sơ không ở bước của bạn, hoặc phần đó thuộc vai trò khác. Kiểm tra trạng thái và người xử lý ở tab General.</p>
+  <p><b>Không thấy nút chuyển bước tôi cần?</b> Bước chỉ hiện cho người đang xử lý và đúng nhóm. Nếu sai người xử lý, nhờ trưởng nhóm giao lại.</p>
+  <p><b>DSR, NST, khoản trả tháng không đổi sau khi sửa?</b> Các số này tính lại khi bấm <span class="ui">Save</span>. Hãy lưu trang rồi mở lại tab.</p>
+  <p><b>Điểm CRR hiện "Not scored yet"?</b> CED chưa chấm điểm. Điểm chỉ được tính khi CED bấm <span class="ui">Calculate score</span>.</p>
+  <p><b>Không chọn được người nhận?</b> Không có ai trong nhóm nhận đang hoạt động hoặc nhận việc. Liên hệ trưởng nhóm hoặc quản trị viên.</p>
+  <p><b>Mở file đính kèm báo không có quyền?</b> Chỉ người được xem hồ sơ mới mở được tài liệu của hồ sơ đó.</p>
+</section>
+
+</body>
+</html>

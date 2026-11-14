@@ -1,0 +1,130 @@
+{% extends "admin/base_site.html" %}
+{% load i18n humanize unfold %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block title %}{% translate "Dashboard" %} | {{ site_title|default:"Loan Workflow" }}{% endblock %}
+
+{% block content %}
+<div class="flex flex-col gap-6">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+        <h1 class="text-xl font-semibold text-font-important-light dark:text-font-important-dark">
+            {% blocktranslate with name=request.user.get_full_name|default:request.user.username %}Hello, {{ name }}{% endblocktranslate %}
+        </h1>
+        <div class="flex items-center gap-4">
+            {% if my_officer %}
+                <form method="post" action="{% url 'admin:lwf_officer_my_availability' %}" class="flex items-center gap-2 text-sm">
+                    {% csrf_token %}
+                    {% if my_officer.available %}{% translate "You receive new applications." %}{% else %}<span class="text-red-600">{% translate "You do not receive new applications." %}</span>{% endif %}
+                    <button type="submit" class="border border-base-200 rounded-default px-3 py-1 dark:border-base-700">
+                        {% if my_officer.available %}{% translate "Pause" %}{% else %}{% translate "Resume" %}{% endif %}
+                    </button>
+                </form>
+            {% endif %}
+            <a href="{% url 'admin:lwf_ticket_changelist' %}" class="text-sm text-primary-600 underline">{% translate "All loan applications" %} &rarr;</a>
+        </div>
+    </div>
+
+    {% if notifications %}
+        <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+            <div class="flex items-center justify-between border-b border-base-200 px-4 py-3 dark:border-base-800">
+                <h2 class="font-semibold">{% blocktranslate with count=unread_count %}New notifications ({{ count }}){% endblocktranslate %}</h2>
+                <a href="{% url 'admin:lwf_notification_changelist' %}" class="text-sm text-primary-600 underline">{% translate "All notifications" %} &rarr;</a>
+            </div>
+            <ul class="text-sm">
+                {% for item in notifications %}
+                    <li class="flex items-center gap-3 border-t border-base-200 px-4 py-2 first:border-t-0 dark:border-base-800">
+                        <span class="lwf-unread"></span>
+                        <a class="text-primary-600" href="{% url 'admin:lwf_notification_open' item.pk %}">{{ item.message }}</a>
+                        <span class="ml-auto whitespace-nowrap text-xs">{{ item.created|timesince }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:1rem">
+        {% for kpi in kpis %}
+            <div class="border border-base-200 rounded-default p-4 shadow-xs dark:border-base-800">
+                <p class="text-sm">{{ kpi.title }}</p>
+                <p class="text-3xl font-semibold {% if kpi.alert %}text-red-600{% else %}text-font-important-light dark:text-font-important-dark{% endif %}">{{ kpi.value }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1.5rem">
+        <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800" style="grid-column:span 2 / span 2;min-width:0">
+            <h2 class="border-b border-base-200 px-4 py-3 font-semibold dark:border-base-800">{% translate "My work queue" %}</h2>
+            <div class="overflow-x-auto">
+            <div style="overflow-x:auto">
+            <table class="w-full text-sm">
+                <thead><tr class="text-left">
+                    <th class="px-4 py-2">{% translate "Application" %}</th>
+                    <th class="px-4 py-2">{% translate "Primary applicant" %}</th>
+                    <th class="px-4 py-2">{% translate "Status" %}</th>
+                    <th class="px-4 py-2 text-right">{% translate "Amount" %}</th>
+                    <th class="px-4 py-2">{% translate "Due" %}</th>
+                </tr></thead>
+                <tbody>
+                {% for ticket in my_queue %}
+                    <tr class="border-t border-base-200 dark:border-base-800">
+                        <td class="px-4 py-2"><a class="text-primary-600 underline" href="{% url 'admin:lwf_ticket_change' ticket.pk %}">{{ ticket.title }}</a></td>
+                        <td class="px-4 py-2">{{ ticket.primary_name|default:"-" }}</td>
+                        <td class="px-4 py-2">{{ ticket.get_status_display }}</td>
+                        <td class="px-4 py-2 text-right">{{ ticket.loan.loanamount|intcomma }}</td>
+                        <td class="px-4 py-2 {% if ticket.due_date and ticket.due_date < now %}text-red-600 font-medium{% endif %}">{{ ticket.due_date|date:"d/m/Y"|default:"-" }}</td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="5" class="px-4 py-6 text-center">{% translate "Nothing waiting for you." %}</td></tr>
+                {% endfor %}
+                </tbody>
+            </table></div>
+            </div>
+        </div>
+
+        <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+            <h2 class="border-b border-base-200 px-4 py-3 font-semibold dark:border-base-800">{% translate "Open applications by status" %}</h2>
+            <div class="flex flex-col gap-3 p-4">
+                {% for row in pipeline %}
+                    <div>
+                        <div class="flex justify-between text-sm"><span>{{ row.status }}</span><span class="font-medium">{{ row.total }}</span></div>
+                        <div class="rounded bg-base-100 dark:bg-base-800" style="height:6px"><div class="rounded" style="height:6px;width:{{ row.width }}%;background:var(--color-primary-600,#9333ea)"></div></div>
+                    </div>
+                {% empty %}
+                    <p class="text-sm">{% translate "No open applications." %}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+        <div class="flex items-center justify-between border-b border-base-200 px-4 py-3 dark:border-base-800">
+            <h2 class="font-semibold">{% translate "New and completed applications per week" %}</h2>
+            <a href="{% url 'admin:lwf_ticket_reports' %}" class="text-sm text-primary-600 underline">{% translate "Reports" %} &rarr;</a>
+        </div>
+        <div class="p-4"><div style="height:240px">{% component "unfold/components/chart/bar.html" with data=weekly_chart options=weekly_options %}{% endcomponent %}</div></div>
+    </div>
+
+    {% if workload %}
+        <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+            <h2 class="border-b border-base-200 px-4 py-3 font-semibold dark:border-base-800">{% translate "Team workload" %}</h2>
+            <div style="overflow-x:auto">
+            <table class="w-full text-sm">
+                <thead><tr class="text-left">
+                    <th class="px-4 py-2">{% translate "Team" %}</th><th class="px-4 py-2">{% translate "Officer" %}</th>
+                    <th class="px-4 py-2 text-right">{% translate "Open applications" %}</th><th class="px-4 py-2">{% translate "Receiving new work" %}</th>
+                </tr></thead>
+                <tbody>
+                {% for officer in workload %}
+                    <tr class="border-t border-base-200 dark:border-base-800">
+                        <td class="px-4 py-2">{{ officer.mainteam|default:"-" }}</td>
+                        <td class="px-4 py-2">{{ officer.user.get_full_name|default:officer.user.username }}</td>
+                        <td class="px-4 py-2 text-right">{{ officer.open_count }}</td>
+                        <td class="px-4 py-2">{% if officer.available %}{% translate "Yes" %}{% else %}<span class="text-red-600">{% translate "No" %}</span>{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table></div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

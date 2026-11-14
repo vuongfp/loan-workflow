@@ -1,0 +1,4493 @@
+# Vietnamese translation of Loan Workflow (app texts and the Unfold admin theme).
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Loan Workflow\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-06 09:34+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: lwf/admin.py:50 lwf/templates/admin/lwf/dashboard.html:5 lws/settings.py:250
+msgid "Dashboard"
+msgstr "Trang chủ"
+
+#: lwf/admin.py:135 lwf/admin.py:598 lwf/models.py:510 lwf/models.py:537
+#: lwf/models.py:1149 lwf/reports.py:171 lwf/reports.py:183
+msgid "Product"
+msgstr "Sản phẩm"
+
+#: lwf/admin.py:138
+msgid "Sub-product"
+msgstr "Sản phẩm con"
+
+#: lwf/admin.py:156 lwf/models.py:1260
+msgid "Loan request"
+msgstr "Đề nghị vay"
+
+#: lwf/admin.py:165
+msgid "Monthly installments (calculated)"
+msgstr "Khoản trả hằng tháng (tự tính)"
+
+#: lwf/admin.py:173
+msgid "Credit decision (CED)"
+msgstr "Quyết định tín dụng (CED)"
+
+#: lwf/admin.py:182
+msgid "Loan contract (CRA)"
+msgstr "Hợp đồng tín dụng (CRA)"
+
+#: lwf/admin.py:195 lwf/admin.py:474 lwf/admin.py:680 lwf/admin.py:930
+#: lwf/policy.py:57
+msgid "Monthly income"
+msgstr "Thu nhập hằng tháng"
+
+#: lwf/admin.py:207 lwf/admin.py:212 lwf/models.py:1332 lwf/models.py:1712
+msgid "Collateral"
+msgstr "Tài sản đảm bảo"
+
+#: lwf/admin.py:207 lwf/models.py:1332
+msgid "Collaterals"
+msgstr "Tài sản đảm bảo"
+
+#: lwf/admin.py:215
+msgid "Property"
+msgstr "Bất động sản"
+
+#: lwf/admin.py:219 lwf/admin.py:948 lwf/models.py:1265
+msgid "Car"
+msgstr "Xe"
+
+#: lwf/admin.py:233 lwf/models.py:1946 lwf/models.py:2471
+#: lwf/templates/admin/lwf/ticket/document_reading.html:10
+msgid "Document"
+msgstr "Tài liệu"
+
+#: lwf/admin.py:233 lwf/models.py:1946
+msgid "Documents"
+msgstr "Tài liệu"
+
+#: lwf/admin.py:237 lwf/admin.py:562
+msgid "AI reading"
+msgstr "Đọc bằng AI"
+
+#: lwf/admin.py:242 lwf/templates/admin/lwf/ticket/document_reading.html:30
+msgid "Read with AI"
+msgstr "Đọc bằng AI"
+
+#: lwf/admin.py:242 lwf/models.py:2479
+msgid "Applied"
+msgstr "Đã áp dụng"
+
+#: lwf/admin.py:242
+msgid "Review"
+msgstr "Xem kết quả"
+
+#: lwf/admin.py:254 lwf/models.py:1927
+msgid "Contract document"
+msgstr "Chứng từ hợp đồng"
+
+#: lwf/admin.py:254 lwf/models.py:1927
+msgid "Contract documents"
+msgstr "Chứng từ hợp đồng"
+
+#: lwf/admin.py:259
+msgid "Print"
+msgstr "In"
+
+#: lwf/admin.py:265
+msgid "Word contract"
+msgstr "Hợp đồng Word"
+
+#: lwf/admin.py:266
+msgid "Parties (PDF)"
+msgstr "Các bên (PDF)"
+
+#: lwf/admin.py:272 lwf/models.py:2131
+msgid "Sale party"
+msgstr "Bên bán"
+
+#: lwf/admin.py:272 lwf/models.py:2131
+msgid "Sale parties"
+msgstr "Các bên bán"
+
+#: lwf/admin.py:279
+msgid "Workflow step"
+msgstr "Bước xử lý"
+
+#: lwf/admin.py:279
+msgid "Workflow history"
+msgstr "Lịch sử xử lý"
+
+#: lwf/admin.py:288 lwf/models.py:2248 lwf/models.py:2478
+msgid "By"
+msgstr "Người thực hiện"
+
+#: lwf/admin.py:315
+msgid "Application number, applicant name or ID number"
+msgstr "Số hồ sơ, tên người vay hoặc số giấy tờ"
+
+#: lwf/admin.py:321
+msgid "Overview"
+msgstr "Tổng quan"
+
+#: lwf/admin.py:324
+msgid "People"
+msgstr "Người xử lý"
+
+#: lwf/admin.py:327 lwf/models.py:2114
+msgid "Credit assessment"
+msgstr "Khả năng trả nợ"
+
+#: lwf/admin.py:383
+#, python-format
+msgid "Application %s created."
+msgstr "Đã tạo hồ sơ %s."
+
+#: lwf/admin.py:386
+msgid "New loan application"
+msgstr "Hồ sơ vay mới"
+
+#: lwf/admin.py:428 lwf/admin.py:462
+msgid "Change status"
+msgstr "Chuyển bước"
+
+#: lwf/admin.py:445
+#, python-format
+msgid "%(title)s is now \"%(status)s\", with %(user)s."
+msgstr "%(title)s đã chuyển sang \"%(status)s\", người xử lý: %(user)s."
+
+#: lwf/admin.py:450
+msgid "Choose who receives the application."
+msgstr "Hãy chọn người nhận hồ sơ."
+
+#: lwf/admin.py:472 lwf/admin.py:594 lwf/admin.py:658 lwf/reports.py:171
+#: lwf/templates/admin/lwf/dashboard.html:62
+msgid "Primary applicant"
+msgstr "Người vay chính"
+
+#: lwf/admin.py:473 lwf/admin.py:667
+msgid "Loan"
+msgstr "Khoản vay"
+
+#: lwf/admin.py:475 lwf/admin.py:695
+msgid "DSR highest / average"
+msgstr "DSR cao nhất / trung bình"
+
+#: lwf/admin.py:476 lwf/admin.py:710 lwf/models.py:2110
+#: lwf/templates/admin/lwf/ticket/credit_scoring.html:12
+msgid "CRR score"
+msgstr "Điểm CRR"
+
+#: lwf/admin.py:477 lwf/admin.py:616 lwf/models.py:2200
+msgid "Credit policy"
+msgstr "Chính sách tín dụng"
+
+#: lwf/admin.py:478 lwf/admin.py:649 lwf/models.py:2251 lwf/reports.py:172
+#: lwf/templates/admin/lwf/dashboard.html:65
+msgid "Due"
+msgstr "Hạn xử lý"
+
+#: lwf/admin.py:480 lwf/admin.py:500
+msgid "CRR scoring"
+msgstr "Chấm điểm CRR"
+
+#: lwf/admin.py:495
+#, python-format
+msgid "CRR score %(score)s, %(band)s."
+msgstr "Điểm CRR %(score)s, %(band)s."
+
+#: lwf/admin.py:525 lwf/templates/admin/lwf/dashboard.html:102
+#: lwf/templates/admin/lwf/reports.html:5
+#: lwf/templates/admin/lwf/reports.html:11 lws/settings.py:258
+msgid "Reports"
+msgstr "Báo cáo"
+
+#: lwf/admin.py:552
+#, python-format
+msgid "%d field(s) filled from the document."
+msgstr "Đã điền %d ô từ tài liệu."
+
+#: lwf/admin.py:586
+msgid "Credit memo (PDF)"
+msgstr "Tờ trình tín dụng (PDF)"
+
+#: lwf/admin.py:602 lwf/policy.py:50 lwf/reports.py:171
+msgid "Loan amount"
+msgstr "Số tiền vay"
+
+#: lwf/admin.py:607 lwf/admin.py:611 lwf/models.py:355 lwf/models.py:490
+#: lwf/models.py:743 lwf/models.py:1093 lwf/models.py:2249 lwf/reports.py:172
+#: lwf/reports.py:177 lwf/templates/admin/lwf/dashboard.html:63
+#: lwf/templates/admin/lwf/reports.html:54 lwf/workflow.py:199
+msgid "Status"
+msgstr "Trạng thái"
+
+#: lwf/admin.py:623
+msgid "Within policy"
+msgstr "Trong chính sách"
+
+#: lwf/admin.py:625
+msgid "limit"
+msgstr "ngưỡng"
+
+#: lwf/admin.py:627
+msgid "Deviation codes still to declare:"
+msgstr "Mã ngoại lệ cần khai báo thêm:"
+
+#: lwf/admin.py:630
+#, python-format
+msgid "%d policy limit(s) exceeded"
+msgstr "Vượt %d ngưỡng chính sách"
+
+#: lwf/admin.py:632
+msgid "Ready to send"
+msgstr "Sẵn sàng gửi"
+
+#: lwf/admin.py:639
+msgid "Nothing missing"
+msgstr "Đã đầy đủ"
+
+#: lwf/admin.py:642
+#, python-format
+msgid "%d item(s) missing"
+msgstr "Còn thiếu %d mục"
+
+#: lwf/admin.py:644 lwf/reports.py:172
+#: lwf/templates/admin/lwf/ticket/change_status.html:12
+msgid "With"
+msgstr "Đang xử lý"
+
+#: lwf/admin.py:655 lwf/models.py:2239
+msgid "Overdue"
+msgstr "Quá hạn"
+
+#: lwf/admin.py:673
+msgid "months"
+msgstr "tháng"
+
+#: lwf/admin.py:685
+msgid "Existing debt payments (highest)"
+msgstr "Khoản trả nợ hiện có (cao nhất)"
+
+#: lwf/admin.py:690
+msgid "Living cost"
+msgstr "Chi phí sinh hoạt"
+
+#: lwf/admin.py:700 lwf/policy.py:59
+msgid "Net surplus after payments"
+msgstr "Thu nhập còn lại sau trả nợ"
+
+#: lwf/admin.py:705 lwf/templates/admin/lwf/ticket/credit_scoring.html:24
+msgid "Segment"
+msgstr "Phân khúc"
+
+#: lwf/admin.py:714
+msgid "Not scored yet"
+msgstr "Chưa chấm điểm"
+
+#: lwf/admin.py:730 lwf/models.py:1463
+msgid "Salary"
+msgstr "Lương"
+
+#: lwf/admin.py:730 lwf/models.py:1463
+msgid "Salaries"
+msgstr "Lương"
+
+#: lwf/admin.py:736
+msgid "Fixed pay by month (VND); months counted"
+msgstr "Lương cố định theo tháng (VND); số tháng tính"
+
+#: lwf/admin.py:739
+msgid "Variable pay by month (VND); months counted"
+msgstr "Lương biến đổi theo tháng (VND); số tháng tính"
+
+#: lwf/admin.py:742
+msgid "Monthly averages (calculated)"
+msgstr "Bình quân tháng (tự tính)"
+
+#: lwf/admin.py:748 lwf/models.py:1638
+msgid "Business"
+msgstr "Kinh doanh"
+
+#: lwf/admin.py:748 lwf/models.py:1638
+msgid "Businesses"
+msgstr "Doanh nghiệp / kinh doanh"
+
+#: lwf/admin.py:756
+msgid "Financial statements"
+msgstr "Báo cáo tài chính"
+
+#: lwf/admin.py:764
+msgid "Turnover evidence"
+msgstr "Chứng minh doanh thu"
+
+#: lwf/admin.py:773 lwf/models.py:1548
+msgid "Household business"
+msgstr "Hộ kinh doanh"
+
+#: lwf/admin.py:773 lwf/models.py:1548
+msgid "Household businesses"
+msgstr "Hộ kinh doanh"
+
+#: lwf/admin.py:779
+msgid "Monthly revenue (VND); months counted"
+msgstr "Doanh thu theo tháng (VND); số tháng tính"
+
+#: lwf/admin.py:793 lwf/models.py:1795
+msgid "Secured loan (CIC)"
+msgstr "Khoản vay có TSĐB (CIC)"
+
+#: lwf/admin.py:793 lwf/models.py:1795
+msgid "Secured loans (CIC)"
+msgstr "Khoản vay có TSĐB (CIC)"
+
+#: lwf/admin.py:801 lwf/models.py:1809
+msgid "Unsecured loan (CIC)"
+msgstr "Khoản vay tín chấp (CIC)"
+
+#: lwf/admin.py:801 lwf/models.py:1809
+msgid "Unsecured loans (CIC)"
+msgstr "Khoản vay tín chấp (CIC)"
+
+#: lwf/admin.py:808 lwf/models.py:1822
+msgid "Overdraft (CIC)"
+msgstr "Thấu chi (CIC)"
+
+#: lwf/admin.py:808 lwf/models.py:1822
+msgid "Overdrafts (CIC)"
+msgstr "Thấu chi (CIC)"
+
+#: lwf/admin.py:815 lwf/models.py:1842
+msgid "Credit card (CIC)"
+msgstr "Thẻ tín dụng (CIC)"
+
+#: lwf/admin.py:815 lwf/models.py:1842
+msgid "Credit cards (CIC)"
+msgstr "Thẻ tín dụng (CIC)"
+
+#: lwf/admin.py:857 lwf/models.py:896 lwf/models.py:2432 lwf/models.py:2450
+msgid "Applicant"
+msgstr "Người vay"
+
+#: lwf/admin.py:862
+msgid "Credit bureau"
+msgstr "Thông tin tín dụng (CIC)"
+
+#: lwf/admin.py:864
+msgid "Income summary (calculated)"
+msgstr "Tổng hợp thu nhập (tự tính)"
+
+#: lwf/admin.py:867 lwf/admin.py:945
+msgid "Contract data (CRA)"
+msgstr "Dữ liệu hợp đồng (CRA)"
+
+#: lwf/admin.py:900
+msgid "Look up CIC (demo)"
+msgstr "Tra cứu CIC (demo)"
+
+#: lwf/admin.py:906
+msgid "CIC report received and applied; the credit summary is recalculated."
+msgstr "Đã nhận và áp dụng báo cáo CIC; khả năng trả nợ đã được tính lại."
+
+#: lwf/admin.py:923 lwf/admin.py:1008 lwf/models.py:1661 lwf/models.py:1684
+#: lwf/models.py:2085 lwf/models.py:2245 lwf/models.py:2412 lwf/reports.py:171
+#: lwf/templates/admin/lwf/dashboard.html:61
+msgid "Application"
+msgstr "Hồ sơ"
+
+#: lwf/admin.py:951
+msgid "Land and house"
+msgstr "Đất và nhà"
+
+#: lwf/admin.py:957
+msgid "Apartment purchase"
+msgstr "Mua căn hộ"
+
+#: lwf/admin.py:959
+msgid "Certificate and valuation"
+msgstr "Giấy chứng nhận và định giá"
+
+#: lwf/admin.py:962
+msgid "Notarized transfer"
+msgstr "Công chứng chuyển nhượng"
+
+#: lwf/admin.py:1044
+msgid "Unread"
+msgstr "Chưa đọc"
+
+#: lwf/admin.py:1046 lwf/models.py:2256
+msgid "Notification"
+msgstr "Thông báo"
+
+#: lwf/admin.py:1061
+msgid "Mark as read"
+msgstr "Đánh dấu đã đọc"
+
+#: lwf/admin.py:1065
+msgid "Mark all as read"
+msgstr "Đánh dấu tất cả đã đọc"
+
+#: lwf/admin.py:1074 lwf/admin.py:1090 lwf/models.py:2315
+msgid "Scopes"
+msgstr "Phạm vi quyền"
+
+#: lwf/admin.py:1102
+#, python-format
+msgid "Key for %s - copy it now, it is not shown again:"
+msgstr "Khóa của %s - hãy sao chép ngay, khóa sẽ không hiện lại:"
+
+#: lwf/admin.py:1104
+msgid "Make new keys (the old ones stop working)"
+msgstr "Tạo khóa mới (khóa cũ hết hiệu lực)"
+
+#: lwf/admin.py:1260
+msgid "Rows"
+msgstr "Số dòng"
+
+#: lwf/admin.py:1264
+msgid "Applications scored"
+msgstr "Hồ sơ đã chấm"
+
+#: lwf/admin.py:1268
+msgid "Copy as a new version"
+msgstr "Sao chép thành phiên bản mới"
+
+#: lwf/admin.py:1272
+#, python-format
+msgid "Created %(new)s from %(old)s: edit its rows, then activate it."
+msgstr "Đã tạo %(new)s từ %(old)s: sửa các dòng rồi kích hoạt."
+
+#: lwf/admin.py:1275
+msgid "Activate (new scores use it)"
+msgstr "Kích hoạt (dùng cho các lần chấm mới)"
+
+#: lwf/admin.py:1278
+msgid "Choose exactly one version to activate."
+msgstr "Hãy chọn đúng một phiên bản để kích hoạt."
+
+#: lwf/admin.py:1282
+#, python-format
+msgid "%s is now the active score matrix."
+msgstr "%s là bảng điểm đang hiệu lực."
+
+#: lwf/admin.py:1296
+msgid "Placeholders"
+msgstr "Các trường dùng được"
+
+#: lwf/admin.py:1301
+msgid ""
+"Write them as {{ borrower.name }}; repeat a paragraph for each item of a "
+"list with {%p for c in collaterals %} ... {%p endfor %}. Without an active "
+"template the built-in default is used."
+msgstr ""
+"Viết dạng {{ borrower.name }}; lặp một đoạn cho mỗi phần tử của danh sách "
+"bằng {%p for c in collaterals %} ... {%p endfor %}. Nếu không có mẫu đang "
+"dùng, hệ thống dùng mẫu mặc định."
+
+#: lwf/admin.py:1311
+msgid "Limits"
+msgstr "Ngưỡng"
+
+#: lwf/admin.py:1343
+msgid "You now receive new applications."
+msgstr "Bạn đã nhận hồ sơ mới trở lại."
+
+#: lwf/admin.py:1344
+msgid "You no longer receive new applications."
+msgstr "Bạn đã tạm dừng nhận hồ sơ mới."
+
+#: lwf/api_demo.py:28
+msgid "Two applications"
+msgstr "Có 2 hồ sơ"
+
+#: lwf/api_demo.py:30 lwf/templates/lwf/api_demo.html:325
+#: lwf/templates/lwf/api_demo.html:351
+msgid "Disbursed"
+msgstr "Đã giải ngân"
+
+#: lwf/api_demo.py:31
+msgid "Waiting for disbursement"
+msgstr "Chờ giải ngân"
+
+#: lwf/api_demo.py:32
+msgid "Being approved"
+msgstr "Đang phê duyệt"
+
+#: lwf/api_demo.py:33 lwf/api_demo.py:40 lwf/reports.py:154
+#: lwf/templates/admin/lwf/reports.html:31
+msgid "Rejected"
+msgstr "Từ chối"
+
+#: lwf/api_demo.py:40 lwf/reports.py:153
+#: lwf/templates/admin/lwf/reports.html:29 lwf/templates/lwf/api_demo.html:323
+msgid "In progress"
+msgstr "Đang xử lý"
+
+#: lwf/api_demo.py:40 lwf/models.py:98 lwf/reports.py:124 lwf/reports.py:154
+#: lwf/templates/admin/lwf/reports.html:30
+msgid "Completed"
+msgstr "Đã hoàn thành"
+
+#: lwf/api_demo.py:41 lwf/models.py:608
+msgid "Closed"
+msgstr "Đã đóng"
+
+#: lwf/api_demo.py:43
+msgid ""
+"The key or sign-in is not valid (wrong, expired, turned off, or not allowed "
+"from this address)."
+msgstr ""
+"Khóa hoặc phiên đăng nhập không hợp lệ (sai, hết hạn, đã tắt, hoặc không "
+"được phép từ địa chỉ này)."
+
+#: lwf/api_demo.py:44
+msgid ""
+"This key may not read applications: give it the \"Read applications\" scope."
+msgstr ""
+"Khóa này không được đọc hồ sơ: hãy cấp phạm vi quyền \"Đọc hồ sơ vay\"."
+
+#: lwf/api_demo.py:45
+msgid "No loan application for this ID number, or none this caller may see."
+msgstr ""
+"Không có hồ sơ vay nào với số giấy tờ này, hoặc bên gọi không được xem."
+
+#: lwf/api_demo.py:46
+msgid "Enter an ID number of 6 to 20 characters."
+msgstr "Nhập số giấy tờ từ 6 đến 20 ký tự."
+
+#: lwf/api_demo.py:47
+msgid "Too many calls in a minute: wait a moment and try again."
+msgstr "Gọi quá nhiều lần trong một phút: chờ một lát rồi thử lại."
+
+#: lwf/api_demo.py:48
+msgid "The server could not be reached."
+msgstr "Không kết nối được máy chủ."
+
+#: lwf/api_demo.py:49
+msgid "The server answered with an error."
+msgstr "Máy chủ trả về lỗi."
+
+#: lwf/api_demo.py:51
+msgid "Enter an API key first."
+msgstr "Hãy nhập khóa API trước."
+
+#: lwf/api_demo.py:52
+msgid "Sign in first."
+msgstr "Hãy đăng nhập trước."
+
+#: lwf/api_demo.py:53
+msgid "Wrong username or password, or the account may not use the app."
+msgstr "Sai tên đăng nhập hoặc mật khẩu, hoặc tài khoản không được dùng app."
+
+#: lwf/api_demo.py:54
+#, python-format
+msgid "Signed in as %(name)s; the token is valid until %(time)s."
+msgstr "Đã đăng nhập: %(name)s; token có hiệu lực đến %(time)s."
+
+#: lwf/api_demo.py:55
+msgid "Masked: this key may not read personal data"
+msgstr "Đã che: khóa này không được đọc dữ liệu cá nhân"
+
+#: lwf/api_demo.py:56
+#, python-format
+msgid "%(n)s months"
+msgstr "%(n)s tháng"
+
+#: lwf/api_demo.py:57
+msgid "No disbursement yet"
+msgstr "Chưa giải ngân"
+
+#: lwf/api_demo.py:58
+msgid "of"
+msgstr "trên"
+
+#: lwf/apps.py:7
+msgid "Loan workflow"
+msgstr "Quy trình hồ sơ vay"
+
+#: lwf/completeness.py:33
+msgid "Primary applicant with name, ID number and date of birth"
+msgstr "Người vay chính có họ tên, số giấy tờ và ngày sinh"
+
+#: lwf/completeness.py:35
+msgid "Monthly income entered"
+msgstr "Đã nhập thu nhập hằng tháng"
+
+#: lwf/completeness.py:36
+msgid "Loan request: product, amount, tenor and pricing scheme"
+msgstr "Đề nghị vay: sản phẩm, số tiền, kỳ hạn và gói lãi suất"
+
+#: lwf/completeness.py:38
+msgid "At least one collateral with its value"
+msgstr "Ít nhất một tài sản đảm bảo có giá trị"
+
+#: lwf/completeness.py:40
+msgid "A reason for each deviation chosen"
+msgstr "Có lý do cho mỗi ngoại lệ đã chọn"
+
+#: lwf/completeness.py:43
+#, python-format
+msgid "Document: %s"
+msgstr "Tài liệu: %s"
+
+#: lwf/dashboard.py:38
+msgid "My open applications"
+msgstr "Hồ sơ đang chờ tôi"
+
+#: lwf/dashboard.py:39
+msgid "Overdue (mine)"
+msgstr "Quá hạn (của tôi)"
+
+#: lwf/dashboard.py:40
+msgid "Open applications I can see"
+msgstr "Hồ sơ đang mở tôi xem được"
+
+#: lwf/dashboard.py:41
+msgid "Completed in the last 30 days"
+msgstr "Hoàn tất trong 30 ngày qua"
+
+#: lwf/i18n_data.py:9
+msgid "Approve"
+msgstr "Phê duyệt"
+
+#: lwf/i18n_data.py:10 lwf/templates/admin/lwf/ticket/confirm_create.html:17
+msgid "Cancel"
+msgstr "Hủy"
+
+#: lwf/i18n_data.py:11
+msgid "Change Request"
+msgstr "Yêu cầu thay đổi"
+
+#: lwf/i18n_data.py:12
+msgid "Close"
+msgstr "Đóng hồ sơ"
+
+#: lwf/i18n_data.py:13
+msgid "Confirm Disbursement"
+msgstr "Xác nhận giải ngân"
+
+#: lwf/i18n_data.py:14
+msgid "Confirm Disbursement Complete"
+msgstr "Xác nhận đã giải ngân"
+
+#: lwf/i18n_data.py:15
+msgid "Confirm Valuation"
+msgstr "Xác nhận định giá"
+
+#: lwf/i18n_data.py:16
+msgid "Confirm for Approval Condition"
+msgstr "Xác nhận điều kiện phê duyệt"
+
+#: lwf/i18n_data.py:17
+msgid "Endorse to Sale Support"
+msgstr "Xác nhận, chuyển Sale Support"
+
+#: lwf/i18n_data.py:18
+msgid "General Director Approve"
+msgstr "Tổng Giám đốc phê duyệt"
+
+#: lwf/i18n_data.py:19
+msgid "Head of Credit upload Approval Result"
+msgstr "Giám đốc tín dụng tải kết quả phê duyệt"
+
+#: lwf/i18n_data.py:20
+msgid "Preparation Complete"
+msgstr "Hoàn tất chuẩn bị hồ sơ"
+
+#: lwf/i18n_data.py:21
+msgid "Re-Open"
+msgstr "Mở lại"
+
+#: lwf/i18n_data.py:22
+msgid "Re-Submit"
+msgstr "Gửi lại"
+
+#: lwf/i18n_data.py:23
+msgid "Recommend to Approver 1"
+msgstr "Đề xuất phê duyệt cấp 1"
+
+#: lwf/i18n_data.py:24 lwf/models.py:607
+msgid "Reject"
+msgstr "Từ chối"
+
+#: lwf/i18n_data.py:25
+msgid "Reject Disbursement"
+msgstr "Từ chối giải ngân"
+
+#: lwf/i18n_data.py:26
+msgid "Request CED Check Approval Condition"
+msgstr "Yêu cầu CED kiểm tra điều kiện"
+
+#: lwf/i18n_data.py:27
+msgid "Request CED Update"
+msgstr "Yêu cầu CED cập nhật"
+
+#: lwf/i18n_data.py:28
+msgid "Request Change Term and Condition"
+msgstr "Yêu cầu thay đổi điều khoản"
+
+#: lwf/i18n_data.py:29
+msgid "Request Docs Preparation"
+msgstr "Yêu cầu CRA lập hồ sơ"
+
+#: lwf/i18n_data.py:30
+msgid "Request Re-Submit"
+msgstr "Yêu cầu gửi lại"
+
+#: lwf/i18n_data.py:31
+msgid "Request Sale Update"
+msgstr "Yêu cầu Sale bổ sung"
+
+#: lwf/i18n_data.py:32
+msgid "Request Sale Update CR"
+msgstr "Yêu cầu Sale bổ sung (thay đổi)"
+
+#: lwf/i18n_data.py:33
+msgid "Request Update"
+msgstr "Yêu cầu bổ sung"
+
+#: lwf/i18n_data.py:34
+msgid "Submit to CED"
+msgstr "Chuyển CED"
+
+#: lwf/i18n_data.py:35
+msgid "Submit to Credit Manager"
+msgstr "Trình Giám đốc tín dụng"
+
+#: lwf/i18n_data.py:36
+msgid "Submit to General Director"
+msgstr "Trình Tổng Giám đốc"
+
+#: lwf/i18n_data.py:37
+msgid "Submit to Head of Credit"
+msgstr "Trình Giám đốc khối tín dụng"
+
+#: lwf/i18n_data.py:38
+msgid "Submit to Head of PFS"
+msgstr "Trình Head of PFS"
+
+#: lwf/i18n_data.py:39
+msgid "Submit to Head of Sale"
+msgstr "Trình Head of Sale"
+
+#: lwf/i18n_data.py:40
+msgid "Submit to Sale Leader"
+msgstr "Gửi Sale Leader"
+
+#: lwf/i18n_data.py:41
+msgid "Update to Aprrover 1"
+msgstr "Cập nhật, chuyển phê duyệt cấp 1"
+
+#: lwf/i18n_data.py:42
+msgid "Update to Aprrover 2"
+msgstr "Cập nhật, chuyển phê duyệt cấp 2"
+
+#: lwf/i18n_data.py:43
+msgid "Update to CED"
+msgstr "Cập nhật, chuyển CED"
+
+#: lwf/i18n_data.py:44
+msgid "Update to CRA"
+msgstr "Cập nhật, chuyển CRA"
+
+#: lwf/i18n_data.py:45
+msgid "Update to Sale Support"
+msgstr "Cập nhật, chuyển Sale Support"
+
+#: lwf/i18n_data.py:46
+msgid "Valuation Review Request"
+msgstr "Yêu cầu xem lại định giá"
+
+#: lwf/integrations.py:49
+msgid "This reference was already used for another application."
+msgstr "Mã tham chiếu này đã dùng cho hồ sơ khác."
+
+#: lwf/integrations.py:52
+msgid "The application is not waiting for disbursement."
+msgstr "Hồ sơ không ở bước chờ giải ngân."
+
+#: lwf/integrations.py:57
+#, python-format
+msgid ""
+"The amount is more than the contract allows (%(limit)s VND, %(done)s VND "
+"disbursed already)."
+msgstr ""
+"Số tiền vượt mức hợp đồng cho phép (%(limit)s VND, đã giải ngân %(done)s "
+"VND)."
+
+#: lwf/integrations.py:63
+msgid "Core banking disbursement"
+msgstr "Giải ngân từ core banking"
+
+#: lwf/integrations.py:64
+#, python-format
+msgid "%(amount)s VND to loan account %(account)s, reference %(reference)s."
+msgstr ""
+"%(amount)s VND vào tài khoản vay %(account)s, mã tham chiếu %(reference)s."
+
+#: lwf/integrations.py:155
+msgid "No applicant with this ID number on the application."
+msgstr "Hồ sơ không có người vay mang số giấy tờ này."
+
+#: lwf/models.py:19
+msgid "Ward Code"
+msgstr "Mã phường/xã"
+
+#: lwf/models.py:20
+msgid "Ward Name"
+msgstr "Tên phường/xã"
+
+#: lwf/models.py:21
+msgid "Ward Level"
+msgstr "Cấp phường/xã"
+
+#: lwf/models.py:22
+msgid "District Cde"
+msgstr "Mã quận/huyện"
+
+#: lwf/models.py:23
+msgid "District Name"
+msgstr "Tên quận/huyện"
+
+#: lwf/models.py:24
+msgid "City Code"
+msgstr "Mã tỉnh/thành phố"
+
+#: lwf/models.py:25
+msgid "City Name"
+msgstr "Tên tỉnh/thành phố"
+
+#: lwf/models.py:28
+msgid "Location"
+msgstr "Địa bàn"
+
+#: lwf/models.py:28 lws/settings.py:278
+msgid "Locations"
+msgstr "Địa bàn"
+
+#: lwf/models.py:33
+msgid "FUND USAGE PLAN/LOAN APPLICATION"
+msgstr "PHƯƠNG ÁN SỬ DỤNG VỐN / ĐỀ NGHỊ VAY"
+
+#: lwf/models.py:34
+msgid "BORROWER/GAURANTOR INDENTIFICATION & CREDIT RECORD"
+msgstr "NHÂN THÂN VÀ LỊCH SỬ TÍN DỤNG NGƯỜI VAY / BẢO LÃNH"
+
+#: lwf/models.py:35
+msgid "INCOME PROOF"
+msgstr "CHỨNG MINH THU NHẬP"
+
+#: lwf/models.py:36
+msgid "COLLATERAL& LOAN PURPOSE"
+msgstr "TÀI SẢN ĐẢM BẢO VÀ MỤC ĐÍCH VAY"
+
+#: lwf/models.py:37
+msgid "OTHERS DOCUMENTS"
+msgstr "TÀI LIỆU KHÁC"
+
+#: lwf/models.py:38
+msgid "SCREENING RESULT(All borrowers/Gaurantor)"
+msgstr "KẾT QUẢ SÀNG LỌC (tất cả người vay/bảo lãnh)"
+
+#: lwf/models.py:39
+msgid "VALUATION DOCUMENTS"
+msgstr "TÀI LIỆU ĐỊNH GIÁ"
+
+#: lwf/models.py:42
+msgid "ID Card"
+msgstr "CCCD/CMND"
+
+#: lwf/models.py:43
+msgid "Martial Status Proof"
+msgstr "Giấy tờ tình trạng hôn nhân"
+
+#: lwf/models.py:44
+msgid "Family Book"
+msgstr "Sổ hộ khẩu"
+
+#: lwf/models.py:47
+msgid "Within"
+msgstr "Trong hạn mức"
+
+#: lwf/models.py:48
+msgid "Exceeding"
+msgstr "Vượt hạn mức"
+
+#: lwf/models.py:49
+msgid "Not Applicable"
+msgstr "Không áp dụng"
+
+#: lwf/models.py:53
+msgid "Deactive"
+msgstr "Ngừng hoạt động"
+
+#: lwf/models.py:54 lwf/models.py:1974 lwf/models.py:2220 lwf/models.py:2320
+msgid "Active"
+msgstr "Hoạt động"
+
+#: lwf/models.py:55
+msgid "Pending Approval"
+msgstr "Chờ phê duyệt"
+
+#: lwf/models.py:58
+msgid "HCMC"
+msgstr "TP.HCM"
+
+#: lwf/models.py:59
+msgid "Ha Noi 1"
+msgstr "Hà Nội 1"
+
+#: lwf/models.py:60
+msgid "B. Duong (T. An)"
+msgstr "Bình Dương (Thuận An)"
+
+#: lwf/models.py:61
+msgid "B. Duong (D. An)"
+msgstr "Bình Dương (Dĩ An)"
+
+#: lwf/models.py:62
+msgid "B. Duong (TDM)"
+msgstr "Bình Dương (Thủ Dầu Một)"
+
+#: lwf/models.py:65
+msgid "Not applicable"
+msgstr "Không áp dụng"
+
+#: lwf/models.py:66
+msgid "1A - Loan tenor"
+msgstr "1A - Thời hạn vay"
+
+#: lwf/models.py:67
+msgid "1B - MOA"
+msgstr "1B - Tỷ lệ cho vay (MOA)"
+
+#: lwf/models.py:68
+msgid "1C - FHL"
+msgstr "1C - FHL"
+
+#: lwf/models.py:69
+msgid "02 - DSR"
+msgstr "02 - DSR"
+
+#: lwf/models.py:70
+msgid "Top up"
+msgstr "Vay bổ sung (top up)"
+
+#: lwf/models.py:73
+msgid "All"
+msgstr ""
+
+#: lwf/models.py:74 lwf/models.py:1230
+msgid "Land value only"
+msgstr "Chỉ giá trị đất"
+
+#: lwf/models.py:77
+msgid "101_Loan Tenure"
+msgstr "101_Thời hạn vay"
+
+#: lwf/models.py:78
+msgid "102_Margin of Advance"
+msgstr "102_Tỷ lệ cho vay"
+
+#: lwf/models.py:79
+msgid "103_Waiver of Formal Valuation by Panel Valuer (Mortgage)"
+msgstr "103_Miễn định giá chính thức bởi đơn vị định giá (thế chấp)"
+
+#: lwf/models.py:80
+msgid "104_Age Limit"
+msgstr "104_Giới hạn tuổi"
+
+#: lwf/models.py:81
+msgid ""
+"105_Non-Target Property (eg. unqualified collateral requirement on minimum "
+"land area, land width, alley width, property location) / Fleet Purchase of "
+"Vehicles"
+msgstr ""
+"105_Tài sản ngoài mục tiêu (vd. không đạt diện tích đất, chiều ngang, hẻm, "
+"vị trí tối thiểu) / Mua xe theo đội"
+
+#: lwf/models.py:82
+msgid ""
+"106_Repayment conduct exceeded CIC credit guidelines (eg. Past record of G3+)"
+msgstr "106_Lịch sử trả nợ vượt hướng dẫn CIC (vd. từng nợ nhóm 3 trở lên)"
+
+#: lwf/models.py:83
+msgid ""
+"107_Exceeding Repayment Capability Indicators (eg. DSR / DSCR, NST, Gearing, "
+"Turnover, Negative net profit & tangible net worth in latest Tax Return "
+"Report)"
+msgstr ""
+"107_Vượt chỉ số khả năng trả nợ (vd. DSR / DSCR, NST, đòn bẩy, doanh thu, "
+"lợi nhuận ròng và vốn chủ hữu hình âm trong tờ khai thuế gần nhất)"
+
+#: lwf/models.py:84
+msgid ""
+"108_High Risk Application (eg, Non-target business industry, Customer "
+"Segmentation Group III, Any borrower or guarantor with unsolved insolvency "
+"suits or legal action, Suspicious/fraud documents or verification failed)"
+msgstr ""
+"108_Hồ sơ rủi ro cao (vd. ngành kinh doanh ngoài mục tiêu, phân khúc khách "
+"hàng nhóm III, người vay hoặc bảo lãnh có vụ kiện phá sản/pháp lý chưa giải "
+"quyết, chứng từ nghi ngờ gian lận hoặc xác minh không đạt)"
+
+#: lwf/models.py:86
+msgid "110_Loan amount"
+msgstr "110_Số tiền vay"
+
+#: lwf/models.py:87
+msgid "111_Waiver of Personal Guarantor (for Corporate Auto Loan)"
+msgstr "111_Miễn bảo lãnh cá nhân (vay mua xe doanh nghiệp)"
+
+#: lwf/models.py:88
+msgid "112_Unqualified length in service/ working/ operation"
+msgstr "112_Thời gian công tác/hoạt động không đạt"
+
+#: lwf/models.py:91
+msgid "001 - TOWNHOUSE"
+msgstr "001 - NHÀ PHỐ"
+
+#: lwf/models.py:92
+msgid "003 - VACANT LAND"
+msgstr "003 - ĐẤT TRỐNG"
+
+#: lwf/models.py:93
+msgid "010 - IMPROVEMENT NOT YET UPDATED ON CO"
+msgstr "010 - CẢI TẠO CHƯA CẬP NHẬT TRÊN GCN"
+
+#: lwf/models.py:94
+msgid "012 - APARTMENT"
+msgstr "012 - CĂN HỘ"
+
+#: lwf/models.py:97
+msgid "Under construction"
+msgstr "Đang xây dựng"
+
+#: lwf/models.py:99
+msgid "Completed (Not yet handover)"
+msgstr "Đã hoàn thành (chưa bàn giao)"
+
+#: lwf/models.py:102
+msgid "Owner occupied"
+msgstr "Chủ sở hữu ở"
+
+#: lwf/models.py:103
+msgid "Multiple tenants occupied"
+msgstr "Nhiều người thuê"
+
+#: lwf/models.py:104
+msgid "Single tenant occupied"
+msgstr "Một người thuê"
+
+#: lwf/models.py:105
+msgid "Third party occupied (non-tenancy)"
+msgstr "Bên thứ ba ở (không thuê)"
+
+#: lwf/models.py:106
+msgid "Un-occupied/ Empty house"
+msgstr "Không có người ở / nhà trống"
+
+#: lwf/models.py:110
+msgid "No. of Bedroom ≤ 6 "
+msgstr "Số phòng ngủ ≤ 6"
+
+#: lwf/models.py:111
+msgid "No. of Bedroom >6"
+msgstr "Số phòng ngủ > 6"
+
+#: lwf/models.py:114
+msgid "for residence"
+msgstr "để ở"
+
+#: lwf/models.py:115
+msgid "for residence & rent"
+msgstr "để ở và cho thuê"
+
+#: lwf/models.py:116
+msgid "for sales & rent"
+msgstr "để bán và cho thuê"
+
+#: lwf/models.py:117
+msgid "Domestic"
+msgstr "Trong nước"
+
+#: lwf/models.py:118
+msgid "Imported"
+msgstr "Nhập khẩu"
+
+#: lwf/models.py:121
+msgid "-------------------"
+msgstr ""
+
+#: lwf/models.py:122
+msgid "Purchase of Apartment"
+msgstr "Mua căn hộ"
+
+#: lwf/models.py:123
+msgid "Purchase of Townhouse"
+msgstr "Mua nhà phố"
+
+#: lwf/models.py:124
+msgid "Purchase of Residential land"
+msgstr "Mua đất ở"
+
+#: lwf/models.py:125
+msgid "House renovation"
+msgstr "Sửa chữa nhà"
+
+#: lwf/models.py:126
+msgid "Purchase of New car"
+msgstr "Mua xe mới"
+
+#: lwf/models.py:127
+msgid "Purchase of Used car"
+msgstr "Mua xe đã qua sử dụng"
+
+#: lwf/models.py:128
+msgid "Purchase of household appliances/ interior/ consumption loan"
+msgstr "Mua đồ gia dụng / nội thất / tiêu dùng"
+
+#: lwf/models.py:129
+msgid "Purchase of Land"
+msgstr "Mua đất"
+
+#: lwf/models.py:134
+msgid "JDA"
+msgstr "JDA"
+
+#: lwf/models.py:135
+msgid "Exception"
+msgstr "Ngoại lệ"
+
+#: lwf/models.py:136
+msgid "Normal"
+msgstr "Thông thường"
+
+#: lwf/models.py:139
+msgid "Male"
+msgstr "Nam"
+
+#: lwf/models.py:140
+msgid "Female"
+msgstr "Nữ"
+
+#: lwf/models.py:144
+msgid "Married"
+msgstr "Đã kết hôn"
+
+#: lwf/models.py:145
+msgid "Single"
+msgstr "Độc thân"
+
+#: lwf/models.py:146
+msgid "Separated/Divorced"
+msgstr "Ly thân / ly hôn"
+
+#: lwf/models.py:147 lwf/models.py:181 lwf/models.py:273 lwf/reports.py:59
+msgid "Other"
+msgstr "Khác"
+
+#: lwf/models.py:148 lwf/models.py:155 lwf/models.py:274 lwf/models.py:280
+msgid "No information"
+msgstr "Không có thông tin"
+
+#: lwf/models.py:151
+msgid "Primary School"
+msgstr "Tiểu học"
+
+#: lwf/models.py:152
+msgid "Secondary School"
+msgstr "Trung học"
+
+#: lwf/models.py:153
+msgid "Graduate/equivalent"
+msgstr "Đại học / tương đương"
+
+#: lwf/models.py:154
+msgid "Post-graduate"
+msgstr "Sau đại học"
+
+#: lwf/models.py:158
+msgid "Vietnamese"
+msgstr ""
+
+#: lwf/models.py:159
+msgid "Non-Vietnamese (residing in VN >12M)"
+msgstr "Người nước ngoài (cư trú tại VN > 12 tháng)"
+
+#: lwf/models.py:160
+msgid "Non-Vietnamese"
+msgstr "Người nước ngoài"
+
+#: lwf/models.py:177
+msgid "Retail"
+msgstr "Bán lẻ"
+
+#: lwf/models.py:178
+msgid "Wholesale"
+msgstr "Bán buôn"
+
+#: lwf/models.py:179
+msgid "Manufacturing"
+msgstr "Sản xuất"
+
+#: lwf/models.py:180
+msgid "Service"
+msgstr "Dịch vụ"
+
+#: lwf/models.py:184
+msgid "Retail Others"
+msgstr "Bán lẻ khác"
+
+#: lwf/models.py:185
+msgid "Retail Textile & Apparel"
+msgstr "Bán lẻ dệt may"
+
+#: lwf/models.py:186
+msgid "Commerce Food & Beverage"
+msgstr "Thương mại thực phẩm và đồ uống"
+
+#: lwf/models.py:187
+msgid "Retail Transportation Equipment/Petrol Stations"
+msgstr "Bán lẻ phương tiện vận tải / cây xăng"
+
+#: lwf/models.py:188
+msgid "Retail Furniture, Furnishing & Other Household Goods"
+msgstr "Bán lẻ nội thất, đồ gia dụng"
+
+#: lwf/models.py:189
+msgid "Retail Hardware & Building Materials"
+msgstr "Bán lẻ vật liệu xây dựng, kim khí"
+
+#: lwf/models.py:190
+msgid "Retail Computer & Office Equipment"
+msgstr "Bán lẻ máy tính, thiết bị văn phòng"
+
+#: lwf/models.py:191
+msgid "Retail Supermarket, Dept Stores, Provision Shops"
+msgstr "Bán lẻ siêu thị, cửa hàng bách hóa, tạp hóa"
+
+#: lwf/models.py:192
+msgid "Retail Specific Commodities"
+msgstr "Bán lẻ hàng hóa chuyên biệt"
+
+#: lwf/models.py:193
+msgid "Wholesale Others"
+msgstr "Bán buôn khác"
+
+#: lwf/models.py:194
+msgid "Wholesale Transport Equipment"
+msgstr "Bán buôn phương tiện vận tải"
+
+#: lwf/models.py:195
+msgid "Wholesale Machines & Equipment"
+msgstr "Bán buôn máy móc thiết bị"
+
+#: lwf/models.py:196
+msgid "Wholesale Food, Drinks & Tobacco"
+msgstr "Bán buôn thực phẩm, đồ uống, thuốc lá"
+
+#: lwf/models.py:197
+msgid "Wholesale Timber, Paint & Construction Materials"
+msgstr "Bán buôn gỗ, sơn, vật liệu xây dựng"
+
+#: lwf/models.py:198
+msgid "Wholesale Textile & Apparel"
+msgstr "Bán buôn dệt may"
+
+#: lwf/models.py:199
+msgid "Wholesale Scrap, Junk & Waste Dealers"
+msgstr "Bán buôn phế liệu"
+
+#: lwf/models.py:200
+msgid "Wholesale Industrial, Agri Machinery & Equipment"
+msgstr "Bán buôn máy móc công nghiệp, nông nghiệp"
+
+#: lwf/models.py:201
+msgid "Wholesale Furniture, Furnishing & Other Household Goods"
+msgstr "Bán buôn nội thất, đồ gia dụng"
+
+#: lwf/models.py:202
+msgid "Wholesale Specific Commodities"
+msgstr "Bán buôn hàng hóa chuyên biệt"
+
+#: lwf/models.py:203
+msgid "Wholesale General Importers & Exporters"
+msgstr "Bán buôn xuất nhập khẩu tổng hợp"
+
+#: lwf/models.py:204
+msgid "Wholesale Medical & Pharmaceutical Products"
+msgstr "Bán buôn dược phẩm, thiết bị y tế"
+
+#: lwf/models.py:205
+msgid "Wholesale Chemical & Chemical Products"
+msgstr "Bán buôn hóa chất"
+
+#: lwf/models.py:206
+msgid "Wholesale Paper, Cellophane Products & Stationery"
+msgstr "Bán buôn giấy, văn phòng phẩm"
+
+#: lwf/models.py:207
+msgid "Manufacturing Fabricated Metal Products"
+msgstr "Sản xuất sản phẩm kim loại"
+
+#: lwf/models.py:208
+msgid "Manufacturing Chemicals"
+msgstr "Sản xuất hóa chất"
+
+#: lwf/models.py:209
+msgid "Manufacturing Paper"
+msgstr "Sản xuất giấy"
+
+#: lwf/models.py:210
+msgid "Manufacturing Wood"
+msgstr "Sản xuất gỗ"
+
+#: lwf/models.py:211
+msgid "Manufacturing Textile, Apparel, Leather Products"
+msgstr "Sản xuất dệt may, da"
+
+#: lwf/models.py:212
+msgid "Manufacturing Food, Beverage & Tobacco"
+msgstr "Sản xuất thực phẩm, đồ uống, thuốc lá"
+
+#: lwf/models.py:213
+msgid "Manufacturing Others"
+msgstr "Sản xuất khác"
+
+#: lwf/models.py:214
+msgid "Manufacturing Non-Metallic Mineral Products - Petrol, Coal"
+msgstr "Sản xuất khoáng phi kim loại - xăng dầu, than"
+
+#: lwf/models.py:215
+msgid "Manufacturing Basic Metal Industries"
+msgstr "Sản xuất kim loại cơ bản"
+
+#: lwf/models.py:216
+msgid "Services Other Business Services"
+msgstr "Dịch vụ kinh doanh khác"
+
+#: lwf/models.py:217
+msgid "Services Personal and Household Services"
+msgstr "Dịch vụ cá nhân và hộ gia đình"
+
+#: lwf/models.py:218
+msgid "Social Services & Leisure Services"
+msgstr "Dịch vụ xã hội và giải trí"
+
+#: lwf/models.py:219
+msgid "Services Engineering, Architectural & Technical Svs"
+msgstr "Dịch vụ kỹ thuật, kiến trúc"
+
+#: lwf/models.py:220
+msgid "Services IT Professional"
+msgstr "Dịch vụ CNTT chuyên nghiệp"
+
+#: lwf/models.py:221
+msgid "Services Holding & Investment Companies"
+msgstr "Công ty đầu tư, holding"
+
+#: lwf/models.py:222
+msgid "Services Transport, Storage, Communicaton, Support"
+msgstr "Dịch vụ vận tải, kho bãi, viễn thông"
+
+#: lwf/models.py:223
+msgid "Construction Others"
+msgstr "Xây dựng khác"
+
+#: lwf/models.py:224
+msgid "Construction General/Renovation Contractors"
+msgstr "Thầu xây dựng / sửa chữa"
+
+#: lwf/models.py:225
+msgid "Mining & Quarrying"
+msgstr "Khai khoáng"
+
+#: lwf/models.py:226
+msgid "Agriculture Others"
+msgstr "Nông nghiệp khác"
+
+#: lwf/models.py:227
+msgid "Electricity, Gas & water"
+msgstr "Điện, khí đốt và nước"
+
+#: lwf/models.py:236
+msgid "Retailing of goods"
+msgstr "Bán lẻ hàng hóa"
+
+#: lwf/models.py:237
+msgid "Construction/ General Contractors "
+msgstr "Xây dựng / thầu chung"
+
+#: lwf/models.py:238
+msgid "Other Small Business "
+msgstr "Kinh doanh nhỏ khác"
+
+#: lwf/models.py:239
+msgid "Manufacturing "
+msgstr "Sản xuất"
+
+#: lwf/models.py:240
+msgid "Other Services Oriented Business"
+msgstr "Kinh doanh dịch vụ khác"
+
+#: lwf/models.py:241
+msgid "Professionals, Service Firms/ Partnerships"
+msgstr "Hành nghề chuyên môn, công ty dịch vụ / hợp danh"
+
+#: lwf/models.py:246 lwf/models.py:1360
+msgid "Definite"
+msgstr "Xác định thời hạn"
+
+#: lwf/models.py:247 lwf/models.py:1361
+msgid "Indefinite"
+msgstr "Không xác định thời hạn"
+
+#: lwf/models.py:251
+msgid "Bank transfer"
+msgstr "Chuyển khoản"
+
+#: lwf/models.py:252
+msgid "In cash"
+msgstr "Tiền mặt"
+
+#: lwf/models.py:253
+msgid "Cash/Transfer"
+msgstr "Tiền mặt / chuyển khoản"
+
+#: lwf/models.py:256
+msgid "Notarized"
+msgstr "Có công chứng"
+
+#: lwf/models.py:257
+msgid "Non-notarized"
+msgstr "Không công chứng"
+
+#: lwf/models.py:260
+msgid "Primary Applicant"
+msgstr "Người vay chính"
+
+#: lwf/models.py:261
+msgid "Co-applicant (Spouse)"
+msgstr "Người đồng vay (vợ/chồng)"
+
+#: lwf/models.py:262
+msgid "Co-applicant (Parent)"
+msgstr "Người đồng vay (cha/mẹ)"
+
+#: lwf/models.py:263
+msgid "Co-applicant (Sibling)"
+msgstr "Người đồng vay (anh/chị/em)"
+
+#: lwf/models.py:264
+msgid "Guarantor (spouse)"
+msgstr "Người bảo lãnh (vợ/chồng)"
+
+#: lwf/models.py:268
+msgid "Private House"
+msgstr "Nhà riêng"
+
+#: lwf/models.py:269
+msgid "Living with Parents"
+msgstr "Ở cùng cha mẹ"
+
+#: lwf/models.py:270
+msgid "Co-owned"
+msgstr "Đồng sở hữu"
+
+#: lwf/models.py:271
+msgid "Rented House"
+msgstr "Nhà thuê"
+
+#: lwf/models.py:272
+msgid "Mortgaged House"
+msgstr "Nhà đang thế chấp"
+
+#: lwf/models.py:278
+msgid "Resident House"
+msgstr "Cư trú"
+
+#: lwf/models.py:279
+msgid "Non-resident"
+msgstr "Không cư trú"
+
+#: lwf/models.py:316
+msgid "Developer"
+msgstr "Chủ đầu tư"
+
+#: lwf/models.py:320 lwf/models.py:1298
+msgid "Project Name"
+msgstr "Tên dự án"
+
+#: lwf/models.py:324 lwf/models.py:459
+msgid "LD Name"
+msgstr "Tên trên hệ thống (LD)"
+
+#: lwf/models.py:328
+msgid "Developper Name(Registered)"
+msgstr "Tên chủ đầu tư (đăng ký)"
+
+#: lwf/models.py:334 lwf/models.py:469
+msgid "Expire Date"
+msgstr "Ngày hết hạn"
+
+#: lwf/models.py:339 lwf/models.py:474
+msgid "EPM Limit(VND mio)"
+msgstr "Hạn mức EPM (triệu VND)"
+
+#: lwf/models.py:344 lwf/models.py:479
+msgid "Approved Loan(VND mio)"
+msgstr "Đã cho vay (triệu VND)"
+
+#: lwf/models.py:349 lwf/models.py:484
+msgid "Available Limit (VND mio)"
+msgstr "Hạn mức còn lại (triệu VND)"
+
+#: lwf/models.py:364
+msgid "Panel project"
+msgstr "Dự án liên kết"
+
+#: lwf/models.py:364 lws/settings.py:272
+msgid "Panel projects"
+msgstr "Dự án liên kết"
+
+#: lwf/models.py:367 lwf/models.py:434 lwf/models.py:749 lwf/models.py:1114
+#: lwf/models.py:2013
+msgid "Description"
+msgstr "Mô tả"
+
+#: lwf/models.py:369
+msgid "Early Rate(Year1)"
+msgstr "Phí trả trước (năm 1)"
+
+#: lwf/models.py:374
+msgid "Early Rate(Year2)"
+msgstr "Phí trả trước (năm 2)"
+
+#: lwf/models.py:379
+msgid "Early Rate(Year3)"
+msgstr "Phí trả trước (năm 3)"
+
+#: lwf/models.py:384
+msgid "Early Rate(Year4+)"
+msgstr "Phí trả trước (năm 4+)"
+
+#: lwf/models.py:394
+msgid "Early repayment fee"
+msgstr "Phí trả nợ trước hạn"
+
+#: lwf/models.py:394
+msgid "Early repayment fees"
+msgstr "Phí trả nợ trước hạn"
+
+#: lwf/models.py:398
+msgid "Type"
+msgstr "Loại"
+
+#: lwf/models.py:402 lwf/models.py:2218
+msgid "Name"
+msgstr "Tên"
+
+#: lwf/models.py:409
+msgid "Customer type"
+msgstr "Loại khách hàng"
+
+#: lwf/models.py:409
+msgid "Customer types"
+msgstr "Loại khách hàng"
+
+#: lwf/models.py:412
+msgid "Package"
+msgstr "Gói"
+
+#: lwf/models.py:413
+msgid "Fixed Promotions Months"
+msgstr "Số tháng ưu đãi cố định"
+
+#: lwf/models.py:414
+msgid "Promotions Rate(% P.A)"
+msgstr "Lãi suất ưu đãi (%/năm)"
+
+#: lwf/models.py:415
+msgid "Prime Rate(% P.A)"
+msgstr "Lãi suất cơ sở (%/năm)"
+
+#: lwf/models.py:416
+msgid "Normal Lending Margin(% P.A)"
+msgstr "Biên độ cho vay thông thường (%/năm)"
+
+#: lwf/models.py:417
+msgid "Normal Lending Rate(% P.A)"
+msgstr "Lãi suất cho vay thông thường (%/năm)"
+
+#: lwf/models.py:420
+msgid "Early Payment Fee(%)"
+msgstr "Phí trả nợ trước hạn (%)"
+
+#: lwf/models.py:427
+msgid "Customer Type"
+msgstr "Loại khách hàng"
+
+#: lwf/models.py:429
+msgid "Minimum Loan Account"
+msgstr "Số tiền vay tối thiểu"
+
+#: lwf/models.py:430
+msgid "Minimum Loan Tenor"
+msgstr "Thời hạn vay tối thiểu"
+
+#: lwf/models.py:432
+msgid "Effective Date"
+msgstr "Ngày hiệu lực"
+
+#: lwf/models.py:433
+msgid "End Date"
+msgstr "Ngày kết thúc"
+
+#: lwf/models.py:447
+msgid "Pricing scheme"
+msgstr "Gói lãi suất"
+
+#: lwf/models.py:447 lws/settings.py:269
+msgid "Pricing schemes"
+msgstr "Gói lãi suất"
+
+#: lwf/models.py:451
+msgid "Car Brand"
+msgstr "Hãng xe"
+
+#: lwf/models.py:455 lwf/models.py:1316
+msgid "Dealer Name"
+msgstr "Tên đại lý"
+
+#: lwf/models.py:463
+msgid "Dealer Name(Registered)"
+msgstr "Tên đại lý (đăng ký)"
+
+#: lwf/models.py:499
+msgid "Panel car dealer"
+msgstr "Đại lý xe liên kết"
+
+#: lwf/models.py:499 lws/settings.py:275
+msgid "Panel car dealers"
+msgstr "Đại lý xe liên kết"
+
+#: lwf/models.py:504
+msgid "Product Code"
+msgstr "Mã sản phẩm"
+
+#: lwf/models.py:515
+msgid "Sub-Product Code"
+msgstr "Mã sản phẩm con"
+
+#: lwf/models.py:520
+msgid "Sub Product Code"
+msgstr "Mã sản phẩm con"
+
+#: lwf/models.py:525
+msgid "CRR Convert"
+msgstr "Quy đổi CRR"
+
+#: lwf/models.py:530 lwf/models.py:2019
+msgid "Index"
+msgstr "Thứ tự"
+
+#: lwf/models.py:537 lws/settings.py:266
+msgid "Products"
+msgstr "Sản phẩm"
+
+#: lwf/models.py:576
+msgid "Open"
+msgstr "Mới tạo"
+
+#: lwf/models.py:577
+msgid "Sale Leader Endorse"
+msgstr "Sale Leader xác nhận"
+
+#: lwf/models.py:578
+msgid "Sale Support Review"
+msgstr "Sale Support kiểm tra"
+
+#: lwf/models.py:579
+msgid "Sale Support Request Update"
+msgstr "Sale Support yêu cầu bổ sung"
+
+#: lwf/models.py:580
+msgid "Head of Sale Approve Exception"
+msgstr "Head of Sale duyệt ngoại lệ"
+
+#: lwf/models.py:581
+msgid "Head of PFS Approve Exception"
+msgstr "Head of PFS duyệt ngoại lệ"
+
+#: lwf/models.py:584
+msgid "CED Verify Application"
+msgstr "CED thẩm định"
+
+#: lwf/models.py:585
+msgid "CED Request Update"
+msgstr "CED yêu cầu bổ sung"
+
+#: lwf/models.py:587
+msgid "First Approval"
+msgstr "Phê duyệt cấp 1"
+
+#: lwf/models.py:588
+msgid "First Approver Request Update"
+msgstr "Cấp 1 yêu cầu cập nhật"
+
+#: lwf/models.py:590
+msgid "Second Approval"
+msgstr "Phê duyệt cấp 2"
+
+#: lwf/models.py:591
+msgid " Second Approver Request Update"
+msgstr "Cấp 2 yêu cầu cập nhật"
+
+#: lwf/models.py:593
+msgid "Concurrence"
+msgstr "Ý kiến đồng thuận"
+
+#: lwf/models.py:595
+msgid "Post Approval"
+msgstr "Sau phê duyệt"
+
+#: lwf/models.py:596
+msgid "Request Valuation"
+msgstr "Yêu cầu định giá"
+
+#: lwf/models.py:598
+msgid "CRA Prepare Document"
+msgstr "CRA chuẩn bị hồ sơ"
+
+#: lwf/models.py:599
+msgid "CRA Request Update"
+msgstr "CRA yêu cầu bổ sung"
+
+#: lwf/models.py:601
+msgid "Sale Confirm Disbursement"
+msgstr "Sale xác nhận giải ngân"
+
+#: lwf/models.py:602
+msgid "CED Check Approval Condition"
+msgstr "CED kiểm tra điều kiện phê duyệt"
+
+#: lwf/models.py:603
+msgid "CED Request Update Pre Disbursement"
+msgstr "CED yêu cầu bổ sung trước giải ngân"
+
+#: lwf/models.py:604
+msgid "CRA Disbursement"
+msgstr "CRA giải ngân"
+
+#: lwf/models.py:606
+msgid "Complete"
+msgstr "Hoàn tất"
+
+#: lwf/models.py:614 lwf/models.py:919 lwf/workflow.py:201
+msgid "Title"
+msgstr "Số hồ sơ"
+
+#: lwf/models.py:619 lwf/models.py:814 lwf/models.py:1975 lwf/models.py:2321
+#: lwf/models.py:2360 lwf/reports.py:172
+msgid "Created"
+msgstr "Ngày tạo"
+
+#: lwf/models.py:624 lwf/models.py:820
+msgid "Modified"
+msgstr "Ngày sửa"
+
+#: lwf/models.py:628
+msgid "Submitted"
+msgstr "Ngày gửi CED"
+
+#: lwf/models.py:631
+msgid "Date this ticket was submitted to CED"
+msgstr "Ngày hồ sơ được gửi sang CED"
+
+#: lwf/models.py:640
+msgid "Submitter"
+msgstr "Người tạo"
+
+#: lwf/models.py:648
+msgid "Sale Leader"
+msgstr "Sale Leader"
+
+#: lwf/models.py:656
+msgid "Sale Support"
+msgstr "Sale Support"
+
+#: lwf/models.py:664
+msgid "Sale Director"
+msgstr "Sale Director"
+
+#: lwf/models.py:672
+msgid "Head of PFS"
+msgstr "Head of PFS"
+
+#: lwf/models.py:680
+msgid "CED Officer"
+msgstr "Cán bộ CED"
+
+#: lwf/models.py:688
+msgid "CRA Officer"
+msgstr "Cán bộ CRA"
+
+#: lwf/models.py:696
+msgid "Approver 1 Officer"
+msgstr "Người phê duyệt cấp 1"
+
+#: lwf/models.py:705
+msgid "Approver 2 Officer"
+msgstr "Người phê duyệt cấp 2"
+
+#: lwf/models.py:709 lwf/models.py:1089
+msgid "Approval Type"
+msgstr "Loại phê duyệt"
+
+#: lwf/models.py:716
+msgid "Reject Code (CED Onnly)"
+msgstr "Mã từ chối (chỉ CED)"
+
+#: lwf/models.py:723
+msgid "AML Screening "
+msgstr "Sàng lọc AML"
+
+#: lwf/models.py:726
+msgid "Connected Parties (with Bank) "
+msgstr "Bên liên quan (với ngân hàng)"
+
+#: lwf/models.py:729
+msgid "Corp Auto Loan Watch List "
+msgstr "Danh sách theo dõi vay mua xe doanh nghiệp"
+
+#: lwf/models.py:739
+msgid "Assigned to"
+msgstr "Người xử lý"
+
+#: lwf/models.py:755
+msgid "Due on"
+msgstr "Hạn xử lý"
+
+#: lwf/models.py:763
+msgid "Loan application"
+msgstr "Hồ sơ vay"
+
+#: lwf/models.py:764 lwf/templates/lwf/api_demo.html:322 lws/settings.py:251
+msgid "Loan applications"
+msgstr "Hồ sơ vay"
+
+#: lwf/models.py:784 lwf/ocr.py:173
+msgid "Applicant ID"
+msgstr "Số giấy tờ"
+
+#: lwf/models.py:786
+msgid "Permanent address (unaccented)"
+msgstr "Địa chỉ thường trú (không dấu)"
+
+#: lwf/models.py:787 lwf/ocr.py:175
+msgid "Permanent address"
+msgstr "Địa chỉ thường trú"
+
+#: lwf/models.py:789
+msgid "Current address (unaccented)"
+msgstr "Địa chỉ hiện tại (không dấu)"
+
+#: lwf/models.py:790
+msgid "Current address"
+msgstr "Địa chỉ hiện tại"
+
+#: lwf/models.py:792 lwf/models.py:793 lwf/ocr.py:172
+msgid "Applicant Name"
+msgstr "Họ tên người vay"
+
+#: lwf/models.py:795
+msgid "Type of Applicant"
+msgstr "Vai trò người vay"
+
+#: lwf/models.py:797
+msgid "Old ID"
+msgstr "Số giấy tờ cũ"
+
+#: lwf/models.py:799
+msgid "Nationality"
+msgstr "Quốc tịch"
+
+#: lwf/models.py:801 lwf/ocr.py:174
+msgid "Date of Birth"
+msgstr "Ngày sinh"
+
+#: lwf/models.py:802 lwf/models.py:2031
+msgid "Age"
+msgstr "Tuổi"
+
+#: lwf/models.py:804
+msgid "Type of house for residential"
+msgstr "Loại nhà ở"
+
+#: lwf/models.py:806
+msgid "Gender"
+msgstr "Giới tính"
+
+#: lwf/models.py:808 lwf/models.py:2033
+msgid "Marital Status"
+msgstr "Tình trạng hôn nhân"
+
+#: lwf/models.py:810 lwf/models.py:2038
+msgid "Education level"
+msgstr "Trình độ học vấn"
+
+#: lwf/models.py:825
+msgid "Related Party"
+msgstr "Bên liên quan"
+
+#: lwf/models.py:830
+msgid "Relationship to Bank"
+msgstr "Quan hệ với ngân hàng"
+
+#: lwf/models.py:835
+msgid "Related Party Details"
+msgstr "Chi tiết bên liên quan"
+
+#: lwf/models.py:841 lwf/models.py:2039
+msgid "Residential Status"
+msgstr "Tình trạng cư trú"
+
+#: lwf/models.py:844
+msgid "Residential Location"
+msgstr "Khu vực cư trú"
+
+#: lwf/models.py:849
+msgid "Fixed Salary"
+msgstr "Lương cố định"
+
+#: lwf/models.py:850
+msgid "Variable Salary"
+msgstr "Lương biến đổi"
+
+#: lwf/models.py:851
+msgid "Salary Income"
+msgstr "Thu nhập từ lương"
+
+#: lwf/models.py:852
+msgid "Rental Income"
+msgstr "Thu nhập cho thuê"
+
+#: lwf/models.py:853
+msgid "Business Income"
+msgstr "Thu nhập kinh doanh"
+
+#: lwf/models.py:854
+msgid "Household Income"
+msgstr "Thu nhập hộ kinh doanh"
+
+#: lwf/models.py:855
+msgid "Total Income"
+msgstr "Tổng thu nhập"
+
+#: lwf/models.py:858
+msgid "No CIC record"
+msgstr "Không có dữ liệu CIC"
+
+#: lwf/models.py:859
+msgid "Current G1, No past record of G2 or bad track record in last 5Y"
+msgstr "Hiện nhóm 1, chưa từng nhóm 2 hoặc nợ xấu trong 5 năm"
+
+#: lwf/models.py:860
+msgid "Current G1, Past record of G2 and No bad record in last 5Y"
+msgstr "Hiện nhóm 1, từng nhóm 2, không nợ xấu trong 5 năm"
+
+#: lwf/models.py:861
+msgid ""
+"Current G1, No past record of G2 or bad track record in last 5Y (min 01 year "
+"CIC vintage)"
+msgstr ""
+"Hiện nhóm 1, chưa từng nhóm 2 hoặc nợ xấu trong 5 năm (lịch sử CIC tối thiểu "
+"1 năm)"
+
+#: lwf/models.py:862
+msgid "Current G1 and Past bad track record in last 5Y"
+msgstr "Hiện nhóm 1, từng nợ xấu trong 5 năm"
+
+#: lwf/models.py:863
+msgid "Current G2 or above"
+msgstr "Hiện nhóm 2 trở lên"
+
+#: lwf/models.py:866
+msgid "CIC Report Date"
+msgstr "Ngày báo cáo CIC"
+
+#: lwf/models.py:867
+msgid "Credit Record in last 5Y"
+msgstr "Lịch sử tín dụng 5 năm"
+
+#: lwf/models.py:868
+msgid "Total Outstanding Loan"
+msgstr "Tổng dư nợ"
+
+#: lwf/models.py:869
+msgid "Credit Card Balance"
+msgstr "Dư nợ thẻ tín dụng"
+
+#: lwf/models.py:871
+msgid "Highest Installment"
+msgstr "Khoản trả cao nhất"
+
+#: lwf/models.py:872
+msgid "Average Installment"
+msgstr "Khoản trả trung bình"
+
+#: lwf/models.py:875
+msgid "Update Status"
+msgstr "Trạng thái cập nhật"
+
+#: lwf/models.py:876
+msgid "Nơi cấp CMND"
+msgstr ""
+
+#: lwf/models.py:877
+msgid " Ngày cấp CMND"
+msgstr ""
+
+#: lwf/models.py:878
+msgid "Residential Address"
+msgstr "Địa chỉ thường trú"
+
+#: lwf/models.py:879
+msgid "Current Address"
+msgstr "Địa chỉ hiện tại"
+
+#: lwf/models.py:881
+msgid "Descriptions"
+msgstr "Ghi chú"
+
+#: lwf/models.py:896 lws/settings.py:253
+msgid "Applicants"
+msgstr "Người vay"
+
+#: lwf/models.py:910 lwf/models.py:1146 lwf/models.py:1263 lwf/models.py:2027
+#: lwf/models.py:2121
+msgid "Ticket"
+msgstr "Hồ sơ"
+
+#: lwf/models.py:914 lwf/templates/lwf/api_demo.html:355
+msgid "Date"
+msgstr "Ngày"
+
+#: lwf/models.py:926 lwf/templates/admin/lwf/ticket/change_status.html:93
+#: lwf/templates/admin/lwf/ticket/change_status.html:135
+msgid "Comment"
+msgstr "Ý kiến"
+
+#: lwf/models.py:936 lwf/models.py:2243 lwf/models.py:2356 lwf/models.py:2393
+msgid "User"
+msgstr ""
+
+#: lwf/models.py:940
+msgid "New Status"
+msgstr "Trạng thái mới"
+
+#: lwf/models.py:944
+msgid "If the status was changed, what was it changed to?"
+msgstr "Nếu trạng thái thay đổi, trạng thái mới là gì?"
+
+#: lwf/models.py:949 lwf/models.py:970
+msgid "Follow-up"
+msgstr "Bước xử lý"
+
+#: lwf/models.py:950
+msgid "Follow-ups"
+msgstr "Các bước xử lý"
+
+#: lwf/models.py:974 lwf/templates/admin/lwf/ticket/document_reading.html:48
+msgid "Field"
+msgstr "Trường"
+
+#: lwf/models.py:979
+msgid "Old Value"
+msgstr "Giá trị cũ"
+
+#: lwf/models.py:985
+msgid "New Value"
+msgstr "Giá trị mới"
+
+#: lwf/models.py:993
+msgid "removed"
+msgstr "đã xóa"
+
+#: lwf/models.py:995
+#, python-format
+msgid "set to %s"
+msgstr "đặt thành %s"
+
+#: lwf/models.py:997
+#, python-format
+msgid "changed from \"%(old_value)s\" to \"%(new_value)s\""
+msgstr "đổi từ \"%(old_value)s\" thành \"%(new_value)s\""
+
+#: lwf/models.py:1004
+msgid "Ticket change"
+msgstr "Thay đổi hồ sơ"
+
+#: lwf/models.py:1005
+msgid "Ticket changes"
+msgstr "Thay đổi hồ sơ"
+
+#: lwf/models.py:1110
+msgid "Next Status"
+msgstr "Trạng thái tiếp theo"
+
+#: lwf/models.py:1118
+msgid "Action"
+msgstr ""
+
+#: lwf/models.py:1126
+msgid "Workflow action"
+msgstr "Bước quy trình"
+
+#: lwf/models.py:1126 lws/settings.py:287
+msgid "Workflow actions"
+msgstr "Các bước quy trình"
+
+#: lwf/models.py:1154
+msgid "Sub-Product"
+msgstr "Sản phẩm con"
+
+#: lwf/models.py:1166
+msgid "Loan Amount"
+msgstr "Số tiền vay"
+
+#: lwf/models.py:1172
+msgid "Purpose"
+msgstr "Mục đích"
+
+#: lwf/models.py:1178
+msgid "Loan Purpose Details[ For PSL Only] "
+msgstr "Chi tiết mục đích vay (chỉ cho PSL)"
+
+#: lwf/models.py:1187
+msgid "Purpose of financing"
+msgstr "Mục đích tài trợ"
+
+#: lwf/models.py:1193
+msgid "Purpose details"
+msgstr "Chi tiết mục đích"
+
+#: lwf/models.py:1197
+msgid "Loan Program"
+msgstr "Chương trình vay"
+
+#: lwf/models.py:1205
+msgid "Pricing Scheme"
+msgstr "Gói lãi suất"
+
+#: lwf/models.py:1210 lwf/models.py:1694 lwf/policy.py:48 lwf/reports.py:172
+#: lwf/templates/lwf/api_demo.html:338
+msgid "Tenor"
+msgstr "Kỳ hạn"
+
+#: lwf/models.py:1216
+msgid "MOA (%)"
+msgstr "MOA (%)"
+
+#: lwf/models.py:1223
+msgid "Subject"
+msgstr "Đối tượng"
+
+#: lwf/models.py:1233
+msgid "Deviation (1)"
+msgstr "Ngoại lệ (1)"
+
+#: lwf/models.py:1239
+msgid "Deviation (2)"
+msgstr "Ngoại lệ (2)"
+
+#: lwf/models.py:1243
+msgid "Deviation (1) reason"
+msgstr "Lý do ngoại lệ (1)"
+
+#: lwf/models.py:1244
+msgid "Deviation (2) reason"
+msgstr "Lý do ngoại lệ (2)"
+
+#: lwf/models.py:1246
+msgid "Sale Recommendation"
+msgstr "Đề xuất của Sale"
+
+#: lwf/models.py:1251
+msgid "Loan Highest Installment"
+msgstr "Khoản trả cao nhất của khoản vay"
+
+#: lwf/models.py:1252
+msgid "Loan Lowest Installment"
+msgstr "Khoản trả thấp nhất của khoản vay"
+
+#: lwf/models.py:1253
+msgid "Loan Average Installment"
+msgstr "Khoản trả trung bình của khoản vay"
+
+#: lwf/models.py:1260
+msgid "Loan requests"
+msgstr "Đề nghị vay"
+
+#: lwf/models.py:1264 lwf/models.py:2048
+msgid "Collateral Type"
+msgstr "Loại tài sản đảm bảo"
+
+#: lwf/models.py:1265
+msgid "Mortgage Deed"
+msgstr "Sổ đỏ / sổ hồng"
+
+#: lwf/models.py:1265
+msgid "Contract"
+msgstr "Hợp đồng mua bán"
+
+#: lwf/models.py:1267
+msgid "Existing Collateral"
+msgstr "Tài sản hiện có"
+
+#: lwf/models.py:1268 lwf/models.py:2047
+msgid "Property Type"
+msgstr "Loại bất động sản"
+
+#: lwf/models.py:1269
+msgid "Title deed"
+msgstr "Đã có giấy chứng nhận"
+
+#: lwf/models.py:1270
+msgid "Address Available"
+msgstr "Có địa chỉ cụ thể"
+
+#: lwf/models.py:1271
+msgid "SPA/ Estimated value"
+msgstr "Giá trị HĐMB / ước tính"
+
+#: lwf/models.py:1272
+msgid "Number of Bedrooms"
+msgstr "Số phòng ngủ"
+
+#: lwf/models.py:1274 lwf/models.py:1721 lwf/ocr.py:184
+msgid "Land plot"
+msgstr "Thửa đất"
+
+#: lwf/models.py:1275 lwf/models.py:1722 lwf/ocr.py:185
+msgid "Land map"
+msgstr "Tờ bản đồ"
+
+#: lwf/models.py:1277 lwf/models.py:1278 lwf/models.py:1725 lwf/ocr.py:187
+msgid "Full Address"
+msgstr "Địa chỉ đầy đủ"
+
+#: lwf/models.py:1284
+msgid "Land width(m)"
+msgstr "Chiều ngang đất (m)"
+
+#: lwf/models.py:1285
+msgid "Alley width(m)"
+msgstr "Chiều rộng hẻm (m)"
+
+#: lwf/models.py:1286 lwf/models.py:1723 lwf/ocr.py:186
+msgid "Land area/GFA (m2)"
+msgstr "Diện tích đất/GFA (m2)"
+
+#: lwf/models.py:1287 lwf/models.py:1724
+msgid "Built up area/NFA (m2)"
+msgstr "Diện tích xây dựng/NFA (m2)"
+
+#: lwf/models.py:1288
+msgid "Construction status"
+msgstr "Tình trạng xây dựng"
+
+#: lwf/models.py:1290
+msgid "Property occupancy"
+msgstr "Tình trạng sử dụng"
+
+#: lwf/models.py:1299
+msgid "Project Dealer"
+msgstr "Đại lý dự án"
+
+#: lwf/models.py:1300
+msgid "Project Developer"
+msgstr "Chủ đầu tư dự án"
+
+#: lwf/models.py:1303 lwf/models.py:1320
+msgid "EPM Status"
+msgstr "Trạng thái EPM"
+
+#: lwf/models.py:1304 lwf/models.py:1321
+msgid "EPM Expire Date"
+msgstr "Ngày hết hạn EPM"
+
+#: lwf/models.py:1305 lwf/models.py:1322
+msgid "EPM Limit Available"
+msgstr "Hạn mức EPM còn lại"
+
+#: lwf/models.py:1308
+msgid "Brand of vehicle"
+msgstr "Hãng xe"
+
+#: lwf/models.py:1309
+msgid "Vehicle Group Classification"
+msgstr "Nhóm xe"
+
+#: lwf/models.py:1310
+msgid "Primary"
+msgstr "Chính"
+
+#: lwf/models.py:1310
+msgid "Secondary"
+msgstr "Phụ"
+
+#: lwf/models.py:1312
+msgid "SPA Value"
+msgstr "Giá trị HĐMB"
+
+#: lwf/models.py:1313
+msgid "Model of vehicle (*)"
+msgstr "Dòng xe (*)"
+
+#: lwf/models.py:1314
+msgid "Vehicle Classification"
+msgstr "Phân loại xe"
+
+#: lwf/models.py:1314
+msgid "Passenger"
+msgstr "Xe chở người"
+
+#: lwf/models.py:1314
+msgid "Pick-up"
+msgstr "Xe bán tải"
+
+#: lwf/models.py:1317
+msgid "Other Dealer Name (*)"
+msgstr "Tên đại lý khác (*)"
+
+#: lwf/models.py:1318
+msgid "Year of Manufacture"
+msgstr "Năm sản xuất"
+
+#: lwf/models.py:1344
+msgid "Employer Name"
+msgstr "Tên đơn vị công tác"
+
+#: lwf/models.py:1350
+msgid "Designation"
+msgstr "Chức vụ"
+
+#: lwf/models.py:1355 lwf/models.py:2036
+msgid "Length in service (months)"
+msgstr "Thời gian công tác (tháng)"
+
+#: lwf/models.py:1364
+msgid "Contract Type"
+msgstr "Loại hợp đồng"
+
+#: lwf/models.py:1370
+msgid "Contract/Starting Date"
+msgstr "Ngày hợp đồng / bắt đầu"
+
+#: lwf/models.py:1371 lwf/models.py:1391
+msgid "(Format: dd/mm/yyyy)"
+msgstr "(Định dạng: dd/mm/yyyy)"
+
+#: lwf/models.py:1377
+msgid "Previous Employer"
+msgstr "Đơn vị công tác trước"
+
+#: lwf/models.py:1383
+msgid "Previous Length in service (months)"
+msgstr "Thời gian công tác trước (tháng)"
+
+#: lwf/models.py:1390
+msgid "Expiry Date"
+msgstr "Ngày hết hạn"
+
+#: lwf/models.py:1397
+msgid "Payment Type"
+msgstr "Hình thức nhận lương"
+
+#: lwf/models.py:1404 lwf/models.py:1416 lwf/models.py:1529
+msgid "Number of Month"
+msgstr "Số tháng"
+
+#: lwf/models.py:1427 lwf/models.py:1442 lwf/models.py:1522
+msgid "Month 1"
+msgstr "Tháng 1"
+
+#: lwf/models.py:1428 lwf/models.py:1443 lwf/models.py:1523
+msgid "Month 2"
+msgstr "Tháng 2"
+
+#: lwf/models.py:1429 lwf/models.py:1444 lwf/models.py:1524
+msgid "Month 3"
+msgstr "Tháng 3"
+
+#: lwf/models.py:1430 lwf/models.py:1445 lwf/models.py:1525
+msgid "Month 4"
+msgstr "Tháng 4"
+
+#: lwf/models.py:1431 lwf/models.py:1446 lwf/models.py:1526
+msgid "Month 5"
+msgstr "Tháng 5"
+
+#: lwf/models.py:1432 lwf/models.py:1447 lwf/models.py:1527
+msgid "Month 6"
+msgstr "Tháng 6"
+
+#: lwf/models.py:1433 lwf/models.py:1448
+msgid "Month 7"
+msgstr "Tháng 7"
+
+#: lwf/models.py:1434 lwf/models.py:1449
+msgid "Month 8"
+msgstr "Tháng 8"
+
+#: lwf/models.py:1435 lwf/models.py:1450
+msgid "Month 9"
+msgstr "Tháng 9"
+
+#: lwf/models.py:1436 lwf/models.py:1451
+msgid "Month 10"
+msgstr "Tháng 10"
+
+#: lwf/models.py:1437 lwf/models.py:1452
+msgid "Month 11"
+msgstr "Tháng 11"
+
+#: lwf/models.py:1438 lwf/models.py:1453
+msgid "Month 12"
+msgstr "Tháng 12"
+
+#: lwf/models.py:1439
+msgid "Fixed Income"
+msgstr "Thu nhập cố định"
+
+#: lwf/models.py:1454
+msgid "Variable Income"
+msgstr "Thu nhập biến đổi"
+
+#: lwf/models.py:1456
+msgid "Net Income"
+msgstr "Thu nhập ròng"
+
+#: lwf/models.py:1467 lwf/models.py:1552
+msgid "Business Name"
+msgstr "Tên doanh nghiệp"
+
+#: lwf/models.py:1468 lwf/models.py:1553
+msgid "Share portion(%)"
+msgstr "Tỷ lệ sở hữu (%)"
+
+#: lwf/models.py:1469 lwf/models.py:1554
+msgid "Business Reg. No. "
+msgstr "Số ĐKKD"
+
+#: lwf/models.py:1470 lwf/models.py:1555
+msgid "Business Reg. Date"
+msgstr "Ngày ĐKKD"
+
+#: lwf/models.py:1471 lwf/models.py:1556
+msgid "Years in business"
+msgstr "Số năm kinh doanh"
+
+#: lwf/models.py:1473 lwf/models.py:1558
+msgid "Chartered Capital (VND)"
+msgstr "Vốn điều lệ (VND)"
+
+#: lwf/models.py:1474 lwf/models.py:1560
+msgid "Contributed"
+msgstr "Đã góp"
+
+#: lwf/models.py:1476 lwf/models.py:1562
+msgid "Registered address"
+msgstr "Địa chỉ đăng ký"
+
+#: lwf/models.py:1477
+msgid "Time stay at this address (years)"
+msgstr "Thời gian ở địa chỉ này (năm)"
+
+#: lwf/models.py:1478 lwf/models.py:1564
+msgid "Business scope"
+msgstr "Ngành nghề kinh doanh"
+
+#: lwf/models.py:1481 lwf/models.py:1565
+msgid "Business Industry"
+msgstr "Lĩnh vực kinh doanh"
+
+#: lwf/models.py:1483 lwf/models.py:1571
+msgid "Typical buyers"
+msgstr "Khách hàng chính"
+
+#: lwf/models.py:1484 lwf/models.py:1572
+msgid "Typical suppliers"
+msgstr "Nhà cung cấp chính"
+
+#: lwf/models.py:1537 lwf/models.py:1627 lwf/models.py:2042
+msgid "Monthly Average"
+msgstr "Bình quân tháng"
+
+#: lwf/models.py:1538
+msgid "Margin (%)"
+msgstr "Biên lợi nhuận (%)"
+
+#: lwf/models.py:1539 lwf/models.py:1629
+msgid "Net income (VND)"
+msgstr "Thu nhập ròng (VND)"
+
+#: lwf/models.py:1563
+msgid "Main operating address"
+msgstr "Địa chỉ hoạt động chính"
+
+#: lwf/models.py:1569
+msgid "Business Industry Detail"
+msgstr "Chi tiết lĩnh vực kinh doanh"
+
+#: lwf/models.py:1574
+msgid "Year 1"
+msgstr "Năm 1"
+
+#: lwf/models.py:1575
+msgid "Year 2"
+msgstr "Năm 2"
+
+#: lwf/models.py:1576
+msgid "Year 3"
+msgstr "Năm 3"
+
+#: lwf/models.py:1577
+msgid "Sales Drop/Increase YoY "
+msgstr "Doanh thu tăng/giảm so với năm trước"
+
+#: lwf/models.py:1580
+msgid "Sales Turnover 1"
+msgstr "Doanh thu năm 1"
+
+#: lwf/models.py:1581
+msgid "Net Monthly Average Turnover 1"
+msgstr "Doanh thu bình quân tháng năm 1"
+
+#: lwf/models.py:1582 lwf/models.py:1590 lwf/models.py:1598 lwf/models.py:1605
+msgid "Net profit"
+msgstr "Lợi nhuận ròng"
+
+#: lwf/models.py:1583 lwf/models.py:1591 lwf/models.py:1599
+msgid "Paid-up Capital"
+msgstr "Vốn góp"
+
+#: lwf/models.py:1584 lwf/models.py:1592 lwf/models.py:1600 lwf/models.py:1607
+msgid "Retained Earning"
+msgstr "Lợi nhuận giữ lại"
+
+#: lwf/models.py:1585 lwf/models.py:1593 lwf/models.py:1601 lwf/models.py:1608
+msgid "Intangible assets"
+msgstr "Tài sản vô hình"
+
+#: lwf/models.py:1586 lwf/models.py:1594 lwf/models.py:1602 lwf/models.py:1609
+msgid "Tangible net worth (>0)"
+msgstr "Vốn chủ sở hữu hữu hình (>0)"
+
+#: lwf/models.py:1588
+msgid "Sales Turnover 2"
+msgstr "Doanh thu năm 2"
+
+#: lwf/models.py:1589
+msgid "Net Monthly Average Turnover 2"
+msgstr "Doanh thu bình quân tháng năm 2"
+
+#: lwf/models.py:1596
+msgid "Sales Turnover 3"
+msgstr "Doanh thu năm 3"
+
+#: lwf/models.py:1597
+msgid "Net Monthly Average Turnover 3"
+msgstr "Doanh thu bình quân tháng năm 3"
+
+#: lwf/models.py:1604
+msgid "Sales Turnover"
+msgstr "Doanh thu"
+
+#: lwf/models.py:1612 lwf/reports.py:152
+msgid "Period"
+msgstr "Kỳ"
+
+#: lwf/models.py:1621 lwf/models.py:1623 lwf/models.py:1625
+msgid "Bank statement"
+msgstr "Sao kê ngân hàng"
+
+#: lwf/models.py:1622 lwf/models.py:1624
+msgid "VAT Declaration"
+msgstr "Tờ khai VAT"
+
+#: lwf/models.py:1628
+msgid "EBITDA Margin (%)"
+msgstr "Biên EBITDA (%)"
+
+#: lwf/models.py:1642
+msgid "Property address"
+msgstr "Địa chỉ bất động sản"
+
+#: lwf/models.py:1643
+msgid "Leasing price (VND)"
+msgstr "Giá cho thuê (VND)"
+
+#: lwf/models.py:1644 lwf/models.py:2217
+msgid "Contract type"
+msgstr "Loại hợp đồng"
+
+#: lwf/models.py:1645
+msgid "Proxy margin (%)"
+msgstr "Tỷ lệ ước tính (%)"
+
+#: lwf/models.py:1646
+msgid "Payment type"
+msgstr "Hình thức thanh toán"
+
+#: lwf/models.py:1647
+msgid "Mortgage status"
+msgstr "Tình trạng thế chấp"
+
+#: lwf/models.py:1648
+msgid "Net rental income"
+msgstr "Thu nhập cho thuê ròng"
+
+#: lwf/models.py:1655
+msgid "Rental income"
+msgstr "Thu nhập cho thuê"
+
+#: lwf/models.py:1655
+msgid "Rental incomes"
+msgstr "Thu nhập cho thuê"
+
+#: lwf/models.py:1662
+msgid "Approval Limit"
+msgstr "Số tiền phê duyệt"
+
+#: lwf/models.py:1663
+msgid "Desktop Valuation(VND)"
+msgstr "Định giá sơ bộ (VND)"
+
+#: lwf/models.py:1664
+msgid "Valuation Report(VND)"
+msgstr "Báo cáo định giá (VND)"
+
+#: lwf/models.py:1665
+msgid "Variance"
+msgstr "Chênh lệch"
+
+#: lwf/models.py:1666
+msgid "New COVID 19 affected"
+msgstr "Bị ảnh hưởng COVID-19"
+
+#: lwf/models.py:1667
+msgid "Portfolio capping limit"
+msgstr "Giới hạn danh mục"
+
+#: lwf/models.py:1668
+msgid "CED Recommendation"
+msgstr "Đề xuất của CED"
+
+#: lwf/models.py:1669
+msgid "Approver1's comment"
+msgstr "Ý kiến phê duyệt cấp 1"
+
+#: lwf/models.py:1670
+msgid "Approver2's comment"
+msgstr "Ý kiến phê duyệt cấp 2"
+
+#: lwf/models.py:1671
+msgid "Error Codes"
+msgstr "Mã lỗi"
+
+#: lwf/models.py:1672
+msgid "Values Report"
+msgstr "Báo cáo định giá (file)"
+
+#: lwf/models.py:1675
+msgid "Credit decision"
+msgstr "Quyết định tín dụng"
+
+#: lwf/models.py:1685
+msgid "Số tiền đề nghị"
+msgstr ""
+
+#: lwf/models.py:1686
+msgid "Hạn Mức Tín dụng"
+msgstr ""
+
+#: lwf/models.py:1687
+msgid "Bằng chữ:"
+msgstr ""
+
+#: lwf/models.py:1688
+msgid "Số tiền giải ngân"
+msgstr ""
+
+#: lwf/models.py:1689
+msgid "Lãi suất"
+msgstr ""
+
+#: lwf/models.py:1690
+msgid "Biên độ"
+msgstr ""
+
+#: lwf/models.py:1691
+msgid "Phí trả trươc hạn"
+msgstr ""
+
+#: lwf/models.py:1692
+msgid "Mục đích"
+msgstr ""
+
+#: lwf/models.py:1693
+msgid "Phương thức giải ngân"
+msgstr ""
+
+#: lwf/models.py:1695
+msgid "Đk/Đk khác"
+msgstr ""
+
+#: lwf/models.py:1698
+msgid "Loan contract"
+msgstr "Hợp đồng tín dụng"
+
+#: lwf/models.py:1715
+msgid "Nhãn hiệu xe"
+msgstr ""
+
+#: lwf/models.py:1716
+msgid "Số khung"
+msgstr ""
+
+#: lwf/models.py:1717
+msgid "Số máy"
+msgstr ""
+
+#: lwf/models.py:1718
+msgid "Tên Đại lý bán xe"
+msgstr ""
+
+#: lwf/models.py:1719
+msgid "Giá trị xe (theo hóa đơn) (bằng số)"
+msgstr ""
+
+#: lwf/models.py:1720
+msgid "Giá trị xe (theo hóa đơn) (bằng chữ)"
+msgstr ""
+
+#: lwf/models.py:1726
+msgid "Hình thức sử dụng"
+msgstr ""
+
+#: lwf/models.py:1727
+msgid "Mục đích sử dụng"
+msgstr ""
+
+#: lwf/models.py:1728
+msgid "Thời hạn sử dụng"
+msgstr ""
+
+#: lwf/models.py:1729
+msgid "Nguồn gốc sử dụng"
+msgstr ""
+
+#: lwf/models.py:1730
+msgid "Kết cấu nhà"
+msgstr ""
+
+#: lwf/models.py:1731
+msgid "Cấp (Hạng)"
+msgstr ""
+
+#: lwf/models.py:1732
+msgid "Số tầng"
+msgstr ""
+
+#: lwf/models.py:1733
+msgid "Năm hoàn thành xây dựng"
+msgstr ""
+
+#: lwf/models.py:1734
+msgid "Thời hạn sở hữu"
+msgstr ""
+
+#: lwf/models.py:1735
+msgid "Tên Chủ Đầu Tư"
+msgstr ""
+
+#: lwf/models.py:1736
+msgid "Mã căn hộ"
+msgstr ""
+
+#: lwf/models.py:1737
+msgid "Tầng số"
+msgstr ""
+
+#: lwf/models.py:1738
+msgid "Số Hợp Đồng Mua Bán"
+msgstr ""
+
+#: lwf/models.py:1739
+msgid "Ngày ký Hợp Đồng Mua Bán"
+msgstr ""
+
+#: lwf/models.py:1740
+msgid "Giá trị theo Hợp Đồng Mua Bán"
+msgstr ""
+
+#: lwf/models.py:1741
+msgid "Diện tích xây dựng (m2)"
+msgstr ""
+
+#: lwf/models.py:1742 lwf/models.py:1746
+msgid "Diện tích sàn/Diện tích sử dụng (m2)"
+msgstr ""
+
+#: lwf/models.py:1743
+msgid "Diện tích bằng chữ"
+msgstr ""
+
+#: lwf/models.py:1744
+msgid "Diện tích sử dụng bằng chữ"
+msgstr ""
+
+#: lwf/models.py:1745
+msgid "Diện tích sàn (m2)"
+msgstr ""
+
+#: lwf/models.py:1747
+msgid "Tên giấy chứng nhận"
+msgstr ""
+
+#: lwf/models.py:1748
+msgid "Giá trị định giá tổng (bắng số và bằng chữ)"
+msgstr ""
+
+#: lwf/models.py:1749
+msgid "Tên loại tài sản đảm bảo (trên FA, BBDG và GUQ)"
+msgstr ""
+
+#: lwf/models.py:1750
+msgid "Giá trị định giá đất (bắng số và bằng chữ)"
+msgstr ""
+
+#: lwf/models.py:1751
+msgid "Số phát hành GCN"
+msgstr ""
+
+#: lwf/models.py:1752
+msgid "Giá trị định giá phần xây dựng (bắng số và bằng chữ)"
+msgstr ""
+
+#: lwf/models.py:1753
+msgid "Số vào sổ cấp GCN/Hồ sơ gốc số"
+msgstr ""
+
+#: lwf/models.py:1754
+msgid "Ngày định giá"
+msgstr ""
+
+#: lwf/models.py:1755
+msgid "Ngày cấp GCN"
+msgstr ""
+
+#: lwf/models.py:1756
+msgid "Nơi cấp GCN"
+msgstr ""
+
+#: lwf/models.py:1757
+msgid "Tên chi nhánh văn phòng đăng ký đất đai nơi có tài sản"
+msgstr ""
+
+#: lwf/models.py:1758
+msgid "Tên Hợp Đồng Mua Bán công chứng"
+msgstr ""
+
+#: lwf/models.py:1759
+msgid "Số công chứng của Hợp Đồng chuyển nhượng"
+msgstr ""
+
+#: lwf/models.py:1760
+msgid "Ngày công chứng Hợp Đồng chuyển nhượng"
+msgstr ""
+
+#: lwf/models.py:1761
+msgid "Tên phòng công chứng thực hiện công chứng Hợp Đồng chuyển nhượng"
+msgstr ""
+
+#: lwf/models.py:1762
+msgid "Số xác nhận chuyển nhượng của Chủ Đầu Tư"
+msgstr ""
+
+#: lwf/models.py:1763
+msgid "Ngày ký của Xác Nhận Chuyển Nhượng của Chủ Đầu Tư"
+msgstr ""
+
+#: lwf/models.py:1764
+msgid "Ghi chú"
+msgstr ""
+
+#: lwf/models.py:1767
+msgid "Collateral contract data"
+msgstr "Dữ liệu hợp đồng của tài sản"
+
+#: lwf/models.py:1782
+msgid "Original amount(VND)"
+msgstr "Số tiền gốc (VND)"
+
+#: lwf/models.py:1783
+msgid "Interest rate(%)"
+msgstr "Lãi suất (%)"
+
+#: lwf/models.py:1784
+msgid "Loan tenor(months)"
+msgstr "Thời hạn vay (tháng)"
+
+#: lwf/models.py:1785
+msgid "Outstanding Loan(VND) "
+msgstr "Dư nợ (VND)"
+
+#: lwf/models.py:1786
+msgid "Progressive Disbursement "
+msgstr "Giải ngân nhiều lần"
+
+#: lwf/models.py:1787
+msgid "Highest Installment(VND) "
+msgstr "Khoản trả cao nhất (VND)"
+
+#: lwf/models.py:1788
+msgid "Average Installment(VND) "
+msgstr "Khoản trả trung bình (VND)"
+
+#: lwf/models.py:1799 lwf/models.py:1826
+msgid "Month 1 "
+msgstr "Tháng 1"
+
+#: lwf/models.py:1800 lwf/models.py:1827
+msgid "Month 2 "
+msgstr "Tháng 2"
+
+#: lwf/models.py:1801 lwf/models.py:1828
+msgid "Month 3 "
+msgstr "Tháng 3"
+
+#: lwf/models.py:1802 lwf/models.py:1815
+msgid "Highest/Average Installment "
+msgstr "Khoản trả cao nhất/trung bình"
+
+#: lwf/models.py:1813
+msgid "Interest rate(%) "
+msgstr "Lãi suất (%)"
+
+#: lwf/models.py:1814
+msgid "Outstanding Loan "
+msgstr "Dư nợ"
+
+#: lwf/models.py:1829
+msgid "Month 4 "
+msgstr "Tháng 4"
+
+#: lwf/models.py:1830
+msgid "Month 5 "
+msgstr "Tháng 5"
+
+#: lwf/models.py:1831
+msgid "Month 6 "
+msgstr "Tháng 6"
+
+#: lwf/models.py:1832
+msgid "Avg. card balance in last 6M "
+msgstr "Dư nợ thẻ bình quân 6 tháng"
+
+#: lwf/models.py:1833
+msgid "Proxy min payment"
+msgstr "Khoản trả tối thiểu ước tính"
+
+#: lwf/models.py:1834
+msgid "Installment(Highest)"
+msgstr "Khoản trả (cao nhất)"
+
+#: lwf/models.py:1835
+msgid "Installment(Avg)"
+msgstr "Khoản trả (trung bình)"
+
+#: lwf/models.py:1847
+msgid "Pre-disbursement"
+msgstr "Trước giải ngân"
+
+#: lwf/models.py:1848
+msgid "Post-disbursement"
+msgstr "Sau giải ngân"
+
+#: lwf/models.py:1849
+msgid "Accept Pending Dox"
+msgstr "Chấp nhận nợ chứng từ"
+
+#: lwf/models.py:1859
+msgid "Condition Type"
+msgstr "Loại điều kiện"
+
+#: lwf/models.py:1860
+msgid "Condition Details"
+msgstr "Chi tiết điều kiện"
+
+#: lwf/models.py:1861
+msgid "Document Type"
+msgstr "Loại chứng từ"
+
+#: lwf/models.py:1862
+msgid "Follow by CED"
+msgstr "CED theo dõi"
+
+#: lwf/models.py:1863
+msgid "Follow by CRA"
+msgstr "CRA theo dõi"
+
+#: lwf/models.py:1868
+msgid "Condition"
+msgstr "Điều kiện"
+
+#: lwf/models.py:1868
+msgid "Conditions"
+msgstr "Điều kiện"
+
+#: lwf/models.py:1875
+msgid "Số Hợp Đồng Tín Dụng (FA)"
+msgstr ""
+
+#: lwf/models.py:1876
+msgid "Hợp Đồng Thế Chấp (MA)"
+msgstr ""
+
+#: lwf/models.py:1877
+msgid "Hợp Đồng Ba Bên(TA)"
+msgstr ""
+
+#: lwf/models.py:1878
+msgid "Biên Bản Định Giá(BBDG)"
+msgstr ""
+
+#: lwf/models.py:1881
+msgid "Loại Hợp đồng"
+msgstr ""
+
+#: lwf/models.py:1888
+msgid "Số Hợp đồng"
+msgstr ""
+
+#: lwf/models.py:1895
+msgid "Ngày ký"
+msgstr ""
+
+#: lwf/models.py:1900
+msgid "Người ký"
+msgstr ""
+
+#: lwf/models.py:1906
+msgid "Chức vụ"
+msgstr ""
+
+#: lwf/models.py:1912
+msgid "Họ và tên của người bán thứ 1"
+msgstr ""
+
+#: lwf/models.py:1918
+msgid "Họ và tên của người bán thứ 2"
+msgstr ""
+
+#: lwf/models.py:1932
+msgid "Related Data"
+msgstr "Nhóm dữ liệu"
+
+#: lwf/models.py:1938
+msgid "Filename"
+msgstr "Tên file"
+
+#: lwf/models.py:1952
+msgid "Add"
+msgstr ""
+
+#: lwf/models.py:1953
+msgid "Update"
+msgstr "Cập nhật"
+
+#: lwf/models.py:1954
+msgid "Available"
+msgstr "Đang nhận việc"
+
+#: lwf/models.py:1963 lwf/templates/admin/lwf/dashboard.html:113
+msgid "Officer"
+msgstr "Cán bộ"
+
+#: lwf/models.py:1963 lws/settings.py:305
+msgid "Officers"
+msgstr "Cán bộ xử lý"
+
+#: lwf/models.py:1971 lwf/models.py:2011
+msgid "Version"
+msgstr "Phiên bản"
+
+#: lwf/models.py:1972
+msgid "Effective from"
+msgstr "Hiệu lực từ"
+
+#: lwf/models.py:1973
+msgid "Note"
+msgstr "Ghi chú"
+
+#: lwf/models.py:1978 lwf/models.py:2029
+msgid "Score matrix version"
+msgstr "Phiên bản bảng điểm"
+
+#: lwf/models.py:1978 lws/settings.py:290
+msgid "Score matrix versions"
+msgstr "Phiên bản bảng điểm"
+
+#: lwf/models.py:1996
+#, python-format
+msgid "Copy of %s"
+msgstr "Bản sao của %s"
+
+#: lwf/models.py:2012
+msgid "Score Attribute"
+msgstr "Tiêu chí chấm điểm"
+
+#: lwf/models.py:2014
+msgid "Value From"
+msgstr "Giá trị từ"
+
+#: lwf/models.py:2015
+msgid "Value To"
+msgstr "Giá trị đến"
+
+#: lwf/models.py:2016
+msgid "Score Description"
+msgstr "Mô tả mức điểm"
+
+#: lwf/models.py:2017
+msgid "Score Weight"
+msgstr "Trọng số"
+
+#: lwf/models.py:2018
+msgid "Adjuted Score"
+msgstr "Điểm điều chỉnh"
+
+#: lwf/models.py:2023
+msgid "Score matrix row"
+msgstr "Dòng bảng điểm"
+
+#: lwf/models.py:2023 lwf/templates/admin/lwf/ticket/credit_scoring.html:37
+#: lws/settings.py:293
+msgid "Score matrix"
+msgstr "Bảng điểm CRR"
+
+#: lwf/models.py:2030
+msgid "Scored at"
+msgstr "Thời điểm chấm"
+
+#: lwf/models.py:2032
+msgid "Mortgagor"
+msgstr "Người thế chấp"
+
+#: lwf/models.py:2034
+msgid "Number of borrowers"
+msgstr "Số người vay"
+
+#: lwf/models.py:2035
+msgid "Type of House -  First Borrower"
+msgstr "Loại nhà ở - người vay chính"
+
+#: lwf/models.py:2037 lwf/models.py:2087
+msgid "Employment Type"
+msgstr "Loại hình công việc"
+
+#: lwf/models.py:2043
+msgid "DSR (%)"
+msgstr "DSR (%)"
+
+#: lwf/models.py:2044
+msgid "Sources of Income"
+msgstr "Số nguồn thu nhập"
+
+#: lwf/models.py:2049
+msgid "Loan Term (Months)"
+msgstr "Thời hạn vay (tháng)"
+
+#: lwf/models.py:2050
+msgid "Loan to Value Ratio"
+msgstr "Tỷ lệ cho vay trên giá trị (LTV)"
+
+#: lwf/models.py:2051
+msgid "Loan amount (VND)"
+msgstr "Số tiền vay (VND)"
+
+#: lwf/models.py:2052
+msgid "Mortgage Loans Type"
+msgstr "Loại vay thế chấp"
+
+#: lwf/models.py:2053
+msgid "Overall Margin of Advance (MOA)"
+msgstr "Tỷ lệ cho vay tổng (MOA)"
+
+#: lwf/models.py:2056 lwf/models.py:2058 lwf/models.py:2060
+msgid "0"
+msgstr ""
+
+#: lwf/models.py:2056
+msgid "< 1 year"
+msgstr "< 1 năm"
+
+#: lwf/models.py:2056
+msgid "1-<=3 years"
+msgstr "1 - 3 năm"
+
+#: lwf/models.py:2056
+msgid ">3 years"
+msgstr ">3 năm"
+
+#: lwf/models.py:2057
+msgid "New Borrower"
+msgstr "Khách hàng mới"
+
+#: lwf/models.py:2057
+msgid "Group 1"
+msgstr "Nhóm 1"
+
+#: lwf/models.py:2057
+msgid "Group 2"
+msgstr "Nhóm 2"
+
+#: lwf/models.py:2057
+msgid "Group 3 and above"
+msgstr "Nhóm 3 trở lên"
+
+#: lwf/models.py:2058 lwf/models.py:2060
+msgid "No Bureau Match"
+msgstr "Không có dữ liệu CIC"
+
+#: lwf/models.py:2058 lwf/models.py:2060
+msgid "1"
+msgstr ""
+
+#: lwf/models.py:2058 lwf/models.py:2060
+msgid "2"
+msgstr ""
+
+#: lwf/models.py:2058
+msgid "3"
+msgstr ""
+
+#: lwf/models.py:2059
+msgid "4+"
+msgstr ""
+
+#: lwf/models.py:2059 lwf/models.py:2061
+msgid "No Information/ Missing Value"
+msgstr "Không có thông tin / thiếu dữ liệu"
+
+#: lwf/models.py:2060
+msgid "3+"
+msgstr ""
+
+#: lwf/models.py:2062
+msgid "Age of account (years)"
+msgstr "Thời gian quan hệ tài khoản (năm)"
+
+#: lwf/models.py:2064
+msgid "Conduct of account at Bank"
+msgstr "Lịch sử tài khoản tại ngân hàng"
+
+#: lwf/models.py:2066
+msgid "Where Bureau report is available"
+msgstr "Có báo cáo CIC"
+
+#: lwf/models.py:2068
+msgid "Number of Credit Institutions banked with"
+msgstr "Số tổ chức tín dụng đang quan hệ"
+
+#: lwf/models.py:2070
+msgid "No of Defaults (in the Last 12 months)"
+msgstr "Số lần quá hạn (12 tháng gần nhất)"
+
+#: lwf/models.py:2072
+msgid "No of Defaults (in the Last 60 months)"
+msgstr "Số lần quá hạn (60 tháng gần nhất)"
+
+#: lwf/models.py:2079
+msgid "CRR scoring input"
+msgstr "Đầu vào chấm điểm CRR"
+
+#: lwf/models.py:2079
+msgid "CRR scoring inputs"
+msgstr "Đầu vào chấm điểm CRR"
+
+#: lwf/models.py:2083
+msgid "Self Employed"
+msgstr "Tự kinh doanh"
+
+#: lwf/models.py:2083
+msgid "Employed"
+msgstr "Làm công ăn lương"
+
+#: lwf/models.py:2083
+msgid "Others"
+msgstr "Khác"
+
+#: lwf/models.py:2083
+msgid "No Infomation"
+msgstr "Không có thông tin"
+
+#: lwf/models.py:2086
+msgid "Length in service"
+msgstr "Thời gian công tác"
+
+#: lwf/models.py:2090
+msgid "Net salary/ Net profit (VND)"
+msgstr "Lương ròng / lợi nhuận ròng (VND)"
+
+#: lwf/models.py:2091
+msgid "Income from Business(VND)"
+msgstr "Thu nhập từ kinh doanh (VND)"
+
+#: lwf/models.py:2092
+msgid "Income from Household (VND)"
+msgstr "Thu nhập từ hộ kinh doanh (VND)"
+
+#: lwf/models.py:2093
+msgid "Income from leased assets (VND)"
+msgstr "Thu nhập cho thuê tài sản (VND)"
+
+#: lwf/models.py:2094
+msgid "Total Monthly income (VND)"
+msgstr "Tổng thu nhập tháng (VND)"
+
+#: lwf/models.py:2095
+msgid "Income from Biz activity (VND)"
+msgstr "Thu nhập từ hoạt động kinh doanh (VND)"
+
+#: lwf/models.py:2096
+msgid "Income Segmentation"
+msgstr "Phân khúc thu nhập"
+
+#: lwf/models.py:2097
+msgid "Segmentation for TAT"
+msgstr "Phân khúc cho TAT"
+
+#: lwf/models.py:2099
+msgid "Existing Highest Installment(VND)"
+msgstr "Khoản trả nợ hiện có cao nhất (VND)"
+
+#: lwf/models.py:2101
+msgid "Existing Average Installment (VND)"
+msgstr "Khoản trả nợ hiện có trung bình (VND)"
+
+#: lwf/models.py:2103
+msgid "Total Monthly Expenditure"
+msgstr "Tổng chi phí hằng tháng"
+
+#: lwf/models.py:2104
+msgid "Highest DSR (%)"
+msgstr "DSR cao nhất (%)"
+
+#: lwf/models.py:2106
+msgid "Average DSR (%)"
+msgstr "DSR trung bình (%)"
+
+#: lwf/models.py:2108
+msgid "NST(>0)"
+msgstr "NST (>0)"
+
+#: lwf/models.py:2111
+msgid "CRR band"
+msgstr "Band CRR"
+
+#: lwf/models.py:2122
+msgid "Họ và tên (ghi rõ danh xưng Ông/Bà)"
+msgstr ""
+
+#: lwf/models.py:2123
+msgid "Năm sinh "
+msgstr ""
+
+#: lwf/models.py:2124
+msgid "Số CMND/ CCCD/Hộ chiếu"
+msgstr ""
+
+#: lwf/models.py:2125
+msgid "Nơi cấp"
+msgstr ""
+
+#: lwf/models.py:2126
+msgid "Địa chỉ thường trú"
+msgstr ""
+
+#: lwf/models.py:2156
+msgid "Monthly living cost, primary applicant (VND)"
+msgstr "Chi phí sinh hoạt tháng, người vay chính (VND)"
+
+#: lwf/models.py:2158
+msgid "Monthly living cost, each other applicant (VND)"
+msgstr "Chi phí sinh hoạt tháng, mỗi người vay khác (VND)"
+
+#: lwf/models.py:2160
+msgid "Minimum salary income for the SAL segment (VND)"
+msgstr "Lương tối thiểu cho phân khúc SAL (VND)"
+
+#: lwf/models.py:2162
+msgid "Minimum salary share of total income for SAL"
+msgstr "Tỷ lệ lương tối thiểu trên tổng thu nhập cho SAL"
+
+#: lwf/models.py:2163
+msgid "Score points per CRR band"
+msgstr "Số điểm mỗi band CRR"
+
+#: lwf/models.py:2164
+msgid "Highest CRR band"
+msgstr "Band CRR cao nhất"
+
+#: lwf/models.py:2167 lwf/models.py:2168 lwf/models.py:2171 lws/settings.py:302
+msgid "Credit settings"
+msgstr "Tham số tín dụng"
+
+#: lwf/models.py:2188
+msgid "Product code"
+msgstr "Mã sản phẩm"
+
+#: lwf/models.py:2189
+msgid "Empty: the default for products without their own policy."
+msgstr ""
+"Để trống: chính sách mặc định cho các sản phẩm chưa có chính sách riêng."
+
+#: lwf/models.py:2190
+msgid "Maximum DSR (%)"
+msgstr "DSR tối đa (%)"
+
+#: lwf/models.py:2191
+msgid "Maximum loan to value (%)"
+msgstr "Tỷ lệ cho vay trên giá trị tối đa (%)"
+
+#: lwf/models.py:2193
+msgid "Maximum tenor (months)"
+msgstr "Kỳ hạn tối đa (tháng)"
+
+#: lwf/models.py:2194
+msgid "Maximum age at maturity (years)"
+msgstr "Tuổi tối đa khi đáo hạn (năm)"
+
+#: lwf/models.py:2195
+msgid "Minimum monthly income (VND)"
+msgstr "Thu nhập tháng tối thiểu (VND)"
+
+#: lwf/models.py:2196
+msgid "Minimum net surplus after payments (VND)"
+msgstr "Thu nhập còn lại tối thiểu sau trả nợ (VND)"
+
+#: lwf/models.py:2197
+msgid "Maximum loan amount (VND)"
+msgstr "Số tiền vay tối đa (VND)"
+
+#: lwf/models.py:2200 lws/settings.py:299
+msgid "Credit policies"
+msgstr "Chính sách tín dụng"
+
+#: lwf/models.py:2204
+#, python-format
+msgid "Policy for product %s"
+msgstr "Chính sách sản phẩm %s"
+
+#: lwf/models.py:2204
+msgid "Default policy"
+msgstr "Chính sách mặc định"
+
+#: lwf/models.py:2219
+msgid "Word template (.docx)"
+msgstr "Mẫu Word (.docx)"
+
+#: lwf/models.py:2221
+msgid "Updated"
+msgstr "Cập nhật"
+
+#: lwf/models.py:2224
+msgid "Contract template"
+msgstr "Mẫu hợp đồng"
+
+#: lwf/models.py:2224 lws/settings.py:296
+msgid "Contract templates"
+msgstr "Mẫu hợp đồng"
+
+#: lwf/models.py:2238
+msgid "Handed to you"
+msgstr "Được giao cho bạn"
+
+#: lwf/models.py:2238
+msgid "Sent back to you"
+msgstr "Bị trả lại cho bạn"
+
+#: lwf/models.py:2238
+msgid "Rejected or closed"
+msgstr "Bị từ chối hoặc đóng"
+
+#: lwf/models.py:2239
+msgid "Re-assigned to you"
+msgstr "Được giao lại cho bạn"
+
+#: lwf/models.py:2239
+msgid "Due soon"
+msgstr "Sắp đến hạn"
+
+#: lwf/models.py:2240
+msgid "Disbursed by core banking"
+msgstr "Core banking đã giải ngân"
+
+#: lwf/models.py:2246
+msgid "Kind"
+msgstr "Loại"
+
+#: lwf/models.py:2252 lwf/models.py:2399 lwf/models.py:2458 lwf/models.py:2476
+msgid "Time"
+msgstr ""
+
+#: lwf/models.py:2253
+msgid "Read"
+msgstr "Đã đọc"
+
+#: lwf/models.py:2256 lws/settings.py:255
+msgid "Notifications"
+msgstr "Thông báo"
+
+#: lwf/models.py:2267
+#, python-format
+msgid "%(person)s handed %(app)s to you: %(status)s."
+msgstr "%(person)s đã chuyển %(app)s cho bạn: %(status)s."
+
+#: lwf/models.py:2268
+#, python-format
+msgid "%(person)s sent %(app)s back to you: %(status)s."
+msgstr "%(person)s đã trả %(app)s về cho bạn: %(status)s."
+
+#: lwf/models.py:2269
+#, python-format
+msgid "%(app)s was rejected or closed by %(person)s."
+msgstr "%(app)s đã bị %(person)s từ chối hoặc đóng."
+
+#: lwf/models.py:2270
+#, python-format
+msgid "%(person)s re-assigned %(app)s to you."
+msgstr "%(person)s đã giao lại %(app)s cho bạn."
+
+#: lwf/models.py:2271
+#, python-format
+msgid "%(app)s is due within a day."
+msgstr "%(app)s sẽ đến hạn trong vòng một ngày."
+
+#: lwf/models.py:2272
+#, python-format
+msgid "%(app)s is overdue."
+msgstr "%(app)s đã quá hạn."
+
+#: lwf/models.py:2273
+#, python-format
+msgid "Core banking recorded the disbursement of %(app)s."
+msgstr "Core banking đã ghi nhận giải ngân hồ sơ %(app)s."
+
+#: lwf/models.py:2307
+msgid "Read applications"
+msgstr "Đọc hồ sơ vay"
+
+#: lwf/models.py:2308
+msgid "Full personal data (ID numbers, addresses)"
+msgstr "Dữ liệu cá nhân đầy đủ (số giấy tờ, địa chỉ)"
+
+#: lwf/models.py:2309
+msgid "Read reference data"
+msgstr "Đọc dữ liệu tham chiếu"
+
+#: lwf/models.py:2310
+msgid "Core banking: disbursements"
+msgstr "Core banking: giải ngân"
+
+#: lwf/models.py:2311
+msgid "Send credit bureau (CIC) reports"
+msgstr "Gửi báo cáo CIC"
+
+#: lwf/models.py:2312
+msgid "Send eKYC results"
+msgstr "Gửi kết quả eKYC"
+
+#: lwf/models.py:2314
+msgid "System"
+msgstr "Theo hệ thống"
+
+#: lwf/models.py:2316
+msgid "Allowed IP addresses"
+msgstr "Địa chỉ IP được phép"
+
+#: lwf/models.py:2317
+msgid "One per line. Empty: any address."
+msgstr "Mỗi dòng một địa chỉ. Để trống: mọi địa chỉ."
+
+#: lwf/models.py:2318
+msgid "Key prefix"
+msgstr "Tiền tố khóa"
+
+#: lwf/models.py:2322 lwf/models.py:2362
+msgid "Last used"
+msgstr "Lần dùng gần nhất"
+
+#: lwf/models.py:2325 lwf/models.py:2391 lwf/models.py:2418
+msgid "API client"
+msgstr "Hệ thống kết nối API"
+
+#: lwf/models.py:2325 lws/settings.py:324
+msgid "API clients"
+msgstr "Hệ thống kết nối API"
+
+#: lwf/models.py:2357
+msgid "Device"
+msgstr "Thiết bị"
+
+#: lwf/models.py:2361
+msgid "Expires"
+msgstr "Hết hạn"
+
+#: lwf/models.py:2365
+msgid "App sign-in token"
+msgstr "Token đăng nhập app"
+
+#: lwf/models.py:2365 lws/settings.py:329
+msgid "App sign-in tokens"
+msgstr "Token đăng nhập app"
+
+#: lwf/models.py:2394
+msgid "Method"
+msgstr "Phương thức"
+
+#: lwf/models.py:2395
+msgid "Path"
+msgstr "Đường dẫn"
+
+#: lwf/models.py:2396
+msgid "Status code"
+msgstr "Mã trả về"
+
+#: lwf/models.py:2397
+msgid "IP address"
+msgstr ""
+
+#: lwf/models.py:2398
+msgid "Duration (ms)"
+msgstr "Thời gian (ms)"
+
+#: lwf/models.py:2402
+msgid "API call"
+msgstr "Lượt gọi API"
+
+#: lwf/models.py:2402 lws/settings.py:326
+msgid "API calls"
+msgstr "Nhật ký gọi API"
+
+#: lwf/models.py:2413
+msgid "Core banking reference"
+msgstr "Mã tham chiếu core banking"
+
+#: lwf/models.py:2414 lwf/reports.py:183
+msgid "Amount (VND)"
+msgstr "Số tiền (VND)"
+
+#: lwf/models.py:2415
+msgid "Disbursed at"
+msgstr "Thời điểm giải ngân"
+
+#: lwf/models.py:2416
+msgid "Loan account number"
+msgstr "Số tài khoản vay"
+
+#: lwf/models.py:2419 lwf/models.py:2437 lwf/templates/lwf/api_demo.html:341
+msgid "Received"
+msgstr "Thời điểm nhận"
+
+#: lwf/models.py:2422
+msgid "Disbursement"
+msgstr "Giải ngân"
+
+#: lwf/models.py:2422 lws/settings.py:331
+msgid "Disbursements"
+msgstr "Giải ngân"
+
+#: lwf/models.py:2433
+msgid "Report date"
+msgstr "Ngày báo cáo"
+
+#: lwf/models.py:2434 lwf/models.py:2457
+msgid "Source"
+msgstr "Nguồn"
+
+#: lwf/models.py:2435
+msgid "Credit record in last 5Y"
+msgstr "Lịch sử tín dụng 5 năm"
+
+#: lwf/models.py:2436
+msgid "Report"
+msgstr "Báo cáo"
+
+#: lwf/models.py:2440
+msgid "CIC report"
+msgstr "Báo cáo CIC"
+
+#: lwf/models.py:2440
+msgid "CIC reports"
+msgstr "Báo cáo CIC"
+
+#: lwf/models.py:2451
+msgid "Data read"
+msgstr "Dữ liệu đọc được"
+
+#: lwf/models.py:2452
+msgid "Chip verified"
+msgstr "Đã xác thực chip"
+
+#: lwf/models.py:2453
+msgid "Face match score"
+msgstr "Điểm khớp khuôn mặt"
+
+#: lwf/models.py:2455
+msgid "Passed"
+msgstr "Đạt"
+
+#: lwf/models.py:2456
+msgid "Differences"
+msgstr "Điểm khác"
+
+#: lwf/models.py:2461
+msgid "eKYC check"
+msgstr "Kiểm tra eKYC"
+
+#: lwf/models.py:2461
+msgid "eKYC checks"
+msgstr "Kiểm tra eKYC"
+
+#: lwf/models.py:2472 lwf/templates/admin/lwf/ticket/document_reading.html:25
+msgid "Document kind"
+msgstr "Loại tài liệu"
+
+#: lwf/models.py:2473
+msgid "Fields read"
+msgstr "Dữ liệu đọc được"
+
+#: lwf/models.py:2474
+msgid "AI model"
+msgstr "Model AI"
+
+#: lwf/models.py:2475
+msgid "Error"
+msgstr "Lỗi"
+
+#: lwf/models.py:2482
+msgid "Document reading"
+msgstr "Đọc tài liệu"
+
+#: lwf/models.py:2482
+msgid "Document readings"
+msgstr "Đọc tài liệu"
+
+#: lwf/ocr.py:70
+msgid "ID card (CCCD)"
+msgstr "Căn cước công dân (CCCD)"
+
+#: lwf/ocr.py:71
+msgid "Payslip or salary statement"
+msgstr "Phiếu lương hoặc sao kê lương"
+
+#: lwf/ocr.py:72
+msgid "Land / house certificate"
+msgstr "Giấy chứng nhận quyền sử dụng đất / nhà"
+
+#: lwf/ocr.py:101
+msgid "The file is larger than 30 MB."
+msgstr "File lớn hơn 30 MB."
+
+#: lwf/ocr.py:107
+msgid "Only PDF and image files (JPEG, PNG, GIF, WebP) can be read."
+msgstr "Chỉ đọc được file PDF và ảnh (JPEG, PNG, GIF, WebP)."
+
+#: lwf/ocr.py:124
+msgid "AI document reading is turned off (LWF_AI_DOCUMENT_READING)."
+msgstr "Tính năng đọc tài liệu bằng AI đang tắt (LWF_AI_DOCUMENT_READING)."
+
+#: lwf/ocr.py:138
+msgid "The AI could not read this document."
+msgstr "AI không đọc được tài liệu này."
+
+#: lwf/ocr.py:144
+msgid "The AI service could not be reached; try again later."
+msgstr "Không kết nối được dịch vụ AI; hãy thử lại sau."
+
+#: lwf/ocr.py:146
+msgid "The AI service is busy; try again in a minute."
+msgstr "Dịch vụ AI đang bận; hãy thử lại sau một phút."
+
+#: lwf/ocr.py:148
+#, python-format
+msgid "The AI service answered with an error (%s)."
+msgstr "Dịch vụ AI báo lỗi (%s)."
+
+#: lwf/ocr.py:176
+msgid "ID issue date"
+msgstr "Ngày cấp giấy tờ"
+
+#: lwf/ocr.py:177
+msgid "ID issue place"
+msgstr "Nơi cấp giấy tờ"
+
+#: lwf/ocr.py:188
+msgid "Certificate serial number"
+msgstr "Số phát hành GCN"
+
+#: lwf/ocr.py:189
+msgid "Certificate register number"
+msgstr "Số vào sổ cấp GCN"
+
+#: lwf/ocr.py:190
+msgid "Certificate issue date"
+msgstr "Ngày cấp GCN"
+
+#: lwf/ocr.py:191
+msgid "Certificate issued by"
+msgstr "Cơ quan cấp GCN"
+
+#: lwf/ocr.py:192
+msgid "Land use purpose"
+msgstr "Mục đích sử dụng đất"
+
+#: lwf/ocr.py:193
+msgid "Land use term"
+msgstr "Thời hạn sử dụng đất"
+
+#: lwf/ocr.py:194
+msgid "Land use origin"
+msgstr "Nguồn gốc sử dụng đất"
+
+#: lwf/policy.py:48
+#, python-format
+msgid "%s months"
+msgstr "%s tháng"
+
+#: lwf/policy.py:49
+msgid "Loan to value"
+msgstr "Tỷ lệ cho vay trên giá trị"
+
+#: lwf/policy.py:53
+msgid "Age at maturity"
+msgstr "Tuổi khi đáo hạn"
+
+#: lwf/policy.py:54
+#, python-format
+msgid "%s years"
+msgstr "%s tuổi"
+
+#: lwf/policy.py:56
+msgid "DSR"
+msgstr ""
+
+#: lwf/reports.py:80
+msgid "Not given"
+msgstr "Không ghi"
+
+#: lwf/reports.py:96 lwf/reports.py:177 lwf/templates/admin/lwf/reports.html:54
+msgid "Average days"
+msgstr "Số ngày trung bình"
+
+#: lwf/reports.py:99 lwf/reports.py:179 lwf/reports.py:183
+msgid "Number of applications"
+msgstr "Số hồ sơ"
+
+#: lwf/reports.py:123
+msgid "New"
+msgstr "Mới"
+
+#: lwf/reports.py:151
+msgid "Summary"
+msgstr "Tổng hợp"
+
+#: lwf/reports.py:151
+msgid "Measure"
+msgstr "Chỉ tiêu"
+
+#: lwf/reports.py:151
+msgid "Value"
+msgstr "Giá trị"
+
+#: lwf/reports.py:153 lwf/templates/admin/lwf/reports.html:28
+msgid "Applications received"
+msgstr "Hồ sơ tiếp nhận"
+
+#: lwf/reports.py:155 lwf/templates/admin/lwf/reports.html:32
+msgid "Amount completed (VND)"
+msgstr "Số tiền đã giải ngân (VND)"
+
+#: lwf/reports.py:156 lwf/templates/admin/lwf/reports.html:33
+msgid "Average days to complete"
+msgstr "Số ngày trung bình đến khi hoàn tất"
+
+#: lwf/reports.py:171
+msgid "Application list"
+msgstr "Danh sách hồ sơ"
+
+#: lwf/reports.py:177
+msgid "Turnaround"
+msgstr "Thời gian xử lý"
+
+#: lwf/reports.py:177 lwf/templates/admin/lwf/reports.html:54
+msgid "Steps counted"
+msgstr "Số lượt tính"
+
+#: lwf/reports.py:179
+msgid "Rejections"
+msgstr "Từ chối"
+
+#: lwf/reports.py:179
+msgid "Reason"
+msgstr "Lý do"
+
+#: lwf/reports.py:183
+msgid "By month"
+msgstr "Theo tháng"
+
+#: lwf/reports.py:183
+msgid "Month"
+msgstr "Tháng"
+
+#: lwf/services.py:271
+msgid "No active score matrix version: an administrator must activate one."
+msgstr ""
+"Chưa có bảng điểm đang hiệu lực: quản trị viên cần kích hoạt một phiên bản."
+
+#: lwf/templates/admin/lwf/dashboard.html:11
+#, python-format
+msgid "Hello, %(name)s"
+msgstr "Xin chào, %(name)s"
+
+#: lwf/templates/admin/lwf/dashboard.html:17
+msgid "You receive new applications."
+msgstr "Bạn đang nhận hồ sơ mới."
+
+#: lwf/templates/admin/lwf/dashboard.html:17
+msgid "You do not receive new applications."
+msgstr "Bạn đang tạm dừng nhận hồ sơ mới."
+
+#: lwf/templates/admin/lwf/dashboard.html:19
+msgid "Pause"
+msgstr "Tạm dừng"
+
+#: lwf/templates/admin/lwf/dashboard.html:19
+msgid "Resume"
+msgstr "Nhận lại"
+
+#: lwf/templates/admin/lwf/dashboard.html:23
+msgid "All loan applications"
+msgstr "Tất cả hồ sơ vay"
+
+#: lwf/templates/admin/lwf/dashboard.html:30
+#, python-format
+msgid "New notifications (%(count)s)"
+msgstr "Thông báo mới (%(count)s)"
+
+#: lwf/templates/admin/lwf/dashboard.html:31
+msgid "All notifications"
+msgstr "Tất cả thông báo"
+
+#: lwf/templates/admin/lwf/dashboard.html:56
+msgid "My work queue"
+msgstr "Việc của tôi"
+
+#: lwf/templates/admin/lwf/dashboard.html:64
+#: lwf/templates/lwf/api_demo.html:356
+msgid "Amount"
+msgstr "Số tiền"
+
+#: lwf/templates/admin/lwf/dashboard.html:77
+msgid "Nothing waiting for you."
+msgstr "Không có hồ sơ nào chờ bạn."
+
+#: lwf/templates/admin/lwf/dashboard.html:85
+msgid "Open applications by status"
+msgstr "Hồ sơ đang mở theo trạng thái"
+
+#: lwf/templates/admin/lwf/dashboard.html:93
+msgid "No open applications."
+msgstr "Không có hồ sơ đang mở."
+
+#: lwf/templates/admin/lwf/dashboard.html:101
+msgid "New and completed applications per week"
+msgstr "Hồ sơ mới và hoàn tất theo tuần"
+
+#: lwf/templates/admin/lwf/dashboard.html:109
+msgid "Team workload"
+msgstr "Khối lượng việc của nhóm"
+
+#: lwf/templates/admin/lwf/dashboard.html:113
+msgid "Team"
+msgstr "Nhóm"
+
+#: lwf/templates/admin/lwf/dashboard.html:114
+msgid "Open applications"
+msgstr "Hồ sơ đang mở"
+
+#: lwf/templates/admin/lwf/dashboard.html:114
+msgid "Receiving new work"
+msgstr "Đang nhận việc mới"
+
+#: lwf/templates/admin/lwf/dashboard.html:122
+msgid "Yes"
+msgstr ""
+
+#: lwf/templates/admin/lwf/dashboard.html:122
+msgid "No"
+msgstr ""
+
+#: lwf/templates/admin/lwf/reports.html:12
+#, python-format
+msgid ""
+"Applications created from %(since)s to %(now)s, among those you may see."
+msgstr "Hồ sơ tạo từ %(since)s đến %(now)s, trong phạm vi bạn được xem."
+
+#: lwf/templates/admin/lwf/reports.html:17
+#: lwf/templates/admin/lwf/reports.html:19
+#, python-format
+msgid "%(days)s days"
+msgstr "%(days)s ngày"
+
+#: lwf/templates/admin/lwf/reports.html:22
+msgid "Export to Excel"
+msgstr "Xuất Excel"
+
+#: lwf/templates/admin/lwf/reports.html:39
+msgid "Applications per month by product"
+msgstr "Số hồ sơ theo tháng và sản phẩm"
+
+#: lwf/templates/admin/lwf/reports.html:40
+#: lwf/templates/admin/lwf/reports.html:44
+#: lwf/templates/admin/lwf/reports.html:59
+msgid "No data"
+msgstr "Không có dữ liệu"
+
+#: lwf/templates/admin/lwf/reports.html:43
+msgid "Average days at each step"
+msgstr "Số ngày trung bình ở mỗi bước"
+
+#: lwf/templates/admin/lwf/reports.html:47
+msgid "Rejection reasons"
+msgstr "Lý do từ chối"
+
+#: lwf/templates/admin/lwf/reports.html:48
+msgid "No rejected applications in this period."
+msgstr "Không có hồ sơ bị từ chối trong kỳ."
+
+#: lwf/templates/admin/lwf/reports.html:51
+msgid "Turnaround by step"
+msgstr "Thời gian xử lý theo bước"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:11
+msgid "Current status"
+msgstr "Trạng thái hiện tại"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:29
+msgid "Complete the application before sending it on"
+msgstr "Hoàn thiện hồ sơ trước khi gửi đi"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:29
+msgid "The application is complete"
+msgstr "Hồ sơ đã đầy đủ"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:46
+msgid "Next status"
+msgstr "Trạng thái tiếp theo"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:49
+msgid "Move on"
+msgstr "Chuyển tiếp"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:49
+msgid "Send back"
+msgstr "Trả lại"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:49
+msgid "End"
+msgstr "Kết thúc"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:58
+msgid "Hand over to"
+msgstr "Chuyển cho"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:61
+#: lwf/templates/admin/lwf/ticket/change_status.html:128
+msgid "Choose a person"
+msgstr "Chọn người nhận"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:64
+msgid "suggested"
+msgstr "gợi ý"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:67
+msgid "Nobody available: ask the team admin"
+msgstr "Không có ai: liên hệ trưởng nhóm"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:73
+msgid "Rejection reason"
+msgstr "Lý do từ chối"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:76
+msgid "Choose a reason"
+msgstr "Chọn lý do"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:83
+msgid "QC item"
+msgstr "Mục QC"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:86
+msgid "None"
+msgstr ""
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:93
+msgid "Reason (the receiver sees it in the history)"
+msgstr "Lý do (người nhận sẽ thấy trong lịch sử)"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:111
+msgid ""
+"There is no step you can take on this application at its current status."
+msgstr "Bạn không có bước nào để thực hiện ở trạng thái hiện tại của hồ sơ."
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:118
+msgid "Re-assign (team admin)"
+msgstr "Giao lại (trưởng nhóm)"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:119
+msgid ""
+"Give the application to another member of the team; the status does not "
+"change."
+msgstr "Giao hồ sơ cho thành viên khác trong nhóm; trạng thái không đổi."
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:125
+msgid "New handler"
+msgstr "Người xử lý mới"
+
+#: lwf/templates/admin/lwf/ticket/change_status.html:141
+msgid "Re-assign"
+msgstr "Giao lại"
+
+#: lwf/templates/admin/lwf/ticket/confirm_create.html:7
+msgid "Create a new draft loan application?"
+msgstr "Tạo hồ sơ vay nháp mới?"
+
+#: lwf/templates/admin/lwf/ticket/confirm_create.html:10
+msgid ""
+"It is created with you as the submitter, an empty loan request and an empty "
+"collateral. You can then add applicants, income and documents."
+msgstr ""
+"Hồ sơ được tạo với bạn là người tạo, kèm một đề nghị vay và một tài sản đảm "
+"bảo trống. Sau đó bạn nhập người vay, thu nhập và tài liệu."
+
+#: lwf/templates/admin/lwf/ticket/confirm_create.html:20
+msgid "Create application"
+msgstr "Tạo hồ sơ"
+
+#: lwf/templates/admin/lwf/ticket/credit_scoring.html:18
+msgid "Band"
+msgstr "Band"
+
+#: lwf/templates/admin/lwf/ticket/credit_scoring.html:32
+msgid "Credit bureau and account inputs"
+msgstr "Thông tin CIC và tài khoản"
+
+#: lwf/templates/admin/lwf/ticket/credit_scoring.html:34
+msgid "The other inputs come from the applicants, loan and collateral."
+msgstr "Các thông tin còn lại lấy từ người vay, khoản vay và tài sản đảm bảo."
+
+#: lwf/templates/admin/lwf/ticket/credit_scoring.html:35
+msgid "Only the CED officer can score at this status."
+msgstr "Chỉ cán bộ CED được chấm điểm ở trạng thái này."
+
+#: lwf/templates/admin/lwf/ticket/credit_scoring.html:37
+msgid "effective from"
+msgstr "hiệu lực từ"
+
+#: lwf/templates/admin/lwf/ticket/credit_scoring.html:50
+msgid "Calculate score"
+msgstr "Tính điểm"
+
+#: lwf/templates/admin/lwf/ticket/credit_scoring.html:57
+msgid "Points by criterion"
+msgstr "Điểm theo tiêu chí"
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:16
+msgid ""
+"AI document reading is turned off. It sends the document to the Anthropic "
+"API; an administrator turns it on (LWF_AI_DOCUMENT_READING) once the bank "
+"has approved it."
+msgstr ""
+"Tính năng đọc tài liệu bằng AI đang tắt. Tính năng này gửi tài liệu tới "
+"Anthropic API; quản trị viên bật lên (LWF_AI_DOCUMENT_READING) khi ngân hàng "
+"đã phê duyệt."
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:31
+msgid ""
+"Reading takes a few seconds. Nothing in the application changes until you "
+"apply the result."
+msgstr ""
+"Việc đọc mất vài giây. Hồ sơ không thay đổi cho đến khi bạn áp dụng kết quả."
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:36
+msgid "Last attempt"
+msgstr "Lần thử gần nhất"
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:42
+msgid "What the AI read"
+msgstr "Kết quả AI đọc được"
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:43
+msgid "applied"
+msgstr "đã áp dụng"
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:48
+msgid "In the application"
+msgstr "Trong hồ sơ"
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:49
+msgid "Read from the document"
+msgstr "Đọc từ tài liệu"
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:57
+msgid "Will be filled"
+msgstr "Sẽ điền"
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:58
+msgid "Differs: check"
+msgstr "Khác: cần kiểm tra"
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:59
+msgid "Same"
+msgstr "Giống"
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:63
+msgid "Nothing usable was read."
+msgstr "Không đọc được thông tin dùng được."
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:73
+msgid "Fill the empty fields"
+msgstr "Điền các ô còn trống"
+
+#: lwf/templates/admin/lwf/ticket/document_reading.html:74
+msgid ""
+"Fields that already have a different value are not changed: correct them "
+"yourself if the document is right."
+msgstr ""
+"Các ô đã có giá trị khác sẽ không bị thay: nếu tài liệu đúng, hãy tự sửa."
+
+#: lwf/templates/lwf/api_demo.html:6 lwf/templates/lwf/api_demo.html:109
+#: lws/settings.py:336
+msgid "API demo: customer loans"
+msgstr "Demo API: tra cứu khoản vay"
+
+#: lwf/templates/lwf/api_demo.html:110
+msgid ""
+"Plays a partner system or the staff mobile app looking up a customer's loans "
+"through the API."
+msgstr ""
+"Đóng vai hệ thống đối tác hoặc app di động của nhân viên, tra cứu khoản vay "
+"của khách hàng qua API."
+
+#: lwf/templates/lwf/api_demo.html:114 lws/settings.py:334
+msgid "API documentation"
+msgstr "Tài liệu API"
+
+#: lwf/templates/lwf/api_demo.html:115
+msgid "Back to the application"
+msgstr "Quay lại ứng dụng"
+
+#: lwf/templates/lwf/api_demo.html:123
+msgid "Connect"
+msgstr "Kết nối"
+
+#: lwf/templates/lwf/api_demo.html:126
+msgid "Partner system (API key)"
+msgstr "Hệ thống đối tác (khóa API)"
+
+#: lwf/templates/lwf/api_demo.html:127
+msgid "Staff mobile app (sign in)"
+msgstr "App di động nhân viên (đăng nhập)"
+
+#: lwf/templates/lwf/api_demo.html:130
+msgid "API key"
+msgstr "Khóa API"
+
+#: lwf/templates/lwf/api_demo.html:133
+msgid ""
+"Make a key in <strong>API and integrations → API clients</strong> with the "
+"\"Read applications\" scope. Without \"Full personal data\", ID numbers come "
+"back masked and account numbers show only their last digits."
+msgstr ""
+"Tạo khóa tại <strong>API và tích hợp → Hệ thống kết nối API</strong> với "
+"phạm vi quyền \"Đọc hồ sơ vay\". Nếu không có quyền \"Dữ liệu cá nhân đầy "
+"đủ\", số giấy tờ trả về sẽ bị che và số tài khoản chỉ hiện vài số cuối."
+
+#: lwf/templates/lwf/api_demo.html:137
+msgid "Username"
+msgstr "Tên đăng nhập"
+
+#: lwf/templates/lwf/api_demo.html:138
+msgid "Password"
+msgstr "Mật khẩu"
+
+#: lwf/templates/lwf/api_demo.html:139
+msgid "Sign in"
+msgstr "Đăng nhập"
+
+#: lwf/templates/lwf/api_demo.html:140
+msgid "Sign out"
+msgstr "Đăng xuất"
+
+#: lwf/templates/lwf/api_demo.html:142
+msgid ""
+"The app gets a 12-hour token and sees only the applications this person may "
+"see in the application."
+msgstr ""
+"App nhận token hiệu lực 12 giờ và chỉ thấy những hồ sơ mà người này được xem "
+"trong ứng dụng."
+
+#: lwf/templates/lwf/api_demo.html:149
+msgid "Look up a customer"
+msgstr "Tra cứu khách hàng"
+
+#: lwf/templates/lwf/api_demo.html:152
+msgid "ID number (CCCD / CMND / passport)"
+msgstr "Số giấy tờ (CCCD / CMND / hộ chiếu)"
+
+#: lwf/templates/lwf/api_demo.html:155
+msgid "Look up loans"
+msgstr "Tra cứu khoản vay"
+
+#: lwf/templates/lwf/api_demo.html:159
+msgid "Demo customers:"
+msgstr "Khách hàng demo:"
+
+#: lwf/templates/lwf/api_demo.html:166
+msgid "No demo data yet: run manage.py seed_demo."
+msgstr "Chưa có dữ liệu demo: chạy manage.py seed_demo."
+
+#: lwf/templates/lwf/api_demo.html:174
+msgid "Result"
+msgstr "Kết quả"
+
+#: lwf/templates/lwf/api_demo.html:175
+msgid "The customer's loans appear here."
+msgstr "Các khoản vay của khách hàng sẽ hiện ở đây."
+
+#: lwf/templates/lwf/api_demo.html:181
+msgid "What is sent and received"
+msgstr "Dữ liệu gửi và nhận"
+
+#: lwf/templates/lwf/api_demo.html:182
+msgid "Clear"
+msgstr "Xóa"
+
+#: lwf/templates/lwf/api_demo.html:185
+msgid ""
+"Each API call shows here: the request (key hidden) and the JSON answer. "
+"Every call is also recorded under API calls in the admin."
+msgstr ""
+"Mỗi lần gọi API hiện ở đây: yêu cầu gửi đi (đã ẩn khóa) và JSON trả về. Mọi "
+"lần gọi cũng được ghi lại trong Nhật ký gọi API."
+
+#: lwf/templates/lwf/api_demo.html:324 lwf/templates/lwf/api_demo.html:337
+msgid "Approved"
+msgstr "Được duyệt"
+
+#: lwf/templates/lwf/api_demo.html:336
+msgid "Requested"
+msgstr "Đề nghị"
+
+#: lwf/templates/lwf/api_demo.html:339
+msgid "Interest rate + margin"
+msgstr "Lãi suất + biên độ"
+
+#: lwf/templates/lwf/api_demo.html:340
+msgid "Handled by"
+msgstr "Người xử lý"
+
+#: lwf/templates/lwf/api_demo.html:355
+msgid "Reference"
+msgstr "Mã tham chiếu"
+
+#: lwf/templates/lwf/api_demo.html:356
+msgid "Loan account"
+msgstr "Tài khoản vay"
+
+#: lwf/workflow.py:170
+msgid "This step is not available to you at the current status."
+msgstr "Bạn không thực hiện được bước này ở trạng thái hiện tại."
+
+#: lwf/workflow.py:174
+#, python-format
+msgid "Complete the application first: %s."
+msgstr "Hãy hoàn thiện hồ sơ trước: %s."
+
+#: lwf/workflow.py:177
+msgid "Choose who receives the application from the list."
+msgstr "Hãy chọn người nhận hồ sơ trong danh sách."
+
+#: lwf/workflow.py:180
+msgid "Choose a rejection reason."
+msgstr "Hãy chọn lý do từ chối."
+
+#: lwf/workflow.py:183
+msgid "QC"
+msgstr "QC"
+
+#: lwf/workflow.py:200 lwf/workflow.py:230
+msgid "Owner"
+msgstr "Người xử lý"
+
+#: lwf/workflow.py:221
+msgid "Only the team admin can re-assign this application."
+msgstr "Chỉ trưởng nhóm được giao lại hồ sơ này."
+
+#: lwf/workflow.py:223
+msgid "Choose a member of the team handling this step."
+msgstr "Hãy chọn thành viên của nhóm đang xử lý bước này."
+
+#: lwf/workflow.py:230
+msgid "Re-assigned"
+msgstr "Đã giao lại"
+
+#: lws/settings.py:236
+msgid "Loan application processing"
+msgstr "Xử lý hồ sơ vay"
+
+#: lws/settings.py:248
+msgid "Applications"
+msgstr "Nghiệp vụ"
+
+#: lws/settings.py:263
+msgid "Reference data"
+msgstr "Dữ liệu tham chiếu"
+
+#: lws/settings.py:284
+msgid "Workflow and scoring"
+msgstr "Quy trình và chấm điểm"
+
+#: lws/settings.py:311 lws/settings.py:314
+msgid "Users"
+msgstr "Người dùng"
+
+#: lws/settings.py:316
+msgid "Groups (roles)"
+msgstr "Nhóm (vai trò)"
+
+#: lws/settings.py:321
+msgid "API and integrations"
+msgstr "API và tích hợp"

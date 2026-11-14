@@ -1,0 +1,66 @@
+{% extends "admin/base_site.html" %}
+{% load i18n humanize unfold %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block title %}{% translate "Reports" %} | {{ site_title|default:"Loan Workflow" }}{% endblock %}
+
+{% block content %}
+<div class="flex flex-col gap-6">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+            <h1 class="text-xl font-semibold text-font-important-light dark:text-font-important-dark">{% translate "Reports" %}</h1>
+            <p class="text-sm">{% blocktranslate with since=data.since|date:"d/m/Y" now=data.now|date:"d/m/Y" %}Applications created from {{ since }} to {{ now }}, among those you may see.{% endblocktranslate %}</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+            {% for period in periods %}
+                {% if period.active %}
+                    {% component "unfold/components/button.html" with href=period.url size="sm" %}{% blocktranslate with days=period.days %}{{ days }} days{% endblocktranslate %}{% endcomponent %}
+                {% else %}
+                    {% component "unfold/components/button.html" with href=period.url size="sm" variant="default" %}{% blocktranslate with days=period.days %}{{ days }} days{% endblocktranslate %}{% endcomponent %}
+                {% endif %}
+            {% endfor %}
+            {% component "unfold/components/button.html" with href=export_url variant="default" size="sm" icon="download" %}{% translate "Export to Excel" %}{% endcomponent %}
+        </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:1rem">
+        {% with k=data.kpis %}
+        <div class="border border-base-200 rounded-default p-4 shadow-xs dark:border-base-800"><p class="text-sm">{% translate "Applications received" %}</p><p class="text-3xl font-semibold text-font-important-light dark:text-font-important-dark">{{ k.received }}</p></div>
+        <div class="border border-base-200 rounded-default p-4 shadow-xs dark:border-base-800"><p class="text-sm">{% translate "In progress" %}</p><p class="text-3xl font-semibold text-font-important-light dark:text-font-important-dark">{{ k.in_progress }}</p></div>
+        <div class="border border-base-200 rounded-default p-4 shadow-xs dark:border-base-800"><p class="text-sm">{% translate "Completed" %}</p><p class="text-3xl font-semibold text-font-important-light dark:text-font-important-dark">{{ k.completed }}</p></div>
+        <div class="border border-base-200 rounded-default p-4 shadow-xs dark:border-base-800"><p class="text-sm">{% translate "Rejected" %}</p><p class="text-3xl font-semibold text-font-important-light dark:text-font-important-dark">{{ k.rejected }}</p></div>
+        <div class="border border-base-200 rounded-default p-4 shadow-xs dark:border-base-800"><p class="text-sm">{% translate "Amount completed (VND)" %}</p><p class="text-xl font-semibold text-font-important-light dark:text-font-important-dark">{{ k.amount_completed|intcomma }}</p></div>
+        <div class="border border-base-200 rounded-default p-4 shadow-xs dark:border-base-800"><p class="text-sm">{% translate "Average days to complete" %}</p><p class="text-3xl font-semibold text-font-important-light dark:text-font-important-dark">{{ k.days_to_complete|default:"-" }}</p></div>
+        {% endwith %}
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1.5rem">
+        <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+            <h2 class="border-b border-base-200 px-4 py-3 font-semibold dark:border-base-800">{% translate "Applications per month by product" %}</h2>
+            <div class="p-4">{% if data.monthly %}<div style="height:280px">{% component "unfold/components/chart/bar.html" with data=charts.volume options=charts.volume_options %}{% endcomponent %}</div>{% else %}<p class="text-sm">{% translate "No data" %}</p>{% endif %}</div>
+        </div>
+        <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+            <h2 class="border-b border-base-200 px-4 py-3 font-semibold dark:border-base-800">{% translate "Average days at each step" %}</h2>
+            <div class="p-4">{% if data.turnaround %}<div style="height:280px">{% component "unfold/components/chart/bar.html" with data=charts.turnaround options=charts.turnaround_options %}{% endcomponent %}</div>{% else %}<p class="text-sm">{% translate "No data" %}</p>{% endif %}</div>
+        </div>
+        <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+            <h2 class="border-b border-base-200 px-4 py-3 font-semibold dark:border-base-800">{% translate "Rejection reasons" %}</h2>
+            <div class="p-4">{% if data.rejections %}<div style="height:280px">{% component "unfold/components/chart/bar.html" with data=charts.rejections options=charts.bar_options %}{% endcomponent %}</div>{% else %}<p class="text-sm">{% translate "No rejected applications in this period." %}</p>{% endif %}</div>
+        </div>
+        <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+            <h2 class="border-b border-base-200 px-4 py-3 font-semibold dark:border-base-800">{% translate "Turnaround by step" %}</h2>
+            <div style="overflow-x:auto">
+            <table class="w-full text-sm">
+                <thead><tr class="text-left"><th class="px-4 py-2">{% translate "Status" %}</th><th class="px-4 py-2 text-right">{% translate "Average days" %}</th><th class="px-4 py-2 text-right">{% translate "Steps counted" %}</th></tr></thead>
+                <tbody>
+                {% for row in data.turnaround %}
+                    <tr class="border-t border-base-200 dark:border-base-800"><td class="px-4 py-2">{{ row.status }}</td><td class="px-4 py-2 text-right">{{ row.days }}</td><td class="px-4 py-2 text-right">{{ row.count }}</td></tr>
+                {% empty %}
+                    <tr><td class="px-4 py-2" colspan="3">{% translate "No data" %}</td></tr>
+                {% endfor %}
+                </tbody>
+            </table></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

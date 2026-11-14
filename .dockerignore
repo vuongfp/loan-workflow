@@ -1,0 +1,15 @@
+.git
+.env
+**/__pycache__
+**/*.pyc
+**/.DS_Store
+media
+staticfiles
+*.sql
+*.dump
+1810.txt
+1910.txt
+django.txt
+lwf.txt
+.venv
+dumps

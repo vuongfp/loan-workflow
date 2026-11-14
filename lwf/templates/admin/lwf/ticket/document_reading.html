@@ -1,0 +1,80 @@
+{% extends "admin/base_site.html" %}
+{% load i18n unfold %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div class="flex flex-col gap-6" style="max-width:64rem">
+    <div class="flex flex-col gap-1">
+        <a href="{{ change_url }}" class="text-sm text-primary-600 underline">&larr; {{ original.title }}</a>
+        <p class="text-sm">{% translate "Document" %}: <strong>{{ document.get_related_data_display|default:"-" }}</strong>
+            &middot; <a class="text-primary-600 underline" href="{{ document.file.url }}" target="_blank">{{ document.filename|default:document.file.name }}</a></p>
+    </div>
+
+    {% if not enabled %}
+        <div class="lwf-note">
+            {% translate "AI document reading is turned off. It sends the document to the Anthropic API; an administrator turns it on (LWF_AI_DOCUMENT_READING) once the bank has approved it." %}
+        </div>
+    {% endif %}
+
+    {% if can_edit and enabled %}
+        <form method="post" class="flex flex-wrap items-end gap-3 border border-base-200 rounded-default p-4 shadow-xs dark:border-base-800">
+            {% csrf_token %}
+            <input type="hidden" name="do" value="read">
+            <label class="flex flex-col gap-1 text-sm font-medium">
+                {% translate "Document kind" %}
+                <select name="kind" class="border border-base-200 bg-white rounded-default px-3 py-2 dark:bg-base-900 dark:border-base-700">
+                    {% for key, label in kinds %}<option value="{{ key }}" {% if key == default_kind %}selected{% endif %}>{{ label }}</option>{% endfor %}
+                </select>
+            </label>
+            {% component "unfold/components/button.html" with submit=1 icon="document_scanner" %}{% translate "Read with AI" %}{% endcomponent %}
+            <p class="text-xs" style="flex-basis:100%">{% translate "Reading takes a few seconds. Nothing in the application changes until you apply the result." %}</p>
+        </form>
+    {% endif %}
+
+    {% if last_error and not extraction %}
+        <p class="text-sm text-red-600">{% translate "Last attempt" %}: {{ last_error.error }}</p>
+    {% endif %}
+
+    {% if extraction %}
+        <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-base-200 px-4 py-3 dark:border-base-800">
+                <h2 class="font-semibold">{% translate "What the AI read" %}</h2>
+                <span class="text-xs">{{ extraction.created|date:"d/m/Y H:i" }} &middot; {{ extraction.model_name }}{% if extraction.applied_at %} &middot; {% translate "applied" %} {{ extraction.applied_at|date:"d/m/Y H:i" }}{% endif %}</span>
+            </div>
+            <div style="overflow-x:auto">
+            <table class="w-full text-sm">
+                <thead><tr class="text-left">
+                    <th class="px-4 py-2">{% translate "Field" %}</th><th class="px-4 py-2">{% translate "In the application" %}</th>
+                    <th class="px-4 py-2">{% translate "Read from the document" %}</th><th class="px-4 py-2"></th>
+                </tr></thead>
+                <tbody>
+                {% for label, current, value, state in rows %}
+                    <tr class="border-t border-base-200 dark:border-base-800">
+                        <td class="px-4 py-2">{{ label }}</td><td class="px-4 py-2">{{ current|default:"-" }}</td>
+                        <td class="px-4 py-2 font-medium">{{ value|default:"-" }}</td>
+                        <td class="px-4 py-2">
+                            {% if state == "new" %}<span class="lwf-chip lwf-chip-primary">{% translate "Will be filled" %}</span>
+                            {% elif state == "differs" %}<span class="lwf-chip lwf-chip-warning">{% translate "Differs: check" %}</span>
+                            {% else %}<span class="lwf-chip lwf-chip-success">{% translate "Same" %}</span>{% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td class="px-4 py-2" colspan="4">{% translate "Nothing usable was read." %}</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            {% if can_edit and not extraction.applied_at and rows %}
+                <form method="post" class="flex flex-wrap items-center gap-3 border-t border-base-200 p-4 dark:border-base-800">
+                    {% csrf_token %}
+                    <input type="hidden" name="do" value="apply">
+                    <input type="hidden" name="extraction" value="{{ extraction.pk }}">
+                    {% component "unfold/components/button.html" with submit=1 icon="done" %}{% translate "Fill the empty fields" %}{% endcomponent %}
+                    <span class="text-xs">{% translate "Fields that already have a different value are not changed: correct them yourself if the document is right." %}</span>
+                </form>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

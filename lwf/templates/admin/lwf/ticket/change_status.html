@@ -1,0 +1,148 @@
+{% extends "admin/base_site.html" %}
+{% load i18n unfold %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div class="flex flex-col gap-6" style="max-width:64rem">
+    <div class="flex flex-col gap-1">
+        <a href="{{ change_url }}" class="text-sm text-primary-600 underline">&larr; {{ original.title }}</a>
+        <p class="text-sm">
+            {% translate "Current status" %}: <strong>{{ original.get_status_display }}</strong>
+            &middot; {% translate "With" %}: <strong>{{ original.assigned_to.get_full_name|default:original.assigned_to|default:"-" }}</strong>
+        </p>
+    </div>
+
+    <dl class="border border-base-200 rounded-default shadow-xs dark:border-base-800"
+        style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
+        {% for label, value in summary %}
+            <div class="flex flex-col gap-1 px-4 py-3 border-b border-base-200 dark:border-base-800">
+                <dt class="lwf-label">{{ label }}</dt>
+                <dd class="font-medium text-font-important-light dark:text-font-important-dark">{{ value }}</dd>
+            </div>
+        {% endfor %}
+    </dl>
+
+    {% if checks %}
+        <div class="border border-base-200 rounded-default shadow-xs px-4 py-3 dark:border-base-800">
+            <p class="font-semibold text-font-important-light dark:text-font-important-dark">
+                {% if incomplete %}{% translate "Complete the application before sending it on" %}{% else %}{% translate "The application is complete" %}{% endif %}
+            </p>
+            <ul class="lwf-checklist" style="margin-top:0.5rem">
+                {% for check in checks %}
+                    <li>{% if check.ok %}<span class="lwf-check-ok">&#10003;</span>{% else %}<span class="lwf-check-missing">&#10007;</span>{% endif %}<span>{{ check.label }}</span></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% for step in steps %}
+        {% with label=step.label %}
+        <details class="lwf-step lwf-step-{{ step.kind }} border border-base-200 rounded-default shadow-xs dark:border-base-800"
+                 {% if step.kind == "forward" %}open{% endif %}>
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-3">
+                <span>
+                    <span class="block font-semibold text-font-important-light dark:text-font-important-dark">{{ label }}</span>
+                    <span class="block text-sm">{% translate "Next status" %}: {{ step.action.get_next_status_display|default:step.action.next_status }}</span>
+                </span>
+                <span class="lwf-chip {% if step.kind == 'forward' %}lwf-chip-primary{% elif step.kind == 'back' %}lwf-chip-warning{% else %}lwf-chip-danger{% endif %}">
+                    {% if step.kind == "forward" %}{% translate "Move on" %}{% elif step.kind == "back" %}{% translate "Send back" %}{% else %}{% translate "End" %}{% endif %}
+                </span>
+            </summary>
+            <form method="post" class="flex flex-col gap-4 border-t border-base-200 p-4 dark:border-base-800">
+                {% csrf_token %}
+                <input type="hidden" name="kind" value="action">
+                <input type="hidden" name="action" value="{{ step.action.pk }}">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1rem">
+                    <label class="flex flex-col gap-1 text-sm font-medium">
+                        {% translate "Hand over to" %}
+                        <select name="assignee" required
+                                class="border border-base-200 bg-white rounded-default px-3 py-2 dark:bg-base-900 dark:border-base-700">
+                            {% if not step.choice.suggested %}<option value="">{% translate "Choose a person" %}</option>{% endif %}
+                            {% for person in step.choice.users %}
+                                <option value="{{ person.pk }}" {% if person == step.choice.suggested %}selected{% endif %}>
+                                    {{ person.get_full_name|default:person.username }}{% if person == step.choice.suggested and step.choice.users|length > 1 %} ({% translate "suggested" %}){% endif %}
+                                </option>
+                            {% empty %}
+                                <option value="">{% translate "Nobody available: ask the team admin" %}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    {% if step.reject %}
+                        <label class="flex flex-col gap-1 text-sm font-medium">
+                            {% translate "Rejection reason" %}
+                            <select name="reject_code" required
+                                    class="border border-base-200 bg-white rounded-default px-3 py-2 dark:bg-base-900 dark:border-base-700">
+                                <option value="">{% translate "Choose a reason" %}</option>
+                                {% for code, reason in reject_codes %}<option value="{{ code }}">{{ reason }}</option>{% endfor %}
+                            </select>
+                        </label>
+                    {% endif %}
+                    {% if step.qc %}
+                        <label class="flex flex-col gap-1 text-sm font-medium">
+                            {% translate "QC item" %}
+                            <select name="qc_code"
+                                    class="border border-base-200 bg-white rounded-default px-3 py-2 dark:bg-base-900 dark:border-base-700">
+                                <option value="">{% translate "None" %}</option>
+                                {% for code, item in qc_codes %}<option value="{{ code }}">{{ item }}</option>{% endfor %}
+                            </select>
+                        </label>
+                    {% endif %}
+                </div>
+                <label class="flex flex-col gap-1 text-sm font-medium">
+                    {% if step.kind == "forward" %}{% translate "Comment" %}{% else %}{% translate "Reason (the receiver sees it in the history)" %}{% endif %}
+                    <textarea name="comment" rows="3" {% if step.kind != "forward" %}required{% endif %}
+                              class="border border-base-200 bg-white rounded-default px-3 py-2 dark:bg-base-900 dark:border-base-700"></textarea>
+                </label>
+                <div>
+                    {% if step.kind == "forward" %}
+                        {% if incomplete %}{% component "unfold/components/button.html" with submit=1 icon="arrow_forward" attrs=disabled_attrs %}{{ label }}{% endcomponent %}{% else %}{% component "unfold/components/button.html" with submit=1 icon="arrow_forward" %}{{ label }}{% endcomponent %}{% endif %}
+                    {% elif step.kind == "back" %}
+                        {% component "unfold/components/button.html" with submit=1 variant="default" icon="undo" %}{{ label }}{% endcomponent %}
+                    {% else %}
+                        {% component "unfold/components/button.html" with submit=1 variant="danger" icon="block" %}{{ label }}{% endcomponent %}
+                    {% endif %}
+                </div>
+            </form>
+        </details>
+        {% endwith %}
+    {% empty %}
+        <p class="border border-base-200 rounded-default p-4 text-sm dark:border-base-800">
+            {% translate "There is no step you can take on this application at its current status." %}
+        </p>
+    {% endfor %}
+
+    {% if reassign_users %}
+        <details class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+            <summary class="cursor-pointer px-4 py-3">
+                <span class="block font-semibold text-font-important-light dark:text-font-important-dark">{% translate "Re-assign (team admin)" %}</span>
+                <span class="block text-sm">{% translate "Give the application to another member of the team; the status does not change." %}</span>
+            </summary>
+            <form method="post" class="flex flex-col gap-4 border-t border-base-200 p-4 dark:border-base-800">
+                {% csrf_token %}
+                <input type="hidden" name="kind" value="reassign">
+                <label class="flex flex-col gap-1 text-sm font-medium">
+                    {% translate "New handler" %}
+                    <select name="assignee" required
+                            class="border border-base-200 bg-white rounded-default px-3 py-2 dark:bg-base-900 dark:border-base-700">
+                        <option value="">{% translate "Choose a person" %}</option>
+                        {% for person in reassign_users %}
+                            <option value="{{ person.pk }}">{{ person.get_full_name|default:person.username }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <label class="flex flex-col gap-1 text-sm font-medium">
+                    {% translate "Comment" %}
+                    <textarea name="comment" rows="2"
+                              class="border border-base-200 bg-white rounded-default px-3 py-2 dark:bg-base-900 dark:border-base-700"></textarea>
+                </label>
+                <div>
+                    {% component "unfold/components/button.html" with submit=1 variant="default" icon="swap_horiz" %}
+                        {% translate "Re-assign" %}
+                    {% endcomponent %}
+                </div>
+            </form>
+        </details>
+    {% endif %}
+</div>
+{% endblock %}

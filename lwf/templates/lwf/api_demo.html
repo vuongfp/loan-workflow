@@ -1,0 +1,369 @@
+{% load i18n static %}{% get_current_language as LANGUAGE_CODE %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% translate "API demo: customer loans" %}</title>
+<style>
+:root {
+    --bg: #f6f7fb; --card: #ffffff; --line: #e4e6ef; --text: #1f2330; --muted: #646b7e; --strong: #0f1220;
+    --accent: #7e22ce; --accent-soft: #f3e8ff; --accent-text: #ffffff;
+    --ok: #15803d; --ok-soft: #dcfce7; --warn: #b45309; --warn-soft: #fef3c7;
+    --bad: #b91c1c; --bad-soft: #fee2e2; --info: #1d4ed8; --info-soft: #dbeafe;
+    --code-bg: #0f172a; --code-text: #e2e8f0; --code-key: #93c5fd; --code-str: #86efac; --code-num: #fcd34d;
+    --radius: 10px; --shadow: 0 1px 2px rgb(16 24 40 / .06);
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0b0d14; --card: #141824; --line: #262b3b; --text: #d6d9e4; --muted: #8d93a8; --strong: #f5f6fa;
+        --accent: #a855f7; --accent-soft: rgb(88 28 135 / .35);
+        --ok: #86efac; --ok-soft: rgb(20 83 45 / .4); --warn: #fcd34d; --warn-soft: rgb(120 53 15 / .4);
+        --bad: #fca5a5; --bad-soft: rgb(127 29 29 / .4); --info: #93c5fd; --info-soft: rgb(30 58 138 / .4);
+        --code-bg: #05070d;
+    }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--accent); }
+header { background: var(--card); border-bottom: 1px solid var(--line); }
+.bar { max-width: 1280px; margin: 0 auto; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.brand { display: flex; gap: 12px; align-items: center; }
+.logo { flex: none; width: 36px; height: 36px; border-radius: 9px; background: var(--accent); color: var(--accent-text); display: grid; place-items: center; font-weight: 700; }
+.brand h1 { font-size: 17px; margin: 0; color: var(--strong); }
+.brand p { margin: 0; font-size: 13px; color: var(--muted); }
+.links { display: flex; gap: 16px; font-size: 14px; }
+main { max-width: 1280px; margin: 0 auto; padding: 20px 16px 48px; display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1040px) { main { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; } .console { position: sticky; top: 16px; } #exchanges { max-height: calc(100vh - 110px); overflow-y: auto; } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.card > h2 { margin: 0; padding: 14px 18px; font-size: 15px; color: var(--strong); border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: center; }
+.step { width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 12px; display: grid; place-items: center; font-weight: 700; flex: none; }
+.body { padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+.col { display: flex; flex-direction: column; gap: 20px; }
+.tabs { display: inline-flex; background: var(--bg); border: 1px solid var(--line); border-radius: 9px; padding: 3px; gap: 3px; flex-wrap: wrap; }
+.tabs button { border: 0; background: transparent; color: var(--muted); padding: 7px 12px; border-radius: 7px; font: inherit; font-size: 14px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--card); color: var(--strong); box-shadow: var(--shadow); font-weight: 600; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; color: var(--strong); }
+input { font: inherit; padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--text); width: 100%; }
+input:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+.row > label { flex: 1 1 200px; }
+.btn { font: inherit; font-size: 14px; font-weight: 600; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-text); padding: 9px 16px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:disabled { opacity: .55; cursor: progress; }
+.hint { font-size: 13px; color: var(--muted); margin: 0; }
+.status { font-size: 13px; padding: 8px 10px; border-radius: 8px; margin: 0; }
+.status.ok { background: var(--ok-soft); color: var(--ok); }
+.status.bad { background: var(--bad-soft); color: var(--bad); }
+.samples { display: flex; flex-wrap: wrap; gap: 8px; }
+.sample { border: 1px dashed var(--line); background: var(--bg); color: var(--text); border-radius: 8px; padding: 6px 10px; font: inherit; font-size: 13px; cursor: pointer; text-align: left; }
+.sample:hover { border-color: var(--accent); }
+.sample small { display: block; color: var(--muted); }
+.chip { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.chip.in_progress { background: var(--info-soft); color: var(--info); }
+.chip.completed { background: var(--ok-soft); color: var(--ok); }
+.chip.rejected { background: var(--bad-soft); color: var(--bad); }
+.chip.closed { background: var(--line); color: var(--muted); }
+.chip.masked { background: var(--warn-soft); color: var(--warn); }
+.customer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center; }
+.customer h3 { margin: 0; font-size: 20px; color: var(--strong); }
+.customer p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 10px; }
+.kpi { background: var(--bg); border-radius: 8px; padding: 10px 12px; }
+.kpi span { display: block; font-size: 12px; color: var(--muted); }
+.kpi small { font-size: 12px; font-weight: 500; color: var(--muted); }
+.kpi strong { font-size: 18px; color: var(--strong); font-variant-numeric: tabular-nums; }
+.loan { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.loan-head { display: flex; flex-wrap: wrap; gap: 8px 12px; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--bg); }
+.loan-head strong { color: var(--strong); }
+.loan-head small { color: var(--muted); }
+dl.terms { margin: 0; padding: 12px 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 130px), 1fr)); gap: 10px 16px; }
+dl.terms dt { font-size: 12px; color: var(--muted); }
+dl.terms dd { margin: 0; font-weight: 600; color: var(--strong); font-variant-numeric: tabular-nums; }
+.paid { padding: 0 14px 14px; }
+.meter { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin: 4px 0 8px; }
+.meter i { display: block; height: 100%; background: var(--ok); border-radius: 99px; }
+.paid table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.paid td, .paid th { white-space: nowrap; padding: 5px 8px 5px 0; border-top: 1px solid var(--line); text-align: left; }
+.paid th { color: var(--muted); font-weight: 600; }
+.num { text-align: right !important; font-variant-numeric: tabular-nums; }
+.scroll { overflow-x: auto; }
+.empty { text-align: center; color: var(--muted); padding: 28px 12px; font-size: 14px; }
+.console .body { gap: 14px; }
+.exchange { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.exchange-head { display: flex; gap: 8px; align-items: center; padding: 8px 10px; font: 13px ui-monospace, "Cascadia Code", Consolas, monospace; background: var(--bg); flex-wrap: wrap; }
+.exchange-head .path { flex: 1 1 auto; color: var(--strong); word-break: break-all; }
+.code { margin: 0; background: var(--code-bg); color: var(--code-text); font: 12.5px/1.55 ui-monospace, "Cascadia Code", Consolas, monospace; padding: 10px 12px; overflow: auto; max-height: 340px; white-space: pre; }
+.code .k { color: var(--code-key); } .code .s { color: var(--code-str); } .code .n { color: var(--code-num); }
+.label { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding: 6px 10px 4px; background: var(--card); }
+.pill { font-weight: 700; padding: 1px 7px; border-radius: 6px; }
+.pill.ok { background: var(--ok-soft); color: var(--ok); } .pill.bad { background: var(--bad-soft); color: var(--bad); }
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+    <div class="bar">
+        <div class="brand">
+            <div class="logo" aria-hidden="true">API</div>
+            <div>
+                <h1>{% translate "API demo: customer loans" %}</h1>
+                <p>{% translate "Plays a partner system or the staff mobile app looking up a customer's loans through the API." %}</p>
+            </div>
+        </div>
+        <nav class="links">
+            {% if request.user.is_superuser %}<a href="/api/v1/docs" target="_blank">{% translate "API documentation" %}</a>{% endif %}
+            <a href="{% url 'admin:index' %}">&larr; {% translate "Back to the application" %}</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="col">
+        <section class="card" aria-labelledby="connect-title">
+            <h2 id="connect-title"><span class="step">1</span>{% translate "Connect" %}</h2>
+            <div class="body">
+                <div class="tabs" role="tablist">
+                    <button type="button" role="tab" id="tab-key" aria-selected="true" aria-controls="panel-key">{% translate "Partner system (API key)" %}</button>
+                    <button type="button" role="tab" id="tab-app" aria-selected="false" aria-controls="panel-app">{% translate "Staff mobile app (sign in)" %}</button>
+                </div>
+                <div id="panel-key" role="tabpanel" class="body" style="padding:0">
+                    <label>{% translate "API key" %}
+                        <input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="lwf_key_…">
+                    </label>
+                    <p class="hint">{% blocktranslate %}Make a key in <strong>API and integrations → API clients</strong> with the "Read applications" scope. Without "Full personal data", ID numbers come back masked and account numbers show only their last digits.{% endblocktranslate %}</p>
+                </div>
+                <form id="panel-app" role="tabpanel" class="body hidden" style="padding:0">
+                    <div class="row">
+                        <label>{% translate "Username" %}<input id="username" autocomplete="username" required></label>
+                        <label>{% translate "Password" %}<input id="password" type="password" autocomplete="current-password" required></label>
+                        <button class="btn" id="sign-in" type="submit">{% translate "Sign in" %}</button>
+                        <button class="btn ghost hidden" id="sign-out" type="button">{% translate "Sign out" %}</button>
+                    </div>
+                    <p class="hint">{% translate "The app gets a 12-hour token and sees only the applications this person may see in the application." %}</p>
+                    <p id="sign-in-status" class="status hidden" role="status"></p>
+                </form>
+            </div>
+        </section>
+
+        <section class="card" aria-labelledby="lookup-title">
+            <h2 id="lookup-title"><span class="step">2</span>{% translate "Look up a customer" %}</h2>
+            <form class="body" id="lookup">
+                <div class="row">
+                    <label>{% translate "ID number (CCCD / CMND / passport)" %}
+                        <input id="id-number" inputmode="numeric" autocomplete="off" required minlength="6" maxlength="20" placeholder="079…">
+                    </label>
+                    <button class="btn" id="lookup-btn" type="submit">{% translate "Look up loans" %}</button>
+                </div>
+                {% if show_samples %}
+                    {% if samples %}
+                        <p class="hint">{% translate "Demo customers:" %}</p>
+                        <div class="samples">
+                            {% for sample in samples %}
+                                <button type="button" class="sample" data-id="{{ sample.id_number }}">{{ sample.name }}<small>{{ sample.id_number }} · {{ sample.note }}</small></button>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="hint">{% translate "No demo data yet: run manage.py seed_demo." %}</p>
+                    {% endif %}
+                {% endif %}
+                <p id="lookup-error" class="status bad hidden" role="alert"></p>
+            </form>
+        </section>
+
+        <section class="card" aria-labelledby="result-title" aria-live="polite">
+            <h2 id="result-title"><span class="step">3</span>{% translate "Result" %}</h2>
+            <div class="body" id="result"><p class="empty">{% translate "The customer's loans appear here." %}</p></div>
+        </section>
+    </div>
+
+    <section class="card console" aria-labelledby="console-title">
+        <h2 id="console-title" style="justify-content:space-between">
+            <span>{% translate "What is sent and received" %}</span>
+            <button type="button" class="btn ghost" id="clear" style="padding:4px 10px;font-size:13px">{% translate "Clear" %}</button>
+        </h2>
+        <div class="body" id="exchanges">
+            <p class="empty" id="no-exchanges">{% translate "Each API call shows here: the request (key hidden) and the JSON answer. Every call is also recorded under API calls in the admin." %}</p>
+        </div>
+    </section>
+</main>
+
+{{ texts|json_script:"texts" }}
+<script>
+(function () {
+    'use strict';
+    const T = JSON.parse(document.getElementById('texts').textContent);
+    const API = '/api/v1';
+    const $ = (id) => document.getElementById(id);
+    let mode = 'key', token = null;
+
+    // ---------------------------------------------------------------- formatting
+    const money = (v) => v == null ? '–' : new Intl.NumberFormat('en-US').format(v) + ' VND';
+    const date = (iso) => { if (!iso) return '–'; const d = new Date(iso); return [d.getDate(), d.getMonth() + 1].map((x) => String(x).padStart(2, '0')).join('/') + '/' + d.getFullYear(); };
+    const fill = (text, values) => text.replace(/%\((\w+)\)s/g, (_, k) => values[k]);
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    function hideKey(value) { return value.length > 14 ? value.slice(0, 14) + '…' : '…'; }
+    function highlight(json) {
+        return esc(json).replace(/(&quot;(?:[^&]|&(?!quot;))*&quot;)(\s*:)?|\b(-?\d+(?:\.\d+)?)\b|\b(true|false|null)\b/g, (m, str, colon, num, lit) =>
+            str ? (colon ? '<span class="k">' + str + '</span>' + colon : '<span class="s">' + str + '</span>') : '<span class="n">' + (num || lit) + '</span>');
+    }
+
+    // ---------------------------------------------------------------- console
+    function logExchange(method, path, headers, body, status, ms, data) {
+        $('no-exchanges').classList.add('hidden');
+        const box = document.createElement('div');
+        box.className = 'exchange';
+        const req = [method + ' ' + path].concat(Object.entries(headers).map(([k, v]) => k + ': ' + v));
+        const ok = status >= 200 && status < 300;
+        box.innerHTML = '<div class="exchange-head"><span>' + method + '</span><span class="path">' + esc(path) + '</span>'
+            + '<span class="pill ' + (ok ? 'ok' : 'bad') + '">' + (status || 'ERR') + '</span><span>' + ms + ' ms</span></div>'
+            + '<div class="label">Request</div><pre class="code">' + esc(req.join('\n')) + (body ? '\n\n' + highlight(JSON.stringify(body, null, 2)) : '') + '</pre>'
+            + '<div class="label">Response</div><pre class="code">' + (data === undefined ? '' : highlight(JSON.stringify(data, null, 2))) + '</pre>';
+        $('exchanges').insertBefore(box, $('exchanges').children[1] || null);
+    }
+    $('clear').addEventListener('click', () => {
+        document.querySelectorAll('.exchange').forEach((e) => e.remove());
+        $('no-exchanges').classList.remove('hidden');
+    });
+
+    async function call(method, path, body, auth, shownBody) {
+        const headers = { 'Accept': 'application/json', 'Accept-Language': document.documentElement.lang }, shown = { ...headers };
+        if (body) { headers['Content-Type'] = shown['Content-Type'] = 'application/json'; }
+        if (auth && auth.key) { headers['X-API-Key'] = auth.key; shown['X-API-Key'] = hideKey(auth.key); }
+        if (auth && auth.token) { headers['Authorization'] = 'Bearer ' + auth.token; shown['Authorization'] = 'Bearer ' + hideKey(auth.token); }
+        const started = performance.now();
+        let response, data;
+        try {
+            response = await fetch(API + path, { method, headers, body: body ? JSON.stringify(body) : undefined, credentials: 'omit' });
+            data = await response.json().catch(() => undefined);
+        } catch (e) {
+            logExchange(method, API + path, shown, shownBody || body, 0, Math.round(performance.now() - started), { error: String(e) });
+            return { status: 0 };
+        }
+        logExchange(method, API + path, shown, shownBody || body, response.status, Math.round(performance.now() - started), data);
+        return { status: response.status, data };
+    }
+    const problem = (status) => T.errors[String(status)] || (status ? T.errors.other + ' (' + status + ')' : T.errors.network);
+
+    // ---------------------------------------------------------------- connect
+    function choose(next) {
+        mode = next;
+        $('tab-key').setAttribute('aria-selected', next === 'key');
+        $('tab-app').setAttribute('aria-selected', next === 'app');
+        $('panel-key').classList.toggle('hidden', next !== 'key');
+        $('panel-app').classList.toggle('hidden', next !== 'app');
+    }
+    $('tab-key').addEventListener('click', () => choose('key'));
+    $('tab-app').addEventListener('click', () => choose('app'));
+
+    function signedIn(name, expires) {
+        const status = $('sign-in-status');
+        status.className = 'status ' + (name ? 'ok' : 'bad');
+        status.textContent = name ? fill(T.signed_in_as, { name, time: new Date(expires).toLocaleString('en-GB') }) : expires;
+        $('sign-out').classList.toggle('hidden', !token);
+    }
+    $('panel-app').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        $('sign-in').disabled = true;
+        const body = { username: $('username').value.trim(), password: $('password').value, device: 'API demo page' };
+        const result = await call('POST', '/auth/token', body, null, { ...body, password: '••••••' });
+        $('password').value = '';
+        if (result.status === 200) {
+            token = result.data.token;
+            const me = await call('GET', '/auth/me', null, { token });
+            signedIn(me.status === 200 ? (me.data.full_name || me.data.username) : body.username, result.data.expires);
+        } else {
+            token = null;
+            signedIn(null, result.status === 401 ? T.sign_in_failed : problem(result.status));
+        }
+        $('sign-in').disabled = false;
+    });
+    $('sign-out').addEventListener('click', async () => {
+        if (token) await call('POST', '/auth/logout', null, { token });
+        token = null;
+        $('sign-in-status').classList.add('hidden');
+        $('sign-out').classList.add('hidden');
+    });
+
+    // ---------------------------------------------------------------- look up
+    document.querySelectorAll('.sample').forEach((b) => b.addEventListener('click', () => {
+        $('id-number').value = b.dataset.id;
+        $('lookup').requestSubmit();
+    }));
+
+    function showError(text) {
+        $('lookup-error').textContent = text;
+        $('lookup-error').classList.toggle('hidden', !text);
+    }
+
+    $('lookup').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        showError('');
+        const auth = mode === 'key' ? { key: $('api-key').value.trim() } : { token };
+        if (mode === 'key' && !auth.key) return showError(T.need_key);
+        if (mode === 'app' && !token) return showError(T.need_sign_in);
+        $('lookup-btn').disabled = true;
+        const result = await call('POST', '/customers/loans', { id_number: $('id-number').value.trim() }, auth);
+        $('lookup-btn').disabled = false;
+        if (result.status === 200) {
+            render(result.data);
+        } else {
+            showError(problem(result.status));
+            $('result').innerHTML = '<p class="empty">' + esc(problem(result.status)) + '</p>';
+        }
+    });
+
+    function render(d) {
+        const c = d.customer;
+        const masked = c.id_number.includes('*');
+        let html = '<div class="customer"><div><h3>' + esc(c.name) + '</h3><p>' + esc(c.id_number)
+            + (c.date_of_birth ? ' · ' + date(c.date_of_birth) : '') + '</p></div>'
+            + (masked ? '<span class="chip masked">' + esc(T.masked) + '</span>' : '') + '</div>';
+        html += '<div class="kpis">'
+            + kpi('{% filter escapejs %}{% translate "Loan applications" %}{% endfilter %}', d.applications)
+            + kpi('{% filter escapejs %}{% translate "In progress" %}{% endfilter %}', d.in_progress)
+            + kpi('{% filter escapejs %}{% translate "Approved" %}{% endfilter %}', amount(d.approved_total), true)
+            + kpi('{% filter escapejs %}{% translate "Disbursed" %}{% endfilter %}', amount(d.disbursed_total), true) + '</div>';
+        d.loans.forEach((loan) => { html += loanCard(loan); });
+        $('result').innerHTML = html;
+    }
+    const amount = (v) => esc(new Intl.NumberFormat('en-US').format(v || 0)) + '<small> VND</small>';
+    const kpi = (label, value, html) => '<div class="kpi"><span>' + esc(label) + '</span><strong>' + (html ? value : esc(value)) + '</strong></div>';
+
+    function loanCard(loan) {
+        const k = loan.contract || {};
+        const rate = k.interest_rate ? k.interest_rate + '%' + (k.margin ? ' + ' + k.margin + '%' : '') : '–';
+        const terms = [
+            ['{% filter escapejs %}{% translate "Requested" %}{% endfilter %}', money(loan.loan_amount)],
+            ['{% filter escapejs %}{% translate "Approved" %}{% endfilter %}', money(loan.approved_amount)],
+            ['{% filter escapejs %}{% translate "Tenor" %}{% endfilter %}', loan.tenor_months ? fill(T.months, { n: loan.tenor_months }) : '–'],
+            ['{% filter escapejs %}{% translate "Interest rate + margin" %}{% endfilter %}', rate],
+            ['{% filter escapejs %}{% translate "Handled by" %}{% endfilter %}', loan.handler || '–'],
+            ['{% filter escapejs %}{% translate "Received" %}{% endfilter %}', date(loan.created)],
+        ];
+        let html = '<article class="loan"><div class="loan-head"><div><strong>' + esc(loan.number) + '</strong> '
+            + '<small>· ' + esc(loan.product || '') + ' · ' + esc(loan.role) + '</small></div>'
+            + '<div><span class="chip ' + esc(loan.stage) + '" title="' + esc(loan.status) + '">' + esc(T.stage[loan.stage] || loan.stage)
+            + '</span> <small>' + esc(loan.status) + '</small></div></div><dl class="terms">'
+            + terms.map(([l, v]) => '<div><dt>' + esc(l) + '</dt><dd>' + esc(v) + '</dd></div>').join('') + '</dl>';
+        const limit = k.disbursement_amount || 0;
+        if (limit || loan.disbursements.length) {
+            const share = limit ? Math.min(100, Math.round(100 * loan.disbursed_amount / limit)) : 0;
+            html += '<div class="paid"><dl class="terms" style="padding:0 0 2px"><div><dt>{% filter escapejs %}{% translate "Disbursed" %}{% endfilter %}</dt><dd>'
+                + esc(money(loan.disbursed_amount)) + ' <small style="color:var(--muted);font-weight:400">' + esc(T.of) + ' ' + esc(money(limit)) + '</small></dd></div></dl>'
+                + '<div class="meter" role="img" aria-label="' + share + '%"><i style="width:' + share + '%"></i></div>';
+            if (loan.disbursements.length) {
+                html += '<div class="scroll"><table><thead><tr><th>{% filter escapejs %}{% translate "Date" %}{% endfilter %}</th><th>{% filter escapejs %}{% translate "Reference" %}{% endfilter %}</th>'
+                    + '<th>{% filter escapejs %}{% translate "Loan account" %}{% endfilter %}</th><th class="num">{% filter escapejs %}{% translate "Amount" %}{% endfilter %}</th></tr></thead><tbody>'
+                    + loan.disbursements.map((p) => '<tr><td>' + date(p.disbursed_at) + '</td><td>' + esc(p.reference) + '</td><td>'
+                        + esc(p.account_number) + '</td><td class="num">' + esc(money(p.amount)) + '</td></tr>').join('') + '</tbody></table></div>';
+            } else {
+                html += '<p class="hint">' + esc(T.none) + '</p>';
+            }
+            html += '</div>';
+        }
+        return html + '</article>';
+    }
+})();
+</script>
+</body>
+</html>

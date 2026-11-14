@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>User Guide – Loan Workflow</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  :root {
+    --ink: #1f2430; --muted: #5b6272; --line: #e3e5ea; --soft: #f5f6f8;
+    --brand: #7e22ce; --brand-soft: #f3e8ff; --amber: #b45309; --amber-soft: #fef3c7;
+    --red: #b91c1c; --red-soft: #fee2e2; --green: #15803d; --green-soft: #dcfce7; --blue: #1d4ed8; --blue-soft: #dbeafe;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Inter", Arial, sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.55; margin: 0; }
+  h1, h2, h3 { line-height: 1.25; color: var(--ink); }
+  h2 { font-size: 17pt; margin: 0 0 4mm; padding-bottom: 2mm; border-bottom: 2px solid var(--brand); counter-increment: chapter; counter-reset: section; }
+  h2::before { content: counter(chapter) ". "; color: var(--brand); }
+  h3 { font-size: 12.5pt; margin: 6mm 0 2mm; counter-increment: section; }
+  h3::before { content: counter(chapter) "." counter(section) " "; color: var(--brand); }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1mm; }
+  b, strong { font-weight: 600; }
+  .chapter { page-break-before: always; counter-reset: figure-in-chapter; }
+  body { counter-reset: chapter figure; }
+  figure { margin: 3mm 0 5mm; page-break-inside: avoid; counter-increment: figure; }
+  figure img { width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; }
+  figure.tall img { max-height: 225mm; width: auto; max-width: 100%; margin: 0 auto; }
+  figure.half img { width: 70%; margin: 0 auto; }
+  figcaption { font-size: 9pt; color: var(--muted); margin-top: 1.5mm; text-align: center; }
+  figcaption::before { content: "Figure " counter(figure) ". "; font-weight: 600; color: var(--ink); }
+  .ui { display: inline-block; padding: 0 1.6mm; border: 1px solid var(--line); border-radius: 4px; background: var(--soft); font-size: 9.5pt; white-space: nowrap; }
+  .note, .tip, .warn { border-radius: 6px; padding: 3mm 4mm; margin: 3mm 0 4mm; page-break-inside: avoid; }
+  .note { background: var(--blue-soft); border-left: 4px solid var(--blue); }
+  .tip { background: var(--green-soft); border-left: 4px solid var(--green); }
+  .warn { background: var(--amber-soft); border-left: 4px solid var(--amber); }
+  .note b:first-child, .tip b:first-child, .warn b:first-child { display: block; margin-bottom: 1mm; }
+  table { border-collapse: collapse; width: 100%; margin: 2mm 0 4mm; font-size: 9.5pt; page-break-inside: auto; }
+  th, td { border: 1px solid var(--line); padding: 1.6mm 2.4mm; text-align: left; vertical-align: top; }
+  th { background: var(--soft); font-weight: 600; }
+  tr { page-break-inside: avoid; }
+  .steps { counter-reset: step; list-style: none; padding-left: 0; }
+  .steps > li { counter-increment: step; position: relative; padding-left: 9mm; margin-bottom: 2mm; }
+  .steps > li::before { content: counter(step); position: absolute; left: 0; top: 0.3mm; width: 6mm; height: 6mm; border-radius: 50%;
+                        background: var(--brand); color: #fff; font-size: 8.5pt; font-weight: 600; text-align: center; line-height: 6mm; }
+  .chip { display: inline-block; border-radius: 4px; padding: 0 1.8mm; font-size: 8.5pt; font-weight: 600; text-transform: uppercase; }
+  .c-info { background: var(--blue-soft); color: var(--blue); } .c-primary { background: var(--brand-soft); color: var(--brand); }
+  .c-warn { background: var(--amber-soft); color: var(--amber); } .c-ok { background: var(--green-soft); color: var(--green); }
+  .c-stop { background: var(--red-soft); color: var(--red); }
+
+  /* cover */
+  .cover { height: 255mm; display: flex; flex-direction: column; justify-content: space-between; padding: 10mm 4mm 0; }
+  .cover .logo { width: 16mm; height: 16mm; border-radius: 4mm; background: var(--brand); color: #fff; font-size: 9mm; display: flex; align-items: center; justify-content: center; }
+  .cover h1 { font-size: 30pt; margin: 14mm 0 3mm; letter-spacing: -0.5px; }
+  .cover .sub { font-size: 14pt; color: var(--muted); margin: 0; }
+  .cover .meta { border-top: 1px solid var(--line); padding-top: 5mm; color: var(--muted); font-size: 10pt; }
+  .cover .hero { margin-top: 12mm; }
+  .cover .hero img { width: 100%; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 6px 24px rgba(31,36,48,0.12); }
+
+  /* table of contents */
+  .toc { list-style: none; padding: 0; counter-reset: toc; }
+  .toc > li { counter-increment: toc; display: flex; gap: 3mm; padding: 2mm 0; border-bottom: 1px dotted var(--line); font-size: 11pt; }
+  .toc > li::before { content: counter(toc) "."; color: var(--brand); font-weight: 600; width: 7mm; }
+  .toc a { color: var(--ink); text-decoration: none; flex: 1; }
+  .toc .who { color: var(--muted); font-size: 9.5pt; }
+
+  /* workflow diagram */
+  .flow { display: grid; grid-template-columns: 34mm 1fr; gap: 0; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin: 3mm 0 4mm; font-size: 9pt; }
+  .flow .lane { padding: 2.2mm 3mm; border-bottom: 1px solid var(--line); background: var(--soft); font-weight: 600; }
+  .flow .cells { padding: 2.2mm 3mm; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 1.5mm; align-items: center; }
+  .flow .lane:nth-last-child(2), .flow .cells:last-child { border-bottom: 0; }
+  .flow .box { border-radius: 4px; padding: 0.6mm 2mm; border: 1px solid; }
+  .flow .fwd { border-color: #d8b4fe; background: var(--brand-soft); }
+  .flow .back { border-color: #fcd34d; background: var(--amber-soft); }
+  .flow .end { border-color: #fca5a5; background: var(--red-soft); }
+  .flow .done { border-color: #86efac; background: var(--green-soft); }
+  .flow .arrow { color: var(--muted); }
+  .legend { font-size: 8.5pt; color: var(--muted); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ cover -->
+<section class="cover">
+  <div>
+    <div class="logo">&#127974;</div>
+    <h1>User Guide<br>Loan Workflow</h1>
+    <p class="sub">Loan application processing, from the first Sale entry to disbursement</p>
+    <div class="hero"><img src="img/06_overview.jpg" alt=""></div>
+  </div>
+  <div class="meta">
+    Demo version · November 2026<br>
+    All customer names, ID numbers, companies and amounts in this guide are generated demo data, not real data.
+  </div>
+</section>
+
+<!-- ============================================================ toc -->
+<section class="chapter" style="counter-increment: none">
+  <h1 style="font-size:20pt;margin:0 0 6mm">Contents</h1>
+  <ol class="toc">
+    <li><a href="#intro">Introduction and workflow overview</a> <span class="who">Everyone</span></li>
+    <li><a href="#start">Signing in and the home page</a> <span class="who">Everyone</span></li>
+    <li><a href="#list">Finding and opening applications</a> <span class="who">Everyone</span></li>
+    <li><a href="#sale">Sale: creating and completing an application</a> <span class="who">SaleTeam</span></li>
+    <li><a href="#workflow">Moving an application to the next step</a> <span class="who">Every handler</span></li>
+    <li><a href="#review">Sale Leader, Sale Support and exception approval</a> <span class="who">SaleManager, SaleSupport, SaleDirector, HeadPFS</span></li>
+    <li><a href="#ced">CED: credit review and CRR scoring</a> <span class="who">CEDOfficer</span></li>
+    <li><a href="#approve">Two-level approval</a> <span class="who">Approver</span></li>
+    <li><a href="#cra">CRA: contracts and disbursement</a> <span class="who">CRAOfficer</span></li>
+    <li><a href="#history">Workflow history and the credit memo</a> <span class="who">Everyone</span></li>
+    <li><a href="#teamadmin">Team admins: workload and re-assignment</a> <span class="who">CEDAdmin, CRAAdmin</span></li>
+    <li><a href="#admin">System administration</a> <span class="who">Administrators</span></li>
+    <li><a href="#appendix">Appendix: statuses, edit rights, FAQ</a> <span class="who">Reference</span></li>
+  </ol>
+  <div class="note">
+    <b>How to read this guide</b>
+    Chapters 1–3 and 5 are for everyone. After that, read the chapter for your role.
+    Buttons and tabs are written as they appear on screen, like <span class="ui">Change status</span>.
+  </div>
+</section>
+
+<!-- ============================================================ 1 intro -->
+<section class="chapter" id="intro">
+  <h2>Introduction and workflow overview</h2>
+  <p>Loan Workflow manages personal loan applications (home purchase, purchase in a developer project, secured personal loans, car loans) through these steps:
+     Sale enters the application, the Sale levels check it, CED reviews and scores it, two approvers approve it, then CRA prepares the contracts and disburses.</p>
+  <p>At any moment an application has <b>one status</b> and <b>one handler</b>. Only the handler can move it to the next step.
+     Every step is recorded: who moved it, when, and with what comment.</p>
+
+  <h3>Workflow overview</h3>
+  <div class="flow">
+    <div class="lane">Sale</div>
+    <div class="cells"><span class="box fwd">Open: enter the application</span><span class="arrow">→</span><span class="box fwd">Submit to Sale Leader</span></div>
+    <div class="lane">Sale Leader</div>
+    <div class="cells"><span class="box fwd">Endorse</span><span class="arrow">→</span><span class="box fwd">To Sale Support</span><span class="box back">Ask Sale to update</span><span class="box end">Reject</span></div>
+    <div class="lane">Sale Support</div>
+    <div class="cells"><span class="box fwd">Check</span><span class="arrow">→</span><span class="box fwd">Submit to CED</span><span class="box fwd">Submit exception</span><span class="box back">Ask Sale for more</span></div>
+    <div class="lane">Exception</div>
+    <div class="cells"><span class="box fwd">Head of Sale</span><span class="arrow">→</span><span class="box fwd">Head of PFS</span><span class="arrow">→</span><span class="box fwd">CED</span></div>
+    <div class="lane">CED</div>
+    <div class="cells"><span class="box fwd">Review, CRR scoring</span><span class="arrow">→</span><span class="box fwd">Recommend to Approver 1</span><span class="box back">Ask Sale for more</span><span class="box end">Reject</span></div>
+    <div class="lane">Approver</div>
+    <div class="cells"><span class="box fwd">First approval</span><span class="arrow">→</span><span class="box fwd">Second approval</span><span class="box back">Ask CED to update</span></div>
+    <div class="lane">Sale</div>
+    <div class="cells"><span class="box fwd">Post approval</span><span class="arrow">→</span><span class="box fwd">Request documents from CRA</span></div>
+    <div class="lane">CRA</div>
+    <div class="cells"><span class="box fwd">Prepare contracts</span><span class="arrow">→</span><span class="box fwd">Sale confirms disbursement</span><span class="arrow">→</span><span class="box fwd">CRA disburses</span><span class="arrow">→</span><span class="box done">Complete</span></div>
+  </div>
+  <p class="legend"><span class="chip c-primary">Purple</span> move on · <span class="chip c-warn">Amber</span> send back for changes · <span class="chip c-stop">Red</span> reject / cancel · <span class="chip c-ok">Green</span> complete.
+     The full list of statuses is in the <a href="#appendix">Appendix</a>.</p>
+
+  <h3>Roles</h3>
+  <table>
+    <tr><th style="width:30%">Role (group)</th><th>Main tasks</th></tr>
+    <tr><td>Sale (SaleTeam)</td><td>Create applications; enter applicants, income, credit bureau (CIC) records, collateral and documents; update when sent back; confirm disbursement.</td></tr>
+    <tr><td>Sale Leader (SaleManager)</td><td>Review and endorse the team's applications.</td></tr>
+    <tr><td>Sale Support (SaleSupport)</td><td>Check completeness; submit to CED or submit an exception for approval.</td></tr>
+    <tr><td>Head of Sale, Head of PFS</td><td>Approve exceptions before they go to CED.</td></tr>
+    <tr><td>CED (CEDOfficer)</td><td>Credit review, CRR scoring, credit decision and approval conditions.</td></tr>
+    <tr><td>Approver</td><td>First and second approval (two different people).</td></tr>
+    <tr><td>CRA (CRAOfficer)</td><td>Contract data, contract printing, disbursement.</td></tr>
+    <tr><td>Team admins (CEDAdmin, CRAAdmin)</td><td>Follow the team's workload; re-assign applications within the team.</td></tr>
+    <tr><td>Administrator</td><td>Users, products, workflow steps, score matrix, credit settings.</td></tr>
+  </table>
+</section>
+
+<!-- ============================================================ 2 start -->
+<section class="chapter" id="start">
+  <h2>Signing in and the home page</h2>
+  <h3>Signing in</h3>
+  <p>Open the system's address in your browser (the demo runs at <span class="ui">http://localhost:8000</span>), enter your username and password, and click <span class="ui">Log in</span>.</p>
+  <figure class="half"><img src="img/01_login.jpg" alt=""><figcaption>Sign-in page</figcaption></figure>
+  <div class="note"><b>Demo accounts</b>
+    The demo has an account for each role: <span class="ui">sale1</span>, <span class="ui">sale2</span>, <span class="ui">salelead</span>, <span class="ui">salesupport</span>,
+    <span class="ui">saledirector</span>, <span class="ui">headpfs</span>, <span class="ui">ced1</span>, <span class="ui">ced2</span>, <span class="ui">cedadmin</span>,
+    <span class="ui">approver1</span>, <span class="ui">approver2</span>, <span class="ui">cra1</span>, <span class="ui">craadmin</span>.
+    They all share the password set in <span class="ui">DEMO_USER_PASSWORD</span> in the <span class="ui">.env</span> file.</div>
+
+  <h3>Home page (Dashboard)</h3>
+  <p>After signing in you see your own home page:</p>
+  <ul>
+    <li><b>Four figures</b> at the top: applications waiting for you, your overdue applications, open applications you can see, and applications completed in the last 30 days.</li>
+    <li><b>My work queue</b>: the applications waiting for you, earliest due date first. Past due dates are red. Click an application number to open it.</li>
+    <li><b>Open applications by status</b>: how many open applications are at each step.</li>
+  </ul>
+  <figure><img src="img/02_dashboard_sale.jpg" alt=""><figcaption>Home page of a Sale officer</figcaption></figure>
+  <p>The left sidebar has <span class="ui">Dashboard</span>, <span class="ui">Loan applications</span> and <span class="ui">Applicants</span>.
+     The search box at the top (shortcut <span class="ui">Ctrl K</span>) jumps to a page. Click your name at the bottom to change your password, switch between light and dark mode, or sign out.</p>
+  <div class="tip"><b>Due dates</b>
+    Each time an application moves to a new step, the new handler has <b>3 days</b> for it (a demo setting). Overdue applications are red on the home page and in the list.</div>
+</section>
+
+<!-- ============================================================ 3 list -->
+<section class="chapter" id="list">
+  <h2>Finding and opening applications</h2>
+  <p>Click <span class="ui">Loan applications</span> in the sidebar. You only see the applications you may see: those you created, are handling or have handled, and your team's applications if you are a team admin.</p>
+  <figure><img src="img/03_list.jpg" alt=""><figcaption>Application list</figcaption></figure>
+  <ul>
+    <li><b>Search</b>: type an application number, an applicant's name or ID number, then press Enter.</li>
+    <li><b>Columns</b>: number, primary applicant, product, loan amount, status (coloured by step group), current handler (<i>With</i>), due date (<i>Due</i>) and last change.</li>
+    <li><b>Sorting</b>: click a column heading.</li>
+    <li><b>Filters</b>: click <span class="ui">Filters</span> to filter by status, approval type, handler or creation date range, then click <span class="ui">Apply Filters</span>.</li>
+  </ul>
+  <figure><img src="img/04_list_filters.jpg" alt=""><figcaption>List filters</figcaption></figure>
+  <p>Application numbers come in two forms: <b>APmmyy…</b> while the application is a Sale draft, and <b>DS.&lt;product&gt;.&lt;year&gt;.&lt;sequence&gt;</b> (for example DS.SS.26.0004), given automatically when it reaches CED.</p>
+</section>
+
+<!-- ============================================================ 4 sale -->
+<section class="chapter" id="sale">
+  <h2>Sale: creating and completing an application</h2>
+  <h3>Creating an application</h3>
+  <ol class="steps">
+    <li>In <span class="ui">Loan applications</span>, click the <span class="ui">+</span> button at the top right.</li>
+    <li>Click <span class="ui">Create application</span> to confirm. The system creates a draft with you as submitter and handler, with an empty loan request and an empty collateral.</li>
+  </ol>
+  <figure><img src="img/05_new_application.jpg" alt=""><figcaption>Confirming a new application</figcaption></figure>
+
+  <h3>The application page</h3>
+  <p>The application page has a tab for each part: <span class="ui">General</span>, <span class="ui">Loan request</span>, <span class="ui">Applicants</span>, <span class="ui">Collaterals</span>,
+     <span class="ui">Credit decision (CED)</span>, <span class="ui">Conditions</span>, <span class="ui">Documents</span>, <span class="ui">Loan contract (CRA)</span>,
+     <span class="ui">Contract documents</span>, and under the <span class="ui">···</span> menu <span class="ui">Sale parties</span> and <span class="ui">Workflow history</span>.
+     The buttons at the top: <span class="ui">Change status</span> (workflow), <span class="ui">CRR scoring</span>, <span class="ui">Credit memo (PDF)</span>.</p>
+  <p>The <span class="ui">General › Overview</span> tab shows the status, handler, due date, primary applicant and loan at a glance.</p>
+  <figure><img src="img/06_overview.jpg" alt=""><figcaption>Application overview</figcaption></figure>
+  <div class="warn"><b>Who may edit which part?</b>
+    Each part can only be edited by its role, at the right step. Sale edits the Sale part while the application is at a Sale step (Open, or when sent back).
+    At other steps the fields are read-only. See the table in the <a href="#appendix">Appendix</a>.</div>
+
+  <h3>Loan request</h3>
+  <p>Choose the product and sub-product, enter the amount, tenor (months), loan program, pricing scheme, purpose, loan-to-value (MOA %) and any deviations.
+     Click <span class="ui">Save and continue editing</span>. The monthly installments (highest, lowest, average) are calculated when you save.</p>
+  <figure class="tall"><img src="img/07_loan_request.jpg" alt=""><figcaption>Loan request; installments are calculated automatically</figcaption></figure>
+  <div class="tip"><b>Tip</b>
+    Changing the product updates the collateral type to match (car, property with title deed, property in a project).</div>
+
+  <h3>Applicants</h3>
+  <p>The <span class="ui">Applicants</span> tab lists the primary applicant and co-applicants with each one's monthly income.
+     Add a row to enter a co-applicant. Click a name to open the applicant's page.</p>
+  <figure><img src="img/08_applicants_tab.jpg" alt=""><figcaption>Applicants of an application</figcaption></figure>
+  <p>The applicant page holds personal details, addresses, residence and relationship with the bank. The unaccented name and addresses used on documents are filled in automatically from the Vietnamese ones.</p>
+  <figure class="tall"><img src="img/09_applicant.jpg" alt=""><figcaption>Applicant details</figcaption></figure>
+
+  <h3>Income and credit bureau (CIC)</h3>
+  <p>The tabs on the applicant page hold each income source and each existing debt reported by the credit bureau:</p>
+  <table>
+    <tr><th style="width:32%">Tab</th><th>What you enter</th><th style="width:30%">The system calculates</th></tr>
+    <tr><td>Salaries</td><td>Employer, contract, fixed and variable pay by month, months counted</td><td>Average monthly salary</td></tr>
+    <tr><td>Businesses</td><td>Company or business, VAT turnover, three years of financials, margin</td><td>Net monthly income</td></tr>
+    <tr><td>Household businesses</td><td>Six months of turnover, margin</td><td>Net monthly income</td></tr>
+    <tr><td>Rental incomes</td><td>Rent, margin</td><td>Net monthly income</td></tr>
+    <tr><td>Secured loans / Unsecured loans / Overdrafts / Credit cards (CIC)</td><td>Existing loans and cards from the credit bureau</td><td>Monthly payment</td></tr>
+  </table>
+  <figure class="tall"><img src="img/10_applicant_salary.jpg" alt=""><figcaption>Salary by month</figcaption></figure>
+  <figure><img src="img/11_applicant_cic.jpg" alt=""><figcaption>Secured loans from the credit bureau</figcaption></figure>
+  <p>After each save, the <span class="ui">Income summary (calculated)</span> tab shows the applicant's total income and existing debt payments.</p>
+  <figure><img src="img/12_income_summary.jpg" alt=""><figcaption>Applicant income summary</figcaption></figure>
+
+  <h3>Collaterals</h3>
+  <p>Enter the collateral type and the purchase-contract or estimated value, then open <span class="ui">Property</span> (house, land, project apartment) or <span class="ui">Car</span> for details.
+     An application can have several collaterals. The legal data for the contracts is entered later by CRA, on each collateral's own page (section 9.2).</p>
+  <figure class="tall"><img src="img/13_collaterals.jpg" alt=""><figcaption>Collaterals</figcaption></figure>
+
+  <h3>Documents</h3>
+  <p>Add a row, choose the document type, choose the file, then save. Files can only be opened by people who may see the application.</p>
+  <figure><img src="img/14_documents.jpg" alt=""><figcaption>Attached documents</figcaption></figure>
+
+  <h3>Repayment capacity (Credit assessment)</h3>
+  <p>The <span class="ui">General › Credit assessment</span> tab shows total income, existing debt payments, living cost, DSR, net surplus (NST),
+     customer segment and the CRR score. All of it is recalculated every time the application is saved.</p>
+  <figure><img src="img/15_credit_assessment.jpg" alt=""><figcaption>Repayment capacity, calculated automatically</figcaption></figure>
+  <div class="note"><b>Main formulas</b>
+    DSR = (this loan's payment + existing debt payments) / total income. NST = income − debt payments − living cost.
+    The default living cost depends on the number of applicants; administrators set it in <span class="ui">Credit settings</span>.</div>
+</section>
+
+<!-- ============================================================ 5 workflow -->
+<section class="chapter" id="workflow">
+  <h2>Moving an application to the next step</h2>
+  <p>When your part is done, click <span class="ui">Change status</span> on the application page. The page shows:</p>
+  <ul>
+    <li><b>A summary of the application</b> at the top: applicant, loan, income, DSR, CRR score and due date, so you can decide without going back.</li>
+    <li><b>The steps you can take</b> at the current status, one card each, with a coloured left edge:
+      <span class="chip c-primary">Move on</span> moves the application forward (open by default),
+      <span class="chip c-warn">Send back</span> returns it for changes,
+      <span class="chip c-stop">End</span> rejects or cancels it. The last two are folded to avoid mistakes; click the title to open one.</li>
+  </ul>
+  <figure class="tall"><img src="img/16_status_sale.jpg" alt=""><figcaption>Sale submitting to the Sale Leader</figcaption></figure>
+  <ol class="steps">
+    <li>Open the card of the step you want.</li>
+    <li>Choose the receiver in <span class="ui">Hand over to</span>. The system suggests a person; for CED and CRA it suggests the team member with the fewest open applications (workload balancing).</li>
+    <li>Write a comment. For sending back or rejecting, a reason is required and the receiver sees it in the history.</li>
+    <li>When CED or an approver rejects, choose a rejection reason. When CED sends back to Sale, a QC item can be chosen.</li>
+    <li>Click the step's button. The status changes, the receiver gets the application and an email (if they have an email address).</li>
+  </ol>
+  <div class="note"><b>No steps shown?</b>
+    You only see steps while you are the handler and your group may take a step at the current status. If someone else is handling the application, the page says there is no step for you.</div>
+</section>
+
+<!-- ============================================================ 6 review -->
+<section class="chapter" id="review">
+  <h2>Sale Leader, Sale Support and exception approval</h2>
+  <p>Applications handed to you appear in <b>My work queue</b> on the home page.</p>
+  <figure><img src="img/17_dashboard_salelead.jpg" alt=""><figcaption>Home page of a Sale Leader</figcaption></figure>
+  <ul>
+    <li><b>Sale Leader</b>: open and check the application, then <span class="ui">Endorse to Sale Support</span>; or <span class="ui">Request Update</span> to send it back to Sale; or <span class="ui">Reject</span>.</li>
+    <li><b>Sale Support</b>: check completeness, then <span class="ui">Submit to CED</span>. For an exception, <span class="ui">Submit to Head of Sale</span>.
+        <span class="ui">Request Sale Update</span> asks Sale for more; the application comes back to Sale Support after Sale updates it.</li>
+    <li><b>Head of Sale → Head of PFS</b>: approve the exception; Head of PFS clicks <span class="ui">Approve</span> to send the application to CED.</li>
+  </ul>
+  <figure class="tall"><img src="img/18_status_salelead.jpg" alt=""><figcaption>The Sale Leader's steps</figcaption></figure>
+</section>
+
+<!-- ============================================================ 7 ced -->
+<section class="chapter" id="ced">
+  <h2>CED: credit review and CRR scoring</h2>
+  <p>When an application reaches CED, the system gives it a DS.… number and hands it to a CED officer (suggested by workload).</p>
+  <figure><img src="img/19_dashboard_ced.jpg" alt=""><figcaption>Home page of a CED officer</figcaption></figure>
+
+  <h3>Credit decision</h3>
+  <p>In the <span class="ui">Credit decision (CED)</span> tab, enter the approved amount, valuations, error codes, the CED recommendation and the valuation report file.
+     The comments of Approver 1 and 2 are kept here too.</p>
+  <figure class="tall"><img src="img/20_ced_decision.jpg" alt=""><figcaption>Credit decision</figcaption></figure>
+
+  <h3>CRR scoring</h3>
+  <ol class="steps">
+    <li>Click <span class="ui">CRR scoring</span> on the application page.</li>
+    <li>Enter the bureau and account inputs: age of account, conduct of account, whether a bureau report exists, number of credit institutions, defaults in the last 12 and 60 months.</li>
+    <li>Click <span class="ui">Calculate score</span>. The other inputs (age, marital status, education, income, DSR, loan, LTV…) come from the application.</li>
+  </ol>
+  <figure><img src="img/21_scoring_input.jpg" alt=""><figcaption>Scoring inputs</figcaption></figure>
+  <p>The result shows the total score, the band and the points of each criterion. Others can see the result but not change it.</p>
+  <figure class="tall"><img src="img/22_scoring_result.jpg" alt=""><figcaption>CRR result and points per criterion</figcaption></figure>
+
+  <h3>Approval conditions</h3>
+  <p>In the <span class="ui">Conditions</span> tab, add the conditions before or after disbursement. Two columns record that CED and CRA have followed each condition.</p>
+  <figure><img src="img/23_conditions.jpg" alt=""><figcaption>Approval conditions</figcaption></figure>
+
+  <h3>Moving on</h3>
+  <p>Click <span class="ui">Change status</span>: <span class="ui">Recommend to Approver 1</span> to submit for approval,
+     <span class="ui">Request Sale Update</span> to ask Sale for more, or <span class="ui">Reject</span> with a reason.</p>
+  <figure class="tall"><img src="img/24_status_ced.jpg" alt=""><figcaption>CED steps; the send-back and reject cards are opened for illustration</figcaption></figure>
+</section>
+
+<!-- ============================================================ 8 approve -->
+<section class="chapter" id="approve">
+  <h2>Two-level approval</h2>
+  <p>Approvers open the application from the home page, look at <span class="ui">General › Credit assessment</span>, <span class="ui">CRR scoring</span> and the <span class="ui">Credit memo (PDF)</span>,
+     write their comment in the <span class="ui">Credit decision (CED)</span> tab, then click <span class="ui">Change status</span>.</p>
+  <figure class="tall"><img src="img/25_status_approver1.jpg" alt=""><figcaption>Approver 1: approve, ask CED to update, or reject</figcaption></figure>
+  <div class="warn"><b>Four-eyes rule</b>
+    The second approver must be a different person from the first. The system does not let the first approver also give the second approval, and leaves them out of the list of receivers.</div>
+  <figure class="tall"><img src="img/26_status_approver2.jpg" alt=""><figcaption>Approver 2: approval returns the application to Sale (Post approval)</figcaption></figure>
+  <p>After the second approval the application returns to Sale in <b>Post Approval</b>. Sale clicks <span class="ui">Request Docs Preparation</span> to send it to CRA,
+     or <span class="ui">Valuation Review Request</span> if CED should look at the valuation again.</p>
+</section>
+
+<!-- ============================================================ 9 cra -->
+<section class="chapter" id="cra">
+  <h2>CRA: contracts and disbursement</h2>
+  <h3>Loan contract terms</h3>
+  <p>The <span class="ui">Loan contract (CRA)</span> tab: amount, credit limit (in figures and words), disbursement amount, interest rate, margin, early repayment fee, tenor, disbursement method, purpose and other conditions.</p>
+  <figure class="tall"><img src="img/27_loan_contract.jpg" alt=""><figcaption>Loan contract terms</figcaption></figure>
+
+  <h3>Collateral legal data</h3>
+  <p>In the <span class="ui">Collaterals</span> tab, click a collateral's open icon to go to its own page. The top part is what Sale entered (read-only);
+     the <b>Contract data (CRA)</b> part below is for CRA: land plot, map sheet, certificate, valuation, purchase contract, notarised transfer; for a car, the chassis and engine numbers and the dealer.</p>
+  <figure class="tall"><img src="img/28_collateral_contract.jpg" alt=""><figcaption>Collateral legal data for the mortgage contract</figcaption></figure>
+
+  <h3>Contract documents</h3>
+  <p>The <span class="ui">Contract documents</span> tab: add each document (credit agreement FA, mortgage agreement MA, tripartite agreement TA, valuation minutes), its number, signing date and signer.
+     After saving, the <b>Print</b> column opens a PDF of the contract's parties section, filled in with the borrower's and the bank's details.</p>
+  <figure><img src="img/29_contract_docs.jpg" alt=""><figcaption>Contract documents and print links</figcaption></figure>
+  <p>The next steps: CRA <span class="ui">Preparation Complete</span> → Sale <span class="ui">Confirm Disbursement</span>
+     (or asks CED to check the conditions before disbursement) → CRA <span class="ui">Confirm Disbursement Complete</span>. The application becomes <span class="chip c-ok">Complete</span>.</p>
+</section>
+
+<!-- ============================================================ 10 history -->
+<section class="chapter" id="history">
+  <h2>Workflow history and the credit memo</h2>
+  <h3>Workflow history</h3>
+  <p>The <span class="ui">···</span> › <span class="ui">Workflow history</span> tab lists every step, newest first: time, person, step, new status and comment.</p>
+  <figure><img src="img/30_history.jpg" alt=""><figcaption>Workflow history of a completed application</figcaption></figure>
+  <div class="note"><b>Two kinds of history</b>
+    The <span class="ui">History</span> button in the top bar is the admin's log of data changes, not the application's workflow history.</div>
+
+  <h3>Credit memo (PDF)</h3>
+  <p>Click <span class="ui">Credit memo (PDF)</span> to open the credit memo: loan request, applicants, collateral, repayment capacity, CRR score, credit decision,
+     approvers' comments, conditions and workflow history. Print or save it from the browser.</p>
+  <figure class="tall"><img src="img/36_credit_memo.jpg" alt=""><figcaption>First page of a credit memo</figcaption></figure>
+</section>
+
+<!-- ============================================================ 11 team admin -->
+<section class="chapter" id="teamadmin">
+  <h2>Team admins: workload and re-assignment</h2>
+  <p>CED and CRA team admins see all their team's applications. Their home page adds a <b>Team workload</b> table: each officer's open applications and whether they receive new work.</p>
+  <figure class="tall"><img src="img/31_dashboard_teamadmin.jpg" alt=""><figcaption>Home page of the CED team admin</figcaption></figure>
+  <ul>
+    <li><b>Pausing new work</b>: each officer has a <span class="ui">Pause</span> / <span class="ui">Resume</span> button on the home page (for example during leave). Paused officers are not suggested for new applications.</li>
+    <li><b>Re-assigning</b>: on the <span class="ui">Change status</span> page, open <b>Re-assign (team admin)</b>, choose the new handler, add a note and click <span class="ui">Re-assign</span>. The status does not change.</li>
+  </ul>
+  <figure class="tall"><img src="img/32_reassign.jpg" alt=""><figcaption>Re-assigning an application within the team</figcaption></figure>
+</section>
+
+<!-- ============================================================ 12 admin -->
+<section class="chapter" id="admin">
+  <h2>System administration</h2>
+  <p>Administrators also have the <b>Reference data</b>, <b>Workflow and scoring</b> and <b>Users</b> groups in the sidebar:</p>
+  <table>
+    <tr><th style="width:30%">Item</th><th>Used for</th></tr>
+    <tr><td>Products, Pricing schemes</td><td>Products, sub-products and interest rate packages (with early repayment fees). Excel import and export.</td></tr>
+    <tr><td>Panel projects, Panel car dealers</td><td>Partner projects and car dealers, and their limits.</td></tr>
+    <tr><td>Workflow actions</td><td>The workflow steps: from which status, which group may take it, to which status, handed to which group.</td></tr>
+    <tr><td>Score matrix</td><td>CRR points by criterion and value range.</td></tr>
+    <tr><td>Credit settings</td><td>Default living cost, salary segment thresholds, width of a score band.</td></tr>
+    <tr><td>Officers</td><td>CED and CRA officers who take part in automatic work distribution.</td></tr>
+    <tr><td>Users, Groups (roles)</td><td>Users and groups (roles). Rights in the system follow the groups.</td></tr>
+  </table>
+  <figure><img src="img/33_admin_actions.jpg" alt=""><figcaption>Workflow steps</figcaption></figure>
+  <figure><img src="img/34_admin_scorematrix.jpg" alt=""><figcaption>CRR score matrix</figcaption></figure>
+  <h3>Adding a user</h3>
+  <ol class="steps">
+    <li>Open <span class="ui">Users</span>, click <span class="ui">+</span>, enter a username and a first password.</li>
+    <li>Enter the full name, tick <b>Staff status</b> (may use the system) and choose the group for the role (for example SaleTeam, CEDOfficer).</li>
+    <li>For a CED or CRA officer, add a row in <span class="ui">Officers</span> so that they receive work automatically.</li>
+  </ol>
+  <figure><img src="img/35_admin_users.jpg" alt=""><figcaption>User list</figcaption></figure>
+  <div class="warn"><b>Changing the workflow</b>
+    Editing Workflow actions changes the steps users see immediately. Try changes in a test environment first.</div>
+</section>
+
+<!-- ============================================================ 13 appendix -->
+<section class="chapter" id="appendix">
+  <h2>Appendix: statuses, edit rights, FAQ</h2>
+  <h3>Application statuses</h3>
+  <table>
+    <tr><th style="width:9%">Code</th><th style="width:34%">Status</th><th>Handled by</th><th style="width:22%">Editable</th></tr>
+    <tr><td>11</td><td><span class="chip c-info">Open</span></td><td>Sale</td><td>Sale part</td></tr>
+    <tr><td>12</td><td><span class="chip c-info">Sale Leader Endorse</span></td><td>Sale Leader</td><td>–</td></tr>
+    <tr><td>13</td><td><span class="chip c-info">Sale Support Review</span></td><td>Sale Support</td><td>–</td></tr>
+    <tr><td>19</td><td><span class="chip c-warn">Sale Support Request Update</span></td><td>Sale</td><td>Sale part</td></tr>
+    <tr><td>14</td><td><span class="chip c-info">Head of Sale Approve Exception</span></td><td>Head of Sale</td><td>–</td></tr>
+    <tr><td>16</td><td><span class="chip c-info">Head of PFS Approve Exception</span></td><td>Head of PFS</td><td>–</td></tr>
+    <tr><td>21</td><td><span class="chip c-primary">CED Verify Application</span></td><td>CED</td><td>CED part</td></tr>
+    <tr><td>29</td><td><span class="chip c-warn">CED Request Update</span></td><td>Sale</td><td>Sale part</td></tr>
+    <tr><td>22</td><td><span class="chip c-primary">First Approval</span></td><td>Approver 1</td><td>–</td></tr>
+    <tr><td>24</td><td><span class="chip c-warn">First Approver Request Update</span></td><td>CED</td><td>CED part</td></tr>
+    <tr><td>23</td><td><span class="chip c-primary">Second Approval</span></td><td>Approver 2 (not Approver 1)</td><td>–</td></tr>
+    <tr><td>25</td><td><span class="chip c-warn">Second Approver Request Update</span></td><td>CED</td><td>CED part</td></tr>
+    <tr><td>26</td><td><span class="chip c-primary">Concurrence</span></td><td>Credit Manager (MCC / exception applications)</td><td>–</td></tr>
+    <tr><td>27</td><td><span class="chip c-primary">Post Approval</span></td><td>Sale</td><td>–</td></tr>
+    <tr><td>28</td><td><span class="chip c-primary">Request Valuation</span></td><td>CED</td><td>–</td></tr>
+    <tr><td>31</td><td><span class="chip c-ok">CRA Prepare Document</span></td><td>CRA</td><td>CRA part</td></tr>
+    <tr><td>39</td><td><span class="chip c-warn">CRA Request Update</span></td><td>Sale</td><td>Sale part</td></tr>
+    <tr><td>32</td><td><span class="chip c-ok">Sale Confirm Disbursement</span></td><td>Sale</td><td>–</td></tr>
+    <tr><td>33</td><td><span class="chip c-ok">CED Check Approval Condition</span></td><td>CED</td><td>–</td></tr>
+    <tr><td>35</td><td><span class="chip c-warn">CED Request Update Pre Disbursement</span></td><td>Sale</td><td>Sale part</td></tr>
+    <tr><td>34</td><td><span class="chip c-ok">CRA Disbursement</span></td><td>CRA</td><td>CRA part</td></tr>
+    <tr><td>51</td><td><span class="chip c-ok">Complete</span></td><td>–</td><td>–</td></tr>
+    <tr><td>10</td><td><span class="chip c-stop">Reject</span></td><td>Sale (can re-open)</td><td>–</td></tr>
+    <tr><td>50</td><td><span class="chip c-stop">Closed</span></td><td>–</td><td>–</td></tr>
+  </table>
+
+  <h3>Data parts by role</h3>
+  <table>
+    <tr><th style="width:18%">Part</th><th>Contains</th><th style="width:30%">Edited by</th></tr>
+    <tr><td>Sale</td><td>Loan request, applicants, income, credit bureau records, collateral, documents</td><td>The Sale officer who created it, while at a Sale step</td></tr>
+    <tr><td>CED</td><td>Credit decision, conditions, scoring, approval type</td><td>The handling CED officer or the CED team admin, at steps 21/24/25</td></tr>
+    <tr><td>CRA</td><td>Loan contract, collateral legal data, contract documents, sale parties</td><td>The handling CRA officer or the CRA team admin, at steps 31/34</td></tr>
+  </table>
+
+  <h3>Frequently asked questions</h3>
+  <p><b>Why can't I edit the application?</b> It is not at your step, or the part belongs to another role. Check the status and handler in the General tab.</p>
+  <p><b>The step I need is not shown?</b> Steps are only shown to the current handler in the right group. If the handler is wrong, ask the team admin to re-assign.</p>
+  <p><b>DSR, NST or installments did not change after editing?</b> They are recalculated when you click <span class="ui">Save</span>. Save the page and open the tab again.</p>
+  <p><b>The CRR score says "Not scored yet"?</b> CED has not scored yet. The score is calculated when CED clicks <span class="ui">Calculate score</span>.</p>
+  <p><b>Nobody to choose as receiver?</b> No one in the receiving group is active or taking new work. Contact the team admin or an administrator.</p>
+  <p><b>An attachment says I have no permission?</b> Only people who may see the application can open its documents.</p>
+</section>
+
+</body>
+</html>

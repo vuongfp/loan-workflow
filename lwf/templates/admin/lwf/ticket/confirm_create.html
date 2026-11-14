@@ -1,0 +1,25 @@
+{% extends "admin/base_site.html" %}
+{% load i18n unfold %}
+
+{% block content %}
+    <div class="border border-base-200 rounded-default shadow-xs dark:border-base-800">
+        <p class="font-semibold p-4 text-font-important-light dark:text-font-important-dark">
+            {% translate "Create a new draft loan application?" %}
+        </p>
+        <p class="px-4 pb-4 text-sm">
+            {% translate "It is created with you as the submitter, an empty loan request and an empty collateral. You can then add applicants, income and documents." %}
+        </p>
+        <form method="post" class="border-base-200 border-t px-4 py-3 dark:border-base-800">
+            {% csrf_token %}
+            <div class="flex flex-col gap-3 items-center w-full lg:flex-row">
+                {% url 'admin:lwf_ticket_changelist' as list_url %}
+                {% component "unfold/components/button.html" with href=list_url variant="default" class="w-full lg:w-auto" %}
+                    {% translate "Cancel" %}
+                {% endcomponent %}
+                {% component "unfold/components/button.html" with submit=1 class="w-full lg:ml-auto lg:w-auto" %}
+                    {% translate "Create application" %}
+                {% endcomponent %}
+            </div>
+        </form>
+    </div>
+{% endblock %}

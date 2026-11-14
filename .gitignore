@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+._*
+
+# Local configuration and secrets
+.env
+
+# User uploads and data snapshots (contain customer data)
+/media/
+*.sql
+*.dump
+/1810.txt
+/1910.txt
+/django.txt
+/lwf.txt
+
+# Local environments
+.venv/
+venv/
+/staticfiles/
+/dumps/
+docs/user-guide/tools/sessions.json
+docs/user-guide/tools/png/
