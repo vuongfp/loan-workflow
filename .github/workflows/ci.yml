@@ -27,8 +27,8 @@ jobs:
       POSTGRES_HOST: 127.0.0.1
       DJANGO_EMAIL_BACKEND: django.core.mail.backends.locmem.EmailBackend
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: pip
@@ -47,11 +47,12 @@ jobs:
           DJANGO_DEBUG: 'false'
           DJANGO_HTTPS: 'true'
           DJANGO_ALLOWED_HOSTS: loan.example.test
+          DJANGO_EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
         run: python manage.py check --deploy --fail-level WARNING
 
   docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Build the image
         run: docker build -t loan-workflow:ci .
